@@ -1,34 +1,31 @@
-<div class="jumbotron">
-  <h2><%= gettext "Welcome to %{name}", name: "Rumbl.io!" %></h2>
-  <p class="lead">A productive web framework that<br />does not compromise speed and maintainability.</p>
-</div>
-<div class="row marketing">
-  <div class="col-lg-6">
-    <h4>Application</h4>
+ <form action="#">
+    <div class="row">
+    <div class="col s12">
+     
+        
+        
+    <p class="range-field">
+      <input type="range" id="test5" min="0" max="100" />
+    </p>
+        <div class="row">
+    <div class="col s12">
+ 
+    <div class="fixed-action-btn horizontal click-to-toggle">
+    <a class="btn-floating btn-large red">
+      <i class="material-icons">menu</i>
+    </a>
     <ul>
-      <li>
-        <a href="./users">Users</a>
-      </li>
-      <li>
-        <a href="https://hexdocs.pm/phoenix">Docs</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix">Source</a>
-      </li>
+      <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
+      <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
+      <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
+      <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
     </ul>
   </div>
-  <div class="col-lg-6">
-    <h4>Resources</h4>
-    <ul>
-      <li>
-        <a href="http://phoenixframework.org/docs/overview">Guides</a>
-      </li>
-      <li>
-        <a href="https://hexdocs.pm/phoenix">Docs</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix">Source</a>
-      </li>
-    </ul>
-  </div>
-</div>
+  <ul id="dropdown2" class="dropdown-content">
+    <li><a href="#!">one<span class="badge">1</span></a></li>
+    <li><a href="#!">two<span class="new badge">1</span></a></li>
+    <li><a href="#!">three</a></li>
+  </ul>
+  <a class="btn dropdown-button" href="#!" data-activates="dropdown2">Dropdown<i class="mdi-navigation-arrow-drop-down right"></i></a>
+ <div class="chips chips-initial"></div>
+  </form>

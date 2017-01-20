@@ -7,6 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>Hello Rumbl!</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
@@ -21,7 +22,7 @@
         </nav>
         <span class="logo"></span>
       </header>
-
+       
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
 
@@ -31,5 +32,21 @@
 
     </div> <!-- /container -->
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+    <!--
+    <script src="<%= static_path(@conn, "/js/materialize.js") %>"></script>
+    -->
+    <script>
+      $('ul.tabs').tabs();
+        $('.chips-initial').material_chip({
+    data: [{
+      tag: 'Apple',
+    }, {
+      tag: 'Microsoft',
+    }, {
+      tag: 'Google',
+    }],
+  });
+  $('ul.tabs').tabs();
+    </script>
   </body>
 </html>

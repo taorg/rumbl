@@ -9,7 +9,15 @@ defmodule Rumbl.Repo.Migrations.CreateUser do
 
       timestamps
     end
+    
+    create table(:weather) do
+      add :city,    :string, size: 40
+      add :temp_lo, :integer
+      add :temp_hi, :integer
+      add :prcp,    :float
 
+      timestamps()
+    end
     create unique_index(:users, [:username])
   end
 end

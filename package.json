@@ -1,20 +1,30 @@
 {
-  "repository": {},
-  "license": "MIT",
-  "scripts": {
-    "deploy": "brunch build --production",
-    "watch": "brunch watch --stdin"
-  },
-  "dependencies": {
-    "phoenix": "file:deps/phoenix",
-    "phoenix_html": "file:deps/phoenix_html"
-  },
-  "devDependencies": {
-    "babel-brunch": "~6.0.0",
-    "brunch": "2.7.4",
-    "clean-css-brunch": "~2.0.0",
-    "css-brunch": "~2.0.0",
-    "javascript-brunch": "~2.0.0",
-    "uglify-js-brunch": "~2.0.1"
-  }
+    "name": "rumbl",
+    "version": "1.0.0",
+    "main": "brunch-config.js",
+    "directories": {
+        "test": "test"
+    },
+    "repository": {},
+    "license": "MIT",
+    "scripts": {
+        "deploy": "brunch build --production",
+        "watch": "brunch watch --stdin",
+        "postinstall": "cp -R ./node_modules/materialize-css/fonts ./web/static/assets; cp ./node_modules/materialize-css/js/date_picker/picker.js ./node_modules/materialize-css/bin/picker.js"
+    },
+    "dependencies": {
+        "jquery": "3.1.1",
+        "materialize-css": "0.97.8",
+        "phoenix": "file:deps/phoenix",
+        "phoenix_html": "file:deps/phoenix_html"
+    },
+    "devDependencies": {
+        "babel-brunch": "~6.0.6",
+        "brunch": "2.10.2",
+        "clean-css-brunch": "~2.0.0",
+        "css-brunch": "~2.6.1",
+        "javascript-brunch": "~2.0.0",
+        "sass-brunch": "^2.9.0",
+        "uglify-js-brunch": "~2.0.1"
+    }
 }
