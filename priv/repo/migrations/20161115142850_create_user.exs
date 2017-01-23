@@ -2,6 +2,7 @@ defmodule Rumbl.Repo.Migrations.CreateUser do
   use Ecto.Migration
 
   def change do
+    
     create table(:users) do
       add :name, :string
       add :username, :string, null: false
@@ -10,7 +11,7 @@ defmodule Rumbl.Repo.Migrations.CreateUser do
       timestamps
     end
     
-    create table(:weather) do
+    create table(:instalations) do
       add :city,    :string, size: 40
       add :temp_lo, :integer
       add :temp_hi, :integer
@@ -19,5 +20,6 @@ defmodule Rumbl.Repo.Migrations.CreateUser do
       timestamps()
     end
     create unique_index(:users, [:username])
+
   end
 end

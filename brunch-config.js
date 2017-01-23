@@ -3,7 +3,8 @@ exports.config = {
     files: {
         javascripts: {
             joinTo: {
-                "js/app.js": /^(web\/static\/js)|(node_modules)/
+                "js/app.js": /^(web\/static\/js)|(node_modules)/,
+                "js/vendor.js": /^(web\/static\/vendor)|(deps)/
                     //"js/materialize.js": ["web/static/vendor/materialize/materialize.js"
             }
 
@@ -24,7 +25,7 @@ exports.config = {
         },
         stylesheets: {
             joinTo: {
-                "css/app.scss": /^(web\/static\/css)|(node_modules)/
+                "css/app.css": /^(web\/static\/css)|(node_modules)/
             },
             order: {
                 after: ["web/static/css/app.css"] // concat app.css last
@@ -76,9 +77,25 @@ exports.config = {
 
     npm: {
         enabled: true,
+        styles: {
+            "timedropper-ex": ["src/timedropper.css"],
+            "daterange-picker-ex": ["src/daterangepicker.css"],
+            "datetimeranger": ["src/datetimeranger.css"]
+
+        },
         globals: {
             $: "jquery",
             jQuery: "jquery",
+            moment: "moment"
         },
+        static: ["node_modules/materialize-css/bin/materialize.js",
+            "node_modules/materialize-css/bin/picker.js",
+            "node_modules/timedropper-ex/src/timedropper.js",
+            "node_modules/timedropper-ex/src/timedropper.lang.js",
+            "node_modules/daterange-picker-ex/src/jquery.daterangepicker.js",
+            "node_modules/daterange-picker-ex/src/jquery.daterangepicker.lang.js",
+            "node_modules/datetimeranger/src/datetimeranger.js",
+            "node_modules/datetimeranger/src/datetimeranger.lang.js"
+        ]
     }
 };

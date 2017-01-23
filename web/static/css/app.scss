@@ -1,1 +1,178 @@
 @import "materialize";
+main,
+.nav_breadcrumb,
+footer {
+    padding-left: 95px;
+}
+
+@media only screen and (max-width: 992px) {
+    main,
+    .nav_breadcrumb,
+    footer {
+        padding-left: 0;
+    }
+}
+
+.breadcrumb.breadcrumb {
+    font-size: 13px;
+}
+
+.card .dash-title {
+    font-size: 15px!important;
+    font-weight: 400!important;
+    line-height: 30px!important;
+}
+
+.side-nav .userView {
+    padding: 8px 8px 4px!important;
+    margin-left: -26px;
+}
+
+.side-nav a {
+    padding: 0 20px!important;
+}
+
+.header-shadow {
+    background-image: url('/images/ledHeader.jpeg');
+    background-repeat: repeat-y;
+    /* for vertical repeat */
+    background-repeat: repeat-x;
+    /* for horizontal repeat */
+}
+
+.btn-floating.btn-medium i {
+    line-height: 47px!important;
+}
+
+
+/*
+BEGIN
+Cards for forms and lists adapted to differente medias*/
+
+.form-card-panel {
+    @media screen and (min-width: 400px) {
+        transition: box-shadow .25s;
+        padding: 20px;
+        margin: 0.5rem 1rem 1rem 1rem;
+        border-radius: 2px;
+        background-color: #fff;
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+    }
+}
+
+
+/*
+END
+Cards for forms and lists adapted to differente medias*/
+
+
+/*
+BEGIN
+ Page 400 and %00*/
+
+.text-long-shadow {
+    text-shadow: #1d7d74 1px 1px, #1d7d74 2px 2px, #1d7d74 3px 3px, #1d7d74 4px 4px, #1d7d74 5px 5px, #1d7d74 6px 6px, #1d7d74 7px 7px, #1d7d74 8px 8px, #1d7d74 9px 9px, #1d7d74 10px 10px, #1d7d74 11px 11px, #1d7d74 12px 12px, #1d7d74 13px 13px, #1d7d74 14px 14px, #1d7d74 15px 15px, #1d7d74 16px 16px, #1d7d74 17px 17px, #1d7d74 18px 18px, #1d7d74 19px 19px, #1d7d74 20px 20px, #1d7d74 21px 21px, #208b81 22px 22px, #208b81 23px 23px, #208b81 24px 24px, #208b81 25px 25px, #208b81 26px 26px, #208b81 27px 27px, #208b81 28px 28px, #208b81 29px 29px, #208b81 30px 30px, #26a69a 31px 31px, #26a69a 32px 32px, #26a69a 33px 33px, #26a69a 34px 34px, #26a69a 35px 35px, #26a69a 36px 36px, #26a69a 37px 37px;
+    background-color: #26a69a;
+    width: 100%;
+    font-size: 10rem;
+    color: #fff !important;
+    text-align: center;
+}
+
+.browser-window {
+    text-align: left;
+    width: 100%;
+    height: auto;
+    display: inline-block;
+    -webkit-border-radius: 5px 5px 2px 2px;
+    -moz-border-radius: 5px 5px 2px 2px;
+    border-radius: 5px 5px 2px 2px;
+    background-clip: padding-box;
+    background-color: transparent;
+    margin: 20px 0;
+    overflow: hidden;
+}
+
+.top-bar {
+    height: 40px;
+    -webkit-border-radius: 5px 5px 0 0;
+    -moz-border-radius: 5px 5px 0 0;
+    border-radius: 5px 5px 0 0;
+    background-clip: padding-box;
+    border-top: thin solid #eaeae9;
+    border-bottom: thin solid #ddd;
+    background: linear-gradient(#e7e7e6, #e0e0e0);
+}
+
+.circles {
+    margin: 5px 12px;
+}
+
+.circle {
+    height: 10px;
+    width: 10px;
+    display: inline-block;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    background-color: #fff;
+    margin-right: 1px
+}
+
+#site-layout-example-top {
+    background-color: #e57373;
+    height: 60px;
+}
+
+.caption-uppercase {
+    font-size: 1.50rem;
+    font-weight: 400;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+}
+
+#close-circle {
+    background-color: #ff5c5a
+}
+
+#minimize-circle {
+    background-color: #fdb45c
+}
+
+#maximize-circle {
+    background-color: #1bc656
+}
+
+.content {
+    margin: 0;
+    width: 100%;
+    display: inline-block;
+    border-radius: 0 0 5px 5px;
+    background-clip: padding-box;
+    border-top: thin solid #eaeae9;
+    border-bottom: thin solid #ddd;
+    background: linear-gradient(#e7e7e6, #e0e0e0);
+}
+
+#site-layout-example-right {
+    background-color: #26a69a;
+}
+
+.flat-text {
+    height: 25px;
+    width: 80%;
+    background-color: rgba(0, 0, 0, 0.15);
+    display: block;
+    margin: 27px auto;
+}
+
+.flat-text.small {
+    width: 25%;
+    height: 25px;
+    background-color: rgba(0, 0, 0, 0.15);
+}
+
+
+/*
+END
+ Page 400 and %00*/

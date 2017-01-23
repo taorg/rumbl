@@ -10,10 +10,11 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>Hello Rumbl!</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+    <script src="<%= static_path(@conn, "/js/vendor.js") %>"></script>
   </head>
 
   <body>
-    <div class="container">
       <header class="header">
         <nav role="navigation">
           <ul class="nav nav-pills pull-right">
@@ -29,24 +30,31 @@
       <main role="main">
         <%= render @view_module, @view_template, assigns %>
       </main>
-
-    </div> <!-- /container -->
-    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
     <!--
+    
     <script src="<%= static_path(@conn, "/js/materialize.js") %>"></script>
     -->
     <script>
-      $('ul.tabs').tabs();
-        $('.chips-initial').material_chip({
-    data: [{
-      tag: 'Apple',
-    }, {
-      tag: 'Microsoft',
-    }, {
-      tag: 'Google',
-    }],
-  });
-  $('ul.tabs').tabs();
+
+ $("#time_dropper").timeDropper({});
+ $('#dateranger').dateRangePicker({
+		//startOfWeek : 1,
+		shortcuts: {
+			'next-days': [3, 5, 7],
+			'next': ['week', 'month', 'year']
+		}
+	});
+    $('.chips-initial').material_chip({
+        data: [{
+          tag: 'Apple',
+        }, {
+          tag: 'Microsoft',
+        }, {
+          tag: 'Google',
+        }],
+      });
+ 
+  $("#datetimeranger").dateTimeRanger({});
     </script>
   </body>
 </html>
