@@ -9,21 +9,28 @@
     "license": "MIT",
     "scripts": {
         "deploy": "brunch build --production",
-        "watch": "brunch watch --stdin",
-        "postinstall": "cp -R ./node_modules/materialize-css/fonts ./web/static/assets; cp ./node_modules/materialize-css/js/date_picker/picker.js ./node_modules/materialize-css/bin/picker.js"
+        "watch": "brunch watch --stdin"
     },
     "dependencies": {
+        "air-datepicker": "2.2.3",
+        "datepair.js": "^0.4.15",
         "daterange-picker-ex": "^1.1.5",
         "datetimeranger": "^1.0.7",
+        "flatpickr": "2.3.5",
         "jquery": "^3.1.1",
+        "materialize-css": "0.98",
         "moment": "^2.17.1",
+        "moment-timezone": "0.5.11",
         "phoenix": "file:deps/phoenix",
         "phoenix_html": "file:deps/phoenix_html",
+        "timepicker": "^1.11.9",
         "timedropper-ex": "^1.4.4"
+
     },
     "devDependencies": {
         "babel-brunch": "~6.0.6",
-        "brunch": "2.10.2",
+        "babel-preset-es2015": "^6.22.0",
+        "brunch": "2.10.3",
         "clean-css-brunch": "~2.0.0",
         "css-brunch": "~2.6.1",
         "javascript-brunch": "~2.0.0",

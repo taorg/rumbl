@@ -18,4 +18,5 @@ import "moment"
 // Local files can be imported directly using relative
 // paths "./socket" or full ones "web/static/js/socket".
 
-// import socket from "./socket"
+import socket from "./socket"
+import bootstrapMaterialDatePicker from "./bootstrap-material-datetimepicker_2.7.1.js"

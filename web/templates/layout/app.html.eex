@@ -11,7 +11,7 @@
     <title>Hello Rumbl!</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
-    <script src="<%= static_path(@conn, "/js/vendor.js") %>"></script>
+  
   </head>
 
   <body>
@@ -35,16 +35,39 @@
     <script src="<%= static_path(@conn, "/js/materialize.js") %>"></script>
     -->
     <script>
+$(document).ready(function(){    
+    $('select').material_select();
+    $("#time_dropper").timeDropper({});
+    $('#dateranger').dateRangePicker({		
+      shortcuts: {
+        'next-days': [3, 5, 7],
+        'next': ['week', 'month', 'year']
+        }
+      });
+    
+    $("#datetimeranger").dateTimeRanger({});
+  
+    $('#from_date').datepicker({
+      //timepicker: true,
+      language: 'en',
+      //minDate: new Date() // Now can select only dates, which goes after today
+    })
+    $('#from_time').timepicker({ 'step': 5 });
+    //
+    $('#date-end').bootstrapMaterialDatePicker({ format : 'dddd DD MMMM YYYY - HH:mm' }); 
+    $('#date-start').bootstrapMaterialDatePicker({ format : 'dddd DD MMMM YYYY - HH:mm' }); 
+    flatpickr("#to_date");
+    $("#to_date").prop('readonly', false);
+    $('#autocomplete-input').autocomplete({
+      data: {
+        "Apple": null,
+        "Microsoft": null,
+        "Google": 'http://placehold.it/250x250'
+      },
+      limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
+    });
 
- $("#time_dropper").timeDropper({});
- $('#dateranger').dateRangePicker({
-		//startOfWeek : 1,
-		shortcuts: {
-			'next-days': [3, 5, 7],
-			'next': ['week', 'month', 'year']
-		}
-	});
-    $('.chips-initial').material_chip({
+    $('#tag_chips_id').material_chip({
         data: [{
           tag: 'Apple',
         }, {
@@ -52,9 +75,15 @@
         }, {
           tag: 'Google',
         }],
-      });
- 
-  $("#datetimeranger").dateTimeRanger({});
+      autocompleteData: {
+        'Alameda': null,
+        'Marinela': null,
+        'García': null
+      }
+    });
+
+//END DOCUMENT READY    
+});
     </script>
   </body>
 </html>

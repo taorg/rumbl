@@ -3,9 +3,10 @@ exports.config = {
     files: {
         javascripts: {
             joinTo: {
-                "js/app.js": /^(web\/static\/js)|(node_modules)/,
-                "js/vendor.js": /^(web\/static\/vendor)|(deps)/
-                    //"js/materialize.js": ["web/static/vendor/materialize/materialize.js"
+                "js/app.js": /^(web\/static\/js)|(node_modules)/
+
+
+                //"js/materialize.js": ["web/static/vendor/materialize/materialize.js"
             }
 
             // To use a separate vendor.js bundle, specify two files path
@@ -78,9 +79,13 @@ exports.config = {
     npm: {
         enabled: true,
         styles: {
-            "timedropper-ex": ["src/timedropper.css"],
+            "air-datepicker": ["dist/css/datepicker.css"],
             "daterange-picker-ex": ["src/daterangepicker.css"],
-            "datetimeranger": ["src/datetimeranger.css"]
+            "datetimeranger": ["src/datetimeranger.css"],
+            "flatpickr": ["dist/flatpickr.css"],
+            "timedropper-ex": ["src/timedropper.css"],
+            "timepicker": ["jquery.timepicker.css"]
+
 
         },
         globals: {
@@ -88,14 +93,18 @@ exports.config = {
             jQuery: "jquery",
             moment: "moment"
         },
-        static: ["node_modules/materialize-css/bin/materialize.js",
-            "node_modules/materialize-css/bin/picker.js",
-            "node_modules/timedropper-ex/src/timedropper.js",
-            "node_modules/timedropper-ex/src/timedropper.lang.js",
+        static: [
+            "node_modules/air-datepicker/dist/js/datepicker.js",
+            "node_modules/air-datepicker/dist/js/i18n/datepicker.en.js",
+            "node_modules/flatpickr/dist/flatpickr.js",
+            "node_modules/timepicker/jquery.timepicker.js",
             "node_modules/daterange-picker-ex/src/jquery.daterangepicker.js",
             "node_modules/daterange-picker-ex/src/jquery.daterangepicker.lang.js",
             "node_modules/datetimeranger/src/datetimeranger.js",
-            "node_modules/datetimeranger/src/datetimeranger.lang.js"
+            "node_modules/datetimeranger/src/datetimeranger.lang.js",
+            "node_modules/materialize-css/bin/materialize.js",
+            "node_modules/timedropper-ex/src/timedropper.js",
+            "node_modules/timedropper-ex/src/timedropper.lang.js"
         ]
     }
 };
