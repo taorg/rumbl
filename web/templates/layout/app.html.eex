@@ -70,10 +70,16 @@ $(document).ready(function(){
     $('#tag_chips_id').material_chip({
         data: [{
           tag: 'Apple',
-        }, {
+          id: 1,
+          image: 'https://storage.googleapis.com/material-icons/external-assets/v4/icons/svg/ic_vpn_key_black_24px.svg'
+          }, {
           tag: 'Microsoft',
-        }, {
+          id: 2,
+          image: 'https://storage.googleapis.com/material-icons/external-assets/v4/icons/svg/ic_chat_black_24px.svg'
+          }, {
           tag: 'Google',
+          id: 3,
+          image: 'https://storage.googleapis.com/material-icons/external-assets/v4/icons/svg/ic_replay_black_24px.svg'
         }],
       autocompleteData: {
         'Alameda': null,
