@@ -3,7 +3,7 @@ defmodule Rumbl.Repo.Migrations.CreateTags do
 
   def change do
 
-    create table(:tag) do
+    create table(:tags) do
       add :name, :string, null: false
 
       timestamps
