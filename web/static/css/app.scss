@@ -1,4 +1,5 @@
 @import "materialize";
+
 .datepicker--nav {
     padding: 0px!important;
 }
@@ -42,6 +43,9 @@ li.ui-timepicker-selected,
     color: #004d40!important;
 }
 
+.autocomplete-content {
+    position: absolute!important;
+}
 
 /**
 

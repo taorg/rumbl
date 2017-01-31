@@ -19,6 +19,8 @@
         <nav role="navigation">
           <ul class="nav nav-pills pull-right">
             <li><a href="/">Get Started</a></li>
+            <li><a href="/users">List users</a></li>
+            <li><a href="/users/new">New user</a></li>
           </ul>
         </nav>
         <span class="logo"></span>
@@ -26,14 +28,11 @@
        
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-
+<div class="container">
       <main role="main">
         <%= render @view_module, @view_template, assigns %>
       </main>
-    <!--
-    
-    <script src="<%= static_path(@conn, "/js/materialize.js") %>"></script>
-    -->
+    </div>
     <script>
 $(document).ready(function(){    
     $('select').material_select();
@@ -50,6 +49,7 @@ $(document).ready(function(){
     $('#from_date').datepicker({
       //timepicker: true,
       language: 'en',
+      
       //minDate: new Date() // Now can select only dates, which goes after today
     })
     $('#from_time').timepicker({ 'step': 5 });

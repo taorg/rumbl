@@ -1,23 +1,46 @@
-<h1>New User</h1>
-
+<h5>New User</h5>
+<div class="row">
+ <div id="user_chips_id" class="chips chips-autocomplete col s8"></div>
 <%= form_for @changeset, user_path(@conn, :create), fn f -> %>
   <%= if @changeset.action do %>
     <div class="alert alert-danger">
       <p>Oops, something went wrong! Please check the errors below.</p>
     </div>
   <% end %>
-
-  <div class="form-group">
+ 
+  <div class="input-field col s8">
     <%= text_input f, :name, placeholder: "Name", class: "form-control" %>
-    <%= error_tag f, :name %>
   </div>
-  <div class="form-group">
+  
+  <div class="input-field col s12">
+    <%= text_input f, :usertags, placeholder: "tags", class: "form-control" %>
+  </div>
+
+  <div class="input-field col s8">
     <%= text_input f, :username, placeholder: "Username", class: "form-control" %>
-    <%= error_tag f, :username %>
   </div>
-  <div class="form-group">
+  <div class="input-field col s8">
     <%= password_input f, :password, placeholder: "Password", class: "form-control" %>
-    <%= error_tag f, :password %>
   </div>
-  <%= submit "Create User", class: "btn btn-primary" %>
+  
+  <%= submit "Create User", class: "btn btn-primary col s8" %>
 <% end %>
+</div>
+<script type="text/javascript">
+
+  
+  if ($('#user_usertags').val())
+    var tagData =JSON.parse($('#user_usertags').val());
+    console.log("tagData",tagData);
+  $('#user_chips_id').material_chip(
+      {
+       data: tagData
+      }
+    );
+  $('#user_chips_id').on('chip.add', function(e, chip){
+    $('#user_usertags').val(JSON.stringify($('#user_chips_id').material_chip('data')))
+    });
+  $('#user_chips_id').on('chip.delete', function(e, chip){
+    $('#user_usertags').val(JSON.stringify($('#user_chips_id').material_chip('data')))
+    });
+</script>

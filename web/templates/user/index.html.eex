@@ -1,9 +1,24 @@
-​<h1>Listing Users</h1>
+​<h5>Listing Users</h5>
 <table class="table">​ 
+<table class="centered highlight">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Surname</th>
+      <th>UserName</th>
+      <th>ID</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
 <%= for user <- @users do %>​
 ​  <tr>
-​    <td><b><%= Rumbl.UserView.first_name(user) %></b> (<%= user.id %> )</td>
+​    <td><%= Rumbl.UserView.first_name(user) %></td>
+	<td><%= Rumbl.UserView.surname(user) %></td>
+	<td>(<%= user.username %> )</td>
+	<td>(<%= user.id %> )</td>	
     <td> <%= link "View",to: user_path(@conn,:show, user.id) %> </td>
   </tr>
 <% end %>​
+</tbody>
 ​</table>
