@@ -2,8 +2,9 @@ defmodule Rumbl.Tag do
   use Rumbl.Web, :model
 
   schema "tags" do
-	field :name, :string, null: false
-    timestamps()
+	field :tag, :string, null: false
+  belongs_to :tagmaps, Rumbl.Tagmaps
+  timestamps()
   end
 
   def changeset(model, params \\ :empty) do

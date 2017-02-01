@@ -18,32 +18,35 @@ defmodule Rumbl.User do
     |> Ecto.Changeset.put_assoc(:tags, parse_tags(params))
   end
 
+
+
+        
+
+# c("./web/models/user.ex")
+#Poison.decode "[{\"tag\":\"1\"},{\"tag\":\"2\"},{\"tag\":\"3\"}]", [keys: :atoms]
 # params = %{"name" => "", "password" => "1", "username" => "1", "usertags" => "[{\"tag\":\"1\"},{\"tag\":\"2\"},{\"tag\":\"3\"}]"}
 # Rumbl.User.parse_tags(params)
   def parse_tags(params)  do
     cond do
-       is_atom(params) -> ""
+       is_atom(params) -> params
        true -> 
              (params["usertags"])
-             |>String.replace("\"","")
-             |>String.replace_leading("[{","")
-             |>String.replace_trailing("}]","")
-             |>String.replace("tag:","")
-             |>String.replace("},{", ",")
-             |>String.split(",")
-             |> Enum.map(&String.trim/1)
-             |> Enum.reject(& &1 == "")
-             |> Enum.map(&get_or_insert_tag/1)
+             |>Poison.decode([keys: :atoms]) 
+             |>elem(1)
+             |>Enum.map(fn(x) ->  Map.get(x,:tag) end)
+             |>Enum.map(&get_or_insert_tag/1)
     end
 
   end
 
 
-  def get_or_insert_tag(name) do
-    Rumbl.Repo.insert!(%Rumbl.Tag{name: name},
-               on_conflict: [set: [name: name]], conflict_target: :name)
+  defp get_or_insert_tag(tag) do
+    Rumbl.Repo.insert!(%Rumbl.Tag{tag: tag},
+               on_conflict: [set: [tag: tag]], conflict_target: :tag)
 
   end
+
+
 
 
 

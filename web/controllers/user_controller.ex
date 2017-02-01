@@ -1,15 +1,30 @@
 defmodule Rumbl.UserController do
   use Rumbl.Web, :controller
   alias Rumbl.User
+  import Ecto.Query, only: [from: 2]
 
   def index(conn, _params) do
     users = Repo.all(Rumbl.User)
     render conn, "index.html", users: users
   end
 
+#SELECT t.name
+#FROM tagmaps tm, users u, tags t
+#WHERE tm.tag_id = t.id
+#AND 1 = tm.user_id
+#GROUP BY t.name
+
+
   def show(conn, %{"id" => id}) do
-    user = Repo.get(Rumbl.User, id)
-    render conn, "show.html", user: user
+    user = Repo.get(User, id)
+    user_tags = Repo.all( from t in "tags",
+                            join: tm in "tagmaps",
+                            on: tm.tag_id == t.id, 
+                            where: tm.user_id == ^String.to_integer(id),
+                            select: [:tag]                          
+                          )
+IO.inspect user_tags
+    render conn, "show.html", user: user, user_tags: user_tags
   end
 
   def new(conn, _params) do

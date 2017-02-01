@@ -4,12 +4,12 @@ defmodule Rumbl.Repo.Migrations.CreateTags do
   def change do
 
     create table(:tags) do
-      add :name, :string, null: false
+      add :tag, :string, null: false
 
       timestamps()
     end
 
-    create unique_index(:tags, [:name])
+    create unique_index(:tags, [:tag])
 
     create table(:tag_sources) do      
       add :source_id, :integer , null: false 
