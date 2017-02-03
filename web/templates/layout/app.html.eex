@@ -21,6 +21,8 @@
             <li><a href="/">Get Started</a></li>
             <li><a href="/users">List users</a></li>
             <li><a href="/users/new">New user</a></li>
+             <li><a href="/images">Images</a></li>
+             <li><a href="/images/new">Upload Images</a></li>
           </ul>
         </nav>
         <span class="logo"></span>

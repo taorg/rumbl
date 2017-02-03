@@ -19,7 +19,7 @@ defmodule Rumbl.Mixfile do
   def application do
     [mod: {Rumbl, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex]]
+                    :phoenix_ecto, :postgrex, :arc_ecto, :ex_aws, :hackney, :poison]]
   end
 
   # Specifies which paths to compile per environment.
@@ -30,7 +30,13 @@ defmodule Rumbl.Mixfile do
   #
   # Type `mix help deps` for examples and options.
   defp deps do
-    [{:phoenix, "~> 1.2.1"},
+    [{:arc, "~> 0.6.0"},
+     {:arc_ecto, "~> 0.5.0"},
+     {:ex_aws, "~> 1.0.0"},
+     {:hackney, "1.6.1"},
+     {:poison, "~> 2.0"},
+     {:sweet_xml, "~> 0.5"},
+     {:phoenix, "~> 1.2.1"},
      {:phoenix_pubsub, "~> 1.0"},
      {:phoenix_ecto, "~> 3.2.1"},
      {:postgrex, ">= 0.0.0"},
