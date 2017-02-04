@@ -1,12 +1,15 @@
 defmodule Rumbl.User do
   use Rumbl.Web, :model
   use Ecto.Schema
+  use Arc.Ecto.Schema
 
   schema "users" do
     field :name, :string
     field :username, :string
     field :password, :string, virtual: true
     field :password_hash, :string
+    field :avatar, Rumbl.Avatar.Type
+    has_many :images, Rumb.Images
     many_to_many :tags, Rumbl.Tag, join_through: "tagmaps"
     timestamps()
   end

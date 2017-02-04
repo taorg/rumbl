@@ -13,17 +13,28 @@ defmodule Rumbl.ImageController do
     render(conn, "new.html", changeset: changeset)
   end
 
-  def create(conn, %{"image" => images_params}) do    
-    result = insert_images( images_params["image"])
-    conn
-    |> put_flash(:info, result)
-    |> redirect(to: image_path(conn, :index))
+  def create(conn, _params) do    
+    case Map.has_key?(_params, "image") do
+      true ->      
+        %{"image" => images_params} = _params
+        result = insert_images( images_params["image"])
+        conn
+        |> put_flash(:info, result)
+        |> redirect(to: image_path(conn, :index))
+      false->
+        conn
+        |> put_flash(:error, "Select a image, please")
+        |> render("new.html", changeset: Image.changeset(%Image{}, _params))
+    end
   end
 
   defp insert_images( img_params_list) do         
-    for x <- img_params_list do                
+    for x <- img_params_list do   
+      IO.inspect "----XX------"
+
       Image.changeset(%Image{}, %{"image" => x})
       |>Repo.insert
+      |>IO.inspect              
     end      
       |>Enum.map_reduce({0,0}, &evaluate_result(&1, &2) )
       |>elem(1)

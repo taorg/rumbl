@@ -2,4 +2,5 @@
 
 <%= for image <- @images do %>
   <img src="<%= Rumbl.ImageUploader.url({image.image, image})%>"><br>
+  <img src="<%= Rumbl.ImageUploader.url({image.image, image}, :thumb)%>"><br>
 <% end %>

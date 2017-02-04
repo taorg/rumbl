@@ -8,13 +8,6 @@ defmodule Rumbl.UserController do
     render conn, "index.html", users: users
   end
 
-#SELECT t.name
-#FROM tagmaps tm, users u, tags t
-#WHERE tm.tag_id = t.id
-#AND 1 = tm.user_id
-#GROUP BY t.name
-
-
   def show(conn, %{"id" => id}) do
     user = Repo.get(User, id)
     user_tags = Repo.all( from t in "tags",
@@ -23,7 +16,7 @@ defmodule Rumbl.UserController do
                             where: tm.user_id == ^String.to_integer(id),
                             select: [:tag]                          
                           )
-IO.inspect user_tags
+
     render conn, "show.html", user: user, user_tags: user_tags
   end
 

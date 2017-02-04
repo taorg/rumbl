@@ -6,12 +6,16 @@ defmodule Rumbl.ImageUploader do
   # Include ecto support (requires package arc_ecto installed):
   # use Arc.Ecto.Definition
 
-  @versions [:original]
+  @versions [:original, :thumb]
   @extension_whitelist ~w(.jpg .jpeg .gif .png .svg)
 
   def validate({file, _}) do   
     file_extension = file.file_name |> Path.extname() |> String.downcase()
     Enum.member?(@extension_whitelist, file_extension)
+  end
+
+  def transform(:thumb, _) do
+    {:convert, "-strip -thumbnail 100x100^ -gravity center -extent 100x100 -format png", :png}
   end
   # To add a thumbnail version:
   # @versions [:original, :thumb]

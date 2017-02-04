@@ -4,7 +4,7 @@ defmodule Rumbl.Image do
 
   schema "images" do
     field :image, Rumbl.ImageUploader.Type
-
+    belongs_to :users, Rumbl.User
     timestamps()
   end
 
