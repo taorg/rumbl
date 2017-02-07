@@ -90,6 +90,8 @@ $(document).ready(function(){
       }
     });
 
+  $('.dropify').dropify();
+ 
 //END DOCUMENT READY    
 });
     </script>

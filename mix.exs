@@ -30,12 +30,12 @@ defmodule Rumbl.Mixfile do
   #
   # Type `mix help deps` for examples and options.
   defp deps do
-    [{:arc, "~> 0.6.0"},
-     {:arc_ecto, "~> 0.5.0"},
-     {:ex_aws, "~> 1.0.0"},
-     {:hackney, "1.6.1"},
-     {:poison, "~> 2.0"},
-     {:sweet_xml, "~> 0.5"},
+    [{:arc, "~> 0.7.0", override: true},
+     {:arc_ecto, "~> 0.5.0", override: true},
+     {:ex_aws, "~> 1.1"},
+     {:hackney, "~>1.6"},
+     {:poison, "~> 3.1", override: true},
+     {:sweet_xml, "~> 0.6"},
      {:phoenix, "~> 1.2.1"},
      {:phoenix_pubsub, "~> 1.0"},
      {:phoenix_ecto, "~> 3.2.1"},

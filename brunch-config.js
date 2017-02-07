@@ -82,7 +82,10 @@ exports.config = {
             "air-datepicker": ["dist/css/datepicker.css"],
             "daterange-picker-ex": ["src/daterangepicker.css"],
             "datetimeranger": ["src/datetimeranger.css"],
+            "dropify": ["dist/css/dropify.css"],
+            "fine-uploader": ["jquery.fine-uploader/fine-uploader-gallery.css", "jquery.fine-uploader/fine-uploader-new.css", "jquery.fine-uploader/fine-uploader.css"],
             "flatpickr": ["dist/flatpickr.css"],
+            "jquery.filer": ["css/themes/jquery.filer-dragdropbox-theme.css", "css/jquery.filer.css", "assets/fonts/jquery.filer-icons/jquery-filer.css"],
             "timedropper-ex": ["src/timedropper.css"],
             "timepicker": ["jquery.timepicker.css"]
 
@@ -91,7 +94,8 @@ exports.config = {
         globals: {
             $: "jquery",
             jQuery: "jquery",
-            moment: "moment"
+            moment: "moment",
+            Dropzone: "dropzone"
         },
         static: [
             "node_modules/air-datepicker/dist/js/datepicker.js",
@@ -104,7 +108,8 @@ exports.config = {
             "node_modules/datetimeranger/src/datetimeranger.lang.js",
             "node_modules/materialize-css/bin/materialize.js",
             "node_modules/timedropper-ex/src/timedropper.js",
-            "node_modules/timedropper-ex/src/timedropper.lang.js"
+            "node_modules/timedropper-ex/src/timedropper.lang.js",
+            "node_modules/fine-uploader/jquery.fine-uploader/jquery.fine-uploader.js"
         ]
     }
 };

@@ -13,6 +13,9 @@
 // to also remove its path from "config.paths.watched".
 import "phoenix_html"
 import "moment"
+import "dropify"
+import "jquery.filer"
+import "fine-uploader"
 // Import local files
 //
 // Local files can be imported directly using relative

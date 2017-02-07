@@ -13,10 +13,12 @@ defmodule Rumbl.ImageController do
     render(conn, "new.html", changeset: changeset)
   end
 
-  def create(conn, _params) do    
+  def create(conn, _params) do 
     case Map.has_key?(_params, "image") do
       true ->      
         %{"image" => images_params} = _params
+        IO.inspect "--------PARAMS-----------"
+        IO.inspect images_params["image"]  
         result = insert_images( images_params["image"])
         conn
         |> put_flash(:info, result)
@@ -29,17 +31,15 @@ defmodule Rumbl.ImageController do
   end
 
   defp insert_images( img_params_list) do         
-    for x <- img_params_list do   
-      IO.inspect "----XX------"
-
+    for x <- img_params_list do         
       Image.changeset(%Image{}, %{"image" => x})
-      |>Repo.insert
-      |>IO.inspect              
+      |>Repo.insert               
     end      
       |>Enum.map_reduce({0,0}, &evaluate_result(&1, &2) )
       |>elem(1)
       |>display_result
   end  
+
   defp evaluate_result(x, acc) do
     acc = case x do
           {:ok, image} ->

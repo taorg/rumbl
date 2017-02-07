@@ -9,16 +9,20 @@ defmodule Rumbl.Router do
     plug :put_secure_browser_headers
   end
 
-  pipeline :api do
-    plug :accepts, ["json"]
+  pipeline :pharc do
+    plug :accepts, ["json"]    
   end
 
+  scope "/pharc", Rumbl do
+    pipe_through :pharc
+    resources "/media", MediaControler, only: [:create, :delete]
+  end
+  
   scope "/", Rumbl do
     pipe_through :browser
     get "/", PageController, :index
     resources "/users", UserController, only: [:index, :show, :new, :edit, :create]
-    resources "/images", ImageController
-    
+    resources "/images", ImageController  
   end
 
   # Other scopes may use custom stacks.
