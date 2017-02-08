@@ -15,7 +15,7 @@ defmodule Rumbl.Router do
 
   scope "/pharc", Rumbl do
     pipe_through :pharc
-    resources "/media", MediaControler, only: [:create, :delete]
+    resources "/media", AjaxArc, only: [:create, :delete]
   end
   
   scope "/", Rumbl do

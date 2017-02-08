@@ -1,9 +1,11 @@
-defmodule Rumbl.Image do
+defmodule Rumbl.Medias do
   use Rumbl.Web, :model
   use Arc.Ecto.Schema
 
-  schema "images" do
-    field :image, Rumbl.ImageUploader.Type
+  schema "medias" do
+    field :image, Rumbl.ImageArc.Type
+    field :video, Rumbl.VideoArc.Type
+    field :content_type, :string
     belongs_to :users, Rumbl.User
     timestamps()
   end
@@ -13,8 +15,8 @@ defmodule Rumbl.Image do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:image])
-    |> cast_attachments(params, [:image])
+    |> cast(params, [:image,:video,:content_type])
+    |> cast_attachments(params, [:image, :video])
     |> validate_required([:image])
   end
 end

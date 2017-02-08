@@ -1,15 +1,15 @@
 defmodule Rumbl.ImageController do
   use Rumbl.Web, :controller
-  alias Rumbl.Image
+  alias Rumbl.Medias
   alias Rumbl.Repo
 
   def index(conn, _) do
-    images = Repo.all(Image)
+    images = Repo.all(Medias)
     render(conn, "index.html", images: images)
   end
 
   def new(conn, _) do
-    changeset = Image.changeset(%Image{})
+    changeset = Medias.changeset(%Medias{})
     render(conn, "new.html", changeset: changeset)
   end
 
@@ -17,8 +17,6 @@ defmodule Rumbl.ImageController do
     case Map.has_key?(_params, "image") do
       true ->      
         %{"image" => images_params} = _params
-        IO.inspect "--------PARAMS-----------"
-        IO.inspect images_params["image"]  
         result = insert_images( images_params["image"])
         conn
         |> put_flash(:info, result)
@@ -26,13 +24,13 @@ defmodule Rumbl.ImageController do
       false->
         conn
         |> put_flash(:error, "Select a image, please")
-        |> render("new.html", changeset: Image.changeset(%Image{}, _params))
+        |> render("new.html", changeset: Medias.changeset(%Medias{}, _params))
     end
   end
 
   defp insert_images( img_params_list) do         
     for x <- img_params_list do         
-      Image.changeset(%Image{}, %{"image" => x})
+      Medias.changeset(%Medias{}, %{"image" => x})
       |>Repo.insert               
     end      
       |>Enum.map_reduce({0,0}, &evaluate_result(&1, &2) )

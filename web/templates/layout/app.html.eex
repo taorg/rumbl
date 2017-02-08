@@ -91,7 +91,8 @@ $(document).ready(function(){
     });
 
   $('.dropify').dropify();
- 
+  $('.carousel').carousel();
+  $('.slider').slider();
 //END DOCUMENT READY    
 });
     </script>
