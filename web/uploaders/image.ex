@@ -19,7 +19,7 @@ defmodule Rumbl.ImageArc do
   end
 
   def transform(:original, _) do
-   {:convert, fn(input, output) -> "#{input} -format jpg #{output}" end, :jpg}
+   {:convert, fn(input, output) -> "#{input}  #{output}" end, :jpg}
   end
 
 

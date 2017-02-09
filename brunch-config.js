@@ -83,7 +83,8 @@ exports.config = {
             "daterange-picker-ex": ["src/daterangepicker.css"],
             "datetimeranger": ["src/datetimeranger.css"],
             "dropify": ["dist/css/dropify.css"],
-            "fine-uploader": ["jquery.fine-uploader/fine-uploader-gallery.css", "jquery.fine-uploader/fine-uploader-new.css", "jquery.fine-uploader/fine-uploader.css"],
+            "dropzone": ["dist/dropzone.css"],
+            "fine-uploader": ["jquery.fine-uploader/fine-uploader-gallery.css", "jquery.fine-uploader/fine-uploader-new.css"],
             "flatpickr": ["dist/flatpickr.css"],
             "jquery.filer": ["css/themes/jquery.filer-dragdropbox-theme.css", "css/jquery.filer.css", "assets/fonts/jquery.filer-icons/jquery-filer.css"],
             "timedropper-ex": ["src/timedropper.css"],
@@ -109,7 +110,8 @@ exports.config = {
             "node_modules/materialize-css/bin/materialize.js",
             "node_modules/timedropper-ex/src/timedropper.js",
             "node_modules/timedropper-ex/src/timedropper.lang.js",
-            "node_modules/fine-uploader/jquery.fine-uploader/jquery.fine-uploader.js"
+            "node_modules/fine-uploader/jquery.fine-uploader/jquery.fine-uploader.js",
+
         ]
     }
 };

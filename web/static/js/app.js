@@ -16,6 +16,7 @@ import "moment"
 import "dropify"
 import "jquery.filer"
 import "fine-uploader"
+import "dropzone"
 // Import local files
 //
 // Local files can be imported directly using relative

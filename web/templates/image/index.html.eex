@@ -1,17 +1,6 @@
 <h4><%= link "Upload new image", to: image_path(@conn, :new) %></h4>
 
-<div class="slider">
-<ul class="slides">
-<%= for image <- @images do %>
-  <li>
-    <img src="<%= Rumbl.ImageArc.url({image.image, image})%>">
-  </li>  
-  <li>
-    <img src="<%= Rumbl.ImageArc.url({image.image, image}, :thumb)%>">
- </li>   
-<% end %>
-</ul>
-</div>
+
 
 <div class="carousel">
 <%= for image <- @images do %>
@@ -24,4 +13,16 @@
 <% end %>
 </div>
 
+  <div class="slider">
+    <ul class="slides">
+<%= for image <- @images do %>
+  <li>
+    <img src="<%= Rumbl.ImageArc.url({image.image, image})%>">
+  </li>  
+  <li>
+    <img src="<%= Rumbl.ImageArc.url({image.image, image}, :thumb)%>">
+ </li>   
+<% end %>
+</ul>
+</div>
   

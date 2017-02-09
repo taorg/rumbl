@@ -19,7 +19,7 @@
         "dropify": "^0.2.1",
         "dropzone": "4.3.0",
         "fine-uploader": "5.13.0",
-        "flatpickr": "2.3.5",
+        "flatpickr": "2.3.7",
         "jquery.filer": "1.3.0",
         "jquery": "^3.1.1",
         "materialize-css": "0.98",
@@ -33,11 +33,10 @@
     },
     "devDependencies": {
         "babel-brunch": "~6.0.6",
-        "babel-preset-es2015": "^6.22.0",
-        "brunch": "2.10.5",
-        "clean-css-brunch": "~2.0.0",
-        "css-brunch": "~2.6.1",
-        "sass-brunch": "^2.9.0",
-        "uglify-js-brunch": "~2.0.1"
+        "brunch": "2.10.6",
+        "clean-css-brunch": "~2.10.0",
+        "css-brunch": "~2.10.0",
+        "sass-brunch": "^2.10.2",
+        "uglify-js-brunch": "~2.1.1"
     }
 }

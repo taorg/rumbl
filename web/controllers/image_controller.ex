@@ -5,6 +5,8 @@ defmodule Rumbl.ImageController do
 
   def index(conn, _) do
     images = Repo.all(Medias)
+    IO.inspect "-----IMAGES-----"
+    IO.inspect images
     render(conn, "index.html", images: images)
   end
 
@@ -14,9 +16,9 @@ defmodule Rumbl.ImageController do
   end
 
   def create(conn, _params) do 
-    case Map.has_key?(_params, "image") do
+    case Map.has_key?(_params, "medias") do
       true ->      
-        %{"image" => images_params} = _params
+        %{"medias" => images_params} = _params
         result = insert_images( images_params["image"])
         conn
         |> put_flash(:info, result)

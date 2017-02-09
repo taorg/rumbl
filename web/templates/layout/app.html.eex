@@ -89,10 +89,11 @@ $(document).ready(function(){
         'García': null
       }
     });
-
-  $('.dropify').dropify();
+  $('.slider').slider();  
   $('.carousel').carousel();
-  $('.slider').slider();
+ 
+  $('.dropify').dropify();
+
 //END DOCUMENT READY    
 });
     </script>
