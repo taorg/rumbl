@@ -9,7 +9,7 @@ defmodule Rumbl.User do
     field :password, :string, virtual: true
     field :password_hash, :string
     field :avatar, Rumbl.ImageArc.Type
-    has_many :images, Rumb.Images
+    has_many :medias, Rumbl.Medias
     many_to_many :tags, Rumbl.Tag, join_through: "tagmaps"
     timestamps()
   end
