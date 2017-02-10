@@ -1,11 +1,6 @@
 <form action="#">
 
-    <ul id="dropdown2" class="dropdown-content">
-        <li><a href="#!">one<span class="badge">1</span></a></li>
-        <li><a href="#!">two<span class="new badge">1</span></a></li>
-        <li><a href="#!">three</a></li>
-    </ul>
-    <a class="btn dropdown-button" href="#!" data-activates="dropdown2">Dropdown<i class="mdi-navigation-arrow-drop-down right"></i></a>
+
     <div class="divider"></div>
     <div id="tag_chips_id" class="chips chips-autocomplete"></div>
 

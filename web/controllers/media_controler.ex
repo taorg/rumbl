@@ -32,25 +32,31 @@ defmodule Rumbl.AjaxArc do
             |> put_resp_content_type("text/plain")
             |> send_resp(200, "File saved")
           {:error, changeset} ->
-            send_resp(conn, 415, "415 ERROR : Media not suported")     
+            conn
+            |> put_resp_content_type("text/plain")
+            |>send_resp(415, "415 ERROR : Media not suported")     
       end     
   end
 
   defp do_insert_fine_upload(conn, _params) do
       %{"qqfile" => media_params} = _params  
       %{"qquuid" => _qquuid} = _params
-      extension = Map.get(media_params, :filename)
-                  |>String.split(".")|>Enum.fetch(-1)|>elem(1)
+      extension = Map.get(media_params, :filename)                  
+                  |> Path.extname() |> String.downcase()
       renamed_media = Map.put(media_params, :filename , _qquuid <>"."<>extension)
-    IO.inspect "--------renamed_media-----------"
-    IO.inspect renamed_media
       changeset = Medias.changeset(%Medias{}, %{"image" => renamed_media})
       result = Repo.insert(changeset) 
+      IO.inspect "--------result-----------"
+      IO.inspect result
       case result do
           {:ok, image} ->
-            send_resp(conn, 200, "{\"success\":true}")
+            conn
+            |>put_resp_content_type("text/plain")
+            |>send_resp( 200, "{\"success\":true}")
           {:error, changeset} ->
-            send_resp(conn, 200, "{\"success\":false}")     
+            conn
+            |>put_resp_content_type("text/plain")
+            |>send_resp( 200, "{\"success\":false, \"error\":  \"File format not  valid\", \"preventRetry\": true}")     
       end     
 
   end

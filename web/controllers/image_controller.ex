@@ -5,8 +5,6 @@ defmodule Rumbl.ImageController do
 
   def index(conn, _) do
     images = Repo.all(Medias)
-    IO.inspect "-----IMAGES-----"
-    IO.inspect images
     render(conn, "index.html", images: images)
   end
 

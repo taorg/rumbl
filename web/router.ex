@@ -1,6 +1,6 @@
 defmodule Rumbl.Router do
   use Rumbl.Web, :router
-
+  alias Rumbl.Endpoint
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
