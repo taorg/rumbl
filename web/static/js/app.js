@@ -12,15 +12,14 @@
 // If you no longer want to use a dependency, remember
 // to also remove its path from "config.paths.watched".
 import "phoenix_html"
+import socket from "./socket"
 import "moment"
 import "dropify"
 import "jquery.filer"
 import "fine-uploader"
 import "dropzone"
+import bootstrapMaterialDatePicker from "./bootstrap-material-datetimepicker_2.7.1.js"
 // Import local files
 //
 // Local files can be imported directly using relative
 // paths "./socket" or full ones "web/static/js/socket".
-
-import socket from "./socket"
-import bootstrapMaterialDatePicker from "./bootstrap-material-datetimepicker_2.7.1.js"

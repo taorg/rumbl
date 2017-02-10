@@ -73,10 +73,10 @@
                                     endpoint: '/pharc/media'
                                 },
                                 retry: {
-                                    enableAuto: false
+                                    maxAutoAttempts: 3
                                 },
                                 chunking: {
-                                    enabled: true
+                                    enabled: false
                                 }
                             });
                         </script>

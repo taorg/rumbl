@@ -7,13 +7,19 @@ defmodule Rumbl.VideoArc do
   # use Arc.Ecto.Definition
 
   @versions [:original, :thumb]
-  @extension_whitelist ~w(.mp4 .mkv)
+  @extension_whitelist ~w(.mp4 .mkv .jpg)
 
   def validate({file, _}) do   
     file_extension = file.file_name |> Path.extname() |> String.downcase()
     Enum.member?(@extension_whitelist, file_extension)
   end
 
+  def transform(:thumb, _) do
+    {:ffmpeg, fn(input, output) -> "-i #{input} -f jpg #{output}" end, :jpg}
+  end
+  def transform(:original, _) do
+   {:ffmpeg, fn(input, output) -> "-i #{input} -f gif #{output}" end, :gif}
+  end
   # To add a thumbnail version:
   # @versions [:original, :thumb]
 

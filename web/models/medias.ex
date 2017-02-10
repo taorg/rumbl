@@ -15,8 +15,7 @@ defmodule Rumbl.Medias do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:image,:video,:content_type])
-    |> cast_attachments(params, [:image, :video])
-    |> validate_required([:image])
+    |> cast(params, [:content_type])
+    |> cast_attachments(params, [:image, :video])    
   end
 end
