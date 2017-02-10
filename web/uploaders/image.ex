@@ -7,7 +7,7 @@ defmodule Rumbl.ImageArc do
   # use Arc.Ecto.Definition
 
   @versions [:original, :thumb]
-  @extension_whitelist ~w(.jpg .jpeg .gif .png .svg .mp4 .mkv)
+  @extension_whitelist ~w(.jpg .jpeg .gif .png .svg)
 
   def validate({file, _}) do   
     file_extension = file.file_name |> Path.extname() |> String.downcase()

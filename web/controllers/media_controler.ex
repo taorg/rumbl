@@ -31,14 +31,13 @@ defmodule Rumbl.AjaxArc do
       file_extension = Map.get(media_params, :filename)                  
                   |> Path.extname() |> String.downcase()
       rename_file =  _qquuid<>file_extension           
-      renamed_media = Map.put(media_params, :filename , rename_file)
-      
+      renamed_media = Map.put(media_params, :filename , rename_file)      
       case  Enum.member?(@video_extension_whitelist, file_extension) do
-          true ->changeset = Medias.changeset(%Medias{}, %{"video" => renamed_media})
+          true ->
+            #VideoArc.store(media_params)
+            changeset = Medias.changeset(%Medias{}, %{"video" => renamed_media})
           false ->changeset = Medias.changeset(%Medias{}, %{"image" => renamed_media})
       end 
-      IO.inspect "--------changeset-----------"
-      IO.inspect changeset
       result = Repo.insert(changeset) 
       IO.inspect "--------result-----------"
       IO.inspect result
