@@ -6,6 +6,7 @@ defmodule Rumbl.Repo.Migrations.CreateImage do
       add :image, :string
       add :video, :string
       add :content_type, :string
+      add :filesize, :integer
       add :users_id, references(:users)
       timestamps()
     end

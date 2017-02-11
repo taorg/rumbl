@@ -13,37 +13,33 @@ defmodule Rumbl.AjaxArc do
           do_insert_fine_upload(conn, _params)
         false ->
           do_insert_dropzone(conn, _params)
-
     end  
     
   end
-
 
   def delete(conn, _params) do   
     send_resp(conn, 200, "{\"success\":false}")   
   end
 
-  
 
   defp do_insert_fine_upload(conn, _params) do
       %{"qqfile" => media_params} = _params  
       %{"qquuid" => _qquuid} = _params
+      %{"qqtotalfilesize" => _qqtotalfilesize} = _params
+  
+      content_type = Map.get(media_params, :content_type)      
       file_extension = Map.get(media_params, :filename)                  
                   |> Path.extname() |> String.downcase()
       rename_file =  _qquuid<>file_extension           
       renamed_media = Map.put(media_params, :filename , rename_file)      
       case  Enum.member?(@video_extension_whitelist, file_extension) do
-          true ->
-            #VideoArc.store(media_params)
-            changeset = Medias.changeset(%Medias{}, %{"video" => renamed_media})
-          false ->changeset = Medias.changeset(%Medias{}, %{"image" => renamed_media})
+          true ->changeset = Medias.changeset(%Medias{}, %{"content_type" => content_type, "filesize" => _qqtotalfilesize , "video" => renamed_media})
+          false ->changeset = Medias.changeset(%Medias{}, %{"content_type" => content_type, "filesize" => _qqtotalfilesize , "image" => renamed_media})
       end 
       result = Repo.insert(changeset) 
       IO.inspect "--------result-----------"
-      IO.inspect result
+      IO.inspect _qqtotalfilesize
       
-      
-
       case result do
           {:ok, image} ->
             conn

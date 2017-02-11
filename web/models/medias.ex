@@ -5,6 +5,7 @@ defmodule Rumbl.Medias do
   schema "medias" do
     field :image, Rumbl.ImageArc.Type
     field :video, Rumbl.VideoArc.Type
+    field :filesize, :integer
     field :content_type, :string
     belongs_to :users, Rumbl.User
     timestamps()
@@ -15,7 +16,7 @@ defmodule Rumbl.Medias do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:content_type])
+    |> cast(params, [:content_type,:filesize])
     |> cast_attachments(params, [:image, :video])    
   end
 end
