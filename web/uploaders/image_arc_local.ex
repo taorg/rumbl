@@ -1,4 +1,4 @@
-defmodule Rumbl.VideoArc do
+defmodule Rumbl.ImageArcLocal do
   use Arc.Definition
   use Arc.Ecto.Definition
 
@@ -6,24 +6,15 @@ defmodule Rumbl.VideoArc do
   # Include ecto support (requires package arc_ecto installed):
   # use Arc.Ecto.Definition
 
-  @versions [:original, :thumb, :screen]
-  @extension_whitelist ~w(.mp4 .mkv .jpg)
+  @versions [:original]
+  @extension_whitelist ~w(.jpg .jpeg .gif .png .svg)
 
   def validate({file, _}) do   
     file_extension = file.file_name |> Path.extname() |> String.downcase()
-    :true
+    Enum.member?(@extension_whitelist, file_extension)
   end
 
-  def transform(:thumb, _) do
-    {:ffmpeg, fn(input, output) -> "-itsoffset -1 -i #{input} -vcodec png -vframes 1 -f rawvideo  -y -filter:v scale='300:-1' #{output}" end, :png}
-    #http://stackoverflow.com/questions/14551102/with-ffmpeg-create-thumbnails-proportional-to-the-videos-ratio
-  end
-
-  def transform(:screen, _) do
-    {:ffmpeg, fn(input, output) -> "-itsoffset -1 -i #{input} -vcodec png -vframes 1 -f rawvideo  -y #{output}" end, :jpg}
-  end
-
-
+  
   # To add a thumbnail version:
   # @versions [:original, :thumb]
 

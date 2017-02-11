@@ -5,10 +5,10 @@
 <div class="carousel">
 <%= for image <- @images do %>
   <a class="carousel-item" href="#one!">
-    <img src="<%= Rumbl.ImageArc.url({image.image, image})%>">
+    <img src="<%= Rumbl.ImageArc.url({image.image, image}, signed: true)%>">
   </a>  
   <a class="carousel-item" href="#one!">
-    <img src="<%= Rumbl.ImageArc.url({image.image, image}, :thumb)%>">
+    <img src="<%= Rumbl.ImageArc.url({image.image, image}, :thumb, signed: true)%>">
  </a>   
 <% end %>
 </div>
