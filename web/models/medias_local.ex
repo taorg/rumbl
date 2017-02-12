@@ -4,7 +4,7 @@ defmodule Rumbl.MediasLocal do
 
   schema "mediaslocal" do
     field :image, Rumbl.ImageArcLocal.Type
-    field :video, Rumbl.VideoArc.Type
+    field :video, Rumbl.VideoArcLocal.Type
     field :filesize, :integer
     field :content_type, :string
     belongs_to :users, Rumbl.User

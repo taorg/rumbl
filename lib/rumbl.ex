@@ -20,8 +20,14 @@ defmodule Rumbl do
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: Rumbl.Supervisor]
     Supervisor.start_link(children, opts)
+    start_verk()
   end
-
+  def start_verk() do
+    import Supervisor.Spec
+    tree = [supervisor(Verk.Supervisor, [])]
+    opts = [name: Simple.Sup, strategy: :one_for_one]
+    Supervisor.start_link(tree, opts)
+  end
   # Tell Phoenix to update the endpoint configuration
   # whenever the application is updated.
   def config_change(changed, _new, removed) do

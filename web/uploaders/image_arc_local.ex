@@ -14,6 +14,10 @@ defmodule Rumbl.ImageArcLocal do
     Enum.member?(@extension_whitelist, file_extension)
   end
 
+  def is_valid?(file_extension) do
+    Enum.member?(@extension_whitelist, file_extension)
+  end
+  
   
   # To add a thumbnail version:
   # @versions [:original, :thumb]

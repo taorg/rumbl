@@ -14,6 +14,10 @@ defmodule Rumbl.VideoArc do
     :true
   end
 
+  def is_valid?(file_extension) do
+    Enum.member?(@extension_whitelist, file_extension)
+  end
+  
   def transform(:thumb, _) do
     {:ffmpeg, fn(input, output) -> "-itsoffset -1 -i #{input} -vcodec png -vframes 1 -f rawvideo  -y -filter:v scale='300:-1' #{output}" end, :png}
     #http://stackoverflow.com/questions/14551102/with-ffmpeg-create-thumbnails-proportional-to-the-videos-ratio

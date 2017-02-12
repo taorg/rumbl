@@ -27,7 +27,6 @@ config :arc,
   storage: Arc.Storage.S3,  #Arc.Storage.S3 or Arc.Storage.Local  
   bucket: "phantaweb"
   
-
 config :ex_aws,
   access_key_id: [{:system, "AWS_ACCESS_KEY_ID"}, :instance_role],
   secret_access_key: [{:system, "AWS_SECRET_ACCESS_KEY"}, :instance_role],
@@ -37,6 +36,15 @@ config :ex_aws,
   region: "eu-west-1"
 ]
 
+#https://www.digitalocean.com/community/tutorials/how-to-secure-your-redis-installation-on-ubuntu-14-04
+config :verk, queues: [default: 25, priority: 10],
+              max_retry_count: 10,
+              poll_interval: 5000,
+              start_job_log_level: :info,
+              done_job_log_level: :info,
+              fail_job_log_level: :info,
+              node_id: "1",
+              redis_url: "redis://127.0.0.1:6379"
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"

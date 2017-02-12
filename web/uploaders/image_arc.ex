@@ -7,10 +7,18 @@ defmodule Rumbl.ImageArc do
   # use Arc.Ecto.Definition
 
   @versions [:original, :thumb]
-  @extension_whitelist ~w(.jpg .jpeg .gif .png .svg)
+  @extension_whitelist ~w(.jpg .jpeg .gif .png)
+
+  def validate(file) do
+    validate({file, file}) 
+  end
 
   def validate({file, _}) do   
     file_extension = file.file_name |> Path.extname() |> String.downcase()
+    Enum.member?(@extension_whitelist, file_extension)
+  end
+
+  def is_valid?(file_extension) do
     Enum.member?(@extension_whitelist, file_extension)
   end
 
