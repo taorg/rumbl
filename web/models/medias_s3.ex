@@ -1,4 +1,4 @@
-defmodule Rumbl.Medias do
+defmodule Rumbl.MediasS3 do
   use Rumbl.Web, :model
   use Arc.Ecto.Schema
 
@@ -17,6 +17,6 @@ defmodule Rumbl.Medias do
   def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, [:content_type,:filesize])
-    |> cast_attachments(params, [:image, :video])    
+    |> cast_attachments(params, ~w(image video)a )
   end
 end

@@ -9,7 +9,7 @@ defmodule Rumbl.User do
     field :password, :string, virtual: true
     field :password_hash, :string
     field :avatar, Rumbl.ImageArc.Type
-    has_many :medias, Rumbl.Medias
+    #has_many :medias, Rumbl.Medias
     many_to_many :tags, Rumbl.Tag, join_through: "tagmaps"
     timestamps()
   end
@@ -23,7 +23,7 @@ defmodule Rumbl.User do
 
 
 
-        
+
 
 # c("./web/models/user.ex")
 #Poison.decode "[{\"tag\":\"1\"},{\"tag\":\"2\"},{\"tag\":\"3\"}]", [keys: :atoms]
@@ -32,9 +32,9 @@ defmodule Rumbl.User do
   def parse_tags(params)  do
     cond do
        is_atom(params) -> params
-       true -> 
+       true ->
              (params["usertags"])
-             |>Poison.decode([keys: :atoms]) 
+             |>Poison.decode([keys: :atoms])
              |>elem(1)
              |>Enum.map(fn(x) ->  Map.get(x,:tag) end)
              |>Enum.map(&get_or_insert_tag/1)

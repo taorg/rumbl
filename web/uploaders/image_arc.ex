@@ -9,11 +9,7 @@ defmodule Rumbl.ImageArc do
   @versions [:original, :thumb]
   @extension_whitelist ~w(.jpg .jpeg .gif .png)
 
-  def validate(file) do
-    validate({file, file}) 
-  end
-
-  def validate({file, _}) do   
+  def validate({file, _}) do
     file_extension = file.file_name |> Path.extname() |> String.downcase()
     Enum.member?(@extension_whitelist, file_extension)
   end
@@ -31,7 +27,7 @@ defmodule Rumbl.ImageArc do
   end
 
 
-  
+
   # To add a thumbnail version:
   # @versions [:original, :thumb]
 

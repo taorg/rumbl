@@ -1,5 +1,6 @@
 defmodule Rumbl.Endpoint do
   use Phoenix.Endpoint, otp_app: :rumbl
+  use VerkWeb.Mount, path: "/verk"
 
   socket "/socket", Rumbl.UserSocket
 

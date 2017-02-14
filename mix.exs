@@ -19,7 +19,7 @@ defmodule Rumbl.Mixfile do
   def application do
     [mod: {Rumbl, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :arc_ecto, :ex_aws, :hackney, :poison, :verk, :porcelain]]
+                    :phoenix_ecto, :postgrex, :arc_ecto, :ex_aws, :hackney, :poison, :verk, :verk_web,:porcelain]]
   end
 
   # Specifies which paths to compile per environment.
@@ -37,6 +37,7 @@ defmodule Rumbl.Mixfile do
      {:poison, "~> 3.1", override: true},
      {:sweet_xml, "~> 0.6"},
      {:verk, "~> 0.13.5"},
+     {:verk_web, "~> 0.13.6"},
      {:porcelain, "~> 2.0.3"},
      {:phoenix, "~> 1.2.1"},
      {:phoenix_pubsub, "~> 1.0"},
