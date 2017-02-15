@@ -1,11 +1,9 @@
 defmodule Rumbl.AjaxArc do
   use Rumbl.Web, :controller
   alias Rumbl.{Repo, MediasS3, MediasLocal, ImageArcLocal, ImageArc, VideoArcLocal, VideoArc}
-
+    require Logger
   @video_extension_whitelist ~w(.mp4 .mkv)
   def create(conn, _params) do
-    #IO.inspect "--------PARAMS-----------"
-    #IO.inspect _params
     case Map.has_key?(_params, "qqfile") do
         true ->
           do_insert_fine_upload(conn, _params)
@@ -15,7 +13,11 @@ defmodule Rumbl.AjaxArc do
 
   end
 
-  def delete(conn, _params) do
+
+################################################################
+#DROP ZONE
+################################################################
+  defp do_delete_fine_upload(conn, _params) do
     send_resp(conn, 200, "{\"success\":false}")
   end
 
@@ -29,8 +31,9 @@ defmodule Rumbl.AjaxArc do
                   |> Path.extname() |> String.downcase()
       file_renamed =  _qquuid<>file_extension
       renamed_media = Map.put(media_params, :filename , file_renamed)
-      IO.inspect "Changeset---------------------------"
-      IO.inspect %{"content_type" => content_type, "filesize" => _qqtotalfilesize , "image" => renamed_media}
+      Logger.debug(["ARC CHANGESET --->",
+                    inspect(%{"content_type" => content_type, "filesize" => _qqtotalfilesize , "image" => renamed_media})
+                  ])
 
       cond do
           VideoArcLocal.is_valid?(file_extension) ->
@@ -40,17 +43,17 @@ defmodule Rumbl.AjaxArc do
       end
       result = Repo.insert(changeset)
       %Rumbl.MediasLocal{id: file_local_pk} = elem(result,1)
-      IO.inspect "--------result-----------"
-      IO.inspect renamed_media
-      #IO.inspect result
+      Logger.debug(["INSERT RESULT --->",inspect(renamed_media)])
 
       case result do
           {:ok, uploaded} ->
             cond do
                 VideoArc.is_valid?(file_extension) ->
                       Verk.enqueue(%Verk.Job{queue: :default, class: "Rumbl.VideoWorker", args: [file_renamed,content_type,file_local_pk], max_retry_count: 5})
+                      #Rumbl.VideoWorker.perform(file_renamed,content_type,file_local_pk)
                 ImageArc.is_valid?(file_extension) ->
                       Verk.enqueue(%Verk.Job{queue: :default, class: "Rumbl.ImageWorker", args: [file_renamed,content_type,file_local_pk], max_retry_count: 5})
+                      #Rumbl.ImageWorker.perform(file_renamed,content_type,file_local_pk)
                 true -> {:error, changeset}
             end
             conn
@@ -69,9 +72,9 @@ defmodule Rumbl.AjaxArc do
 
 
 
-
-
-
+################################################################
+#DROP ZONE
+################################################################
   defp do_insert_dropzone(conn, _params) do
       %{"file" => media_params} = _params
       changeset = MediasLocal.changeset(%MediasLocal{}, %{"image" => media_params})

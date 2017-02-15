@@ -4,7 +4,7 @@ defmodule Rumbl.ImageController do
   alias Rumbl.Repo
 
   def index(conn, _) do
-    images = Repo.all(Medias)
+    images = Repo.all(MediasS3)
     IO.inspect "--------IMAGES-----------"
     IO.inspect images
     render(conn, "index.html", images: images)

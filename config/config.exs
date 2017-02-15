@@ -38,11 +38,11 @@ config :ex_aws,
 
 #https://www.digitalocean.com/community/tutorials/how-to-secure-your-redis-installation-on-ubuntu-14-04
 config :verk, queues: [default: 25, priority: 10],
-              max_retry_count: 1,
+              max_retry_count: 10,
               poll_interval: 5000,
               start_job_log_level: :info,
               done_job_log_level: :info,
-              fail_job_log_level: :debug,
+              fail_job_log_level: :info,
               node_id: "1",
               redis_url: "redis://127.0.0.1:6379"
 # Import environment specific config. This must remain at the bottom
