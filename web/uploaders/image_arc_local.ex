@@ -7,7 +7,7 @@ defmodule Rumbl.ImageArcLocal do
   # use Arc.Ecto.Definition
 
   @versions [:original]
-  @extension_whitelist ~w(.jpg .jpeg .gif .png .svg)
+  @extension_whitelist ~w(.jpg .jpeg .png .svg)
 
   def validate({file, _}) do   
     file_extension = file.file_name |> Path.extname() |> String.downcase()
@@ -17,8 +17,11 @@ defmodule Rumbl.ImageArcLocal do
   def is_valid?(file_extension) do
     Enum.member?(@extension_whitelist, file_extension)
   end
-  
-  
+
+  def storage_dir(version, {file, scope}) do
+    "uploads/#{scope.content_type}"
+  end
+
   # To add a thumbnail version:
   # @versions [:original, :thumb]
 

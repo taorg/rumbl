@@ -27,6 +27,9 @@ defmodule Rumbl.VideoArc do
     {:ffmpeg, fn(input, output) -> "-itsoffset -1 -i #{input} -vcodec png -vframes 1 -f rawvideo  -y #{output}" end, :jpg}
   end
 
+  def storage_dir(version, {file, scope}) do
+    "uploads/#{scope.content_type}"
+  end
 
   # To add a thumbnail version:
   # @versions [:original, :thumb]

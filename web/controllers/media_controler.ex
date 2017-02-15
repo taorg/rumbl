@@ -31,27 +31,34 @@ defmodule Rumbl.AjaxArc do
                   |> Path.extname() |> String.downcase()
       file_renamed =  _qquuid<>file_extension
       renamed_media = Map.put(media_params, :filename , file_renamed)
+
       Logger.debug(["ARC CHANGESET --->",
                     inspect(%{"content_type" => content_type, "filesize" => _qqtotalfilesize , "image" => renamed_media})
                   ])
 
       cond do
           VideoArcLocal.is_valid?(file_extension) ->
-                changeset = MediasLocal.changeset(%MediasLocal{}, %{"content_type" => content_type, "filesize" => _qqtotalfilesize , "video" => renamed_media})
+                changeset = MediasLocal.changeset(%MediasLocal{}, %{"content_type" => content_type,
+                                                                    "filesize" => _qqtotalfilesize ,
+                                                                    "video" => renamed_media})
           ImageArcLocal.is_valid?(file_extension) ->
-                changeset = MediasLocal.changeset(%MediasLocal{}, %{"content_type" => content_type, "filesize" => _qqtotalfilesize , "image" => renamed_media})
+                changeset = MediasLocal.changeset(%MediasLocal{}, %{"content_type" => content_type,
+                                                                    "filesize" => _qqtotalfilesize ,
+                                                                     "image" => renamed_media})
       end
       result = Repo.insert(changeset)
       %Rumbl.MediasLocal{id: file_local_pk} = elem(result,1)
-      Logger.debug(["INSERT RESULT --->",inspect(renamed_media)])
+      Logger.debug(["INSERT RESULT --->",inspect(result)])
 
       case result do
           {:ok, uploaded} ->
             cond do
                 VideoArc.is_valid?(file_extension) ->
+                      Logger.error ("VIDEO UPLOADED")
                       Verk.enqueue(%Verk.Job{queue: :default, class: "Rumbl.VideoWorker", args: [file_renamed,content_type,file_local_pk], max_retry_count: 5})
                       #Rumbl.VideoWorker.perform(file_renamed,content_type,file_local_pk)
                 ImageArc.is_valid?(file_extension) ->
+                      Logger.error ("IMAGE UPLOADED")
                       Verk.enqueue(%Verk.Job{queue: :default, class: "Rumbl.ImageWorker", args: [file_renamed,content_type,file_local_pk], max_retry_count: 5})
                       #Rumbl.ImageWorker.perform(file_renamed,content_type,file_local_pk)
                 true -> {:error, changeset}

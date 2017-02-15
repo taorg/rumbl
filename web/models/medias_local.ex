@@ -17,6 +17,6 @@ defmodule Rumbl.MediasLocal do
   def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, [:content_type,:filesize])
-    |> cast_attachments(params, [:image, :video])    
+    |> cast_attachments(params, [:image, :video])
   end
 end

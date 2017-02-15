@@ -6,7 +6,7 @@ defmodule Rumbl.ImageWorker do
     require Logger
 
   def perform(image_file, content_type, file_local_pk) do
-    img_path = Path.expand('./uploads')|>Path.join(image_file)
+    img_path = Path.expand('./uploads')|>Path.join(content_type)|>Path.join(image_file)
     get_img_info(img_path)
     s3_ecto(image_file, content_type, img_path)
     |>clean_local(img_path,file_local_pk)
@@ -23,7 +23,7 @@ defmodule Rumbl.ImageWorker do
 
   defp s3_ecto(image_file, content_type, img_path) do
       media_local = %Plug.Upload{:content_type => content_type,:filename => image_file, :path => img_path}
-      changeset_s3 = MediasS3.changeset(%MediasS3{}, %{"image" => media_local})
+      changeset_s3 = MediasS3.changeset(%MediasS3{}, %{"content_type" => content_type, "image" => media_local})
       Repo.insert(changeset_s3)
   end
 
@@ -54,7 +54,7 @@ defmodule Rumbl.VideoWorker do
   alias Rumbl.{Repo, MediasS3, MediasLocal, VideoArc}
   require Logger
   def perform(video_file,content_type,file_local_pk) do
-    video_path = Path.expand('./uploads')|>Path.join(video_file)
+    video_path = Path.expand('./uploads')|>Path.join(content_type)|>Path.join(video_file)
 
     #https://trac.ffmpeg.org/wiki/FFprobeTips
     get_duration(video_path)
@@ -87,7 +87,7 @@ defmodule Rumbl.VideoWorker do
   end
   defp s3_ecto(video_file, content_type, video_path) do
       media_local = %Plug.Upload{:content_type => content_type,:filename => video_file, :path => video_path}
-      changeset_s3 = MediasS3.changeset(%MediasS3{}, %{"video" => media_local})
+      changeset_s3 = MediasS3.changeset(%MediasS3{}, %{"content_type" => content_type, "video" => media_local})
       Repo.insert(changeset_s3)
   end
 

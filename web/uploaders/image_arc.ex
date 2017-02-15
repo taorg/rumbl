@@ -7,7 +7,7 @@ defmodule Rumbl.ImageArc do
   # use Arc.Ecto.Definition
 
   @versions [:original, :thumb]
-  @extension_whitelist ~w(.jpg .jpeg .gif .png)
+  @extension_whitelist ~w(.jpg .jpeg .png)
 
   def validate({file, _}) do
     file_extension = file.file_name |> Path.extname() |> String.downcase()
@@ -26,8 +26,11 @@ defmodule Rumbl.ImageArc do
    {:convert, fn(input, output) -> "#{input}  #{output}" end, :jpg}
   end
 
+  def storage_dir(version, {file, scope}) do
+    "uploads/#{scope.content_type}"
+  end
 
-
+  #http://stackoverflow.com/questions/9812589/how-to-determine-the-length-of-a-gif-animation-in-milliseconds#9813921
   # To add a thumbnail version:
   # @versions [:original, :thumb]
 
