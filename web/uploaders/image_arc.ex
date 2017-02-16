@@ -8,7 +8,7 @@ defmodule Rumbl.ImageArc do
 
   @versions [:original, :thumb]
   @extension_whitelist ~w(.jpg .jpeg .png)
-
+  @async false
   def validate({file, _}) do
     file_extension = file.file_name |> Path.extname() |> String.downcase()
     Enum.member?(@extension_whitelist, file_extension)

@@ -8,7 +8,7 @@ defmodule Rumbl.VideoArc do
 
   @versions [:original, :thumb, :screen]
   @extension_whitelist ~w(.mp4 .mkv)
-
+  @async false
   def validate({file, _}) do   
     file_extension = file.file_name |> Path.extname() |> String.downcase()
     :true
