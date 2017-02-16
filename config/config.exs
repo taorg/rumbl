@@ -23,7 +23,7 @@ config :logger, :console,
   metadata: [:request_id]
 # Configures Arc is a flexible file upload library for Elixir
 config :arc,
-  version_timeout: 150_000, # milliseconds
+  version_timeout: 600_000, # milliseconds
   storage: Arc.Storage.S3,  #Arc.Storage.S3 or Arc.Storage.Local
   bucket: "phantaweb"
 
@@ -35,14 +35,19 @@ config :ex_aws,
   host: "s3-eu-west-1.amazonaws.com",
   region: "eu-west-1"
 ]
+config :ex_aws, :retries,
+  max_attempts: 0,
+  base_backoff_in_ms: 10,
+  max_backoff_in_ms: 10_000
 
 #https://www.digitalocean.com/community/tutorials/how-to-secure-your-redis-installation-on-ubuntu-14-04
 config :verk, queues: [default: 25, priority: 10],
+              workers_manager_timeout: 1200,
               max_retry_count: 10,
               poll_interval: 5000,
               start_job_log_level: :info,
               done_job_log_level: :info,
-              fail_job_log_level: :info,
+              fail_job_log_level: :debug,
               node_id: "1",
               redis_url: "redis://127.0.0.1:6379"
 # Import environment specific config. This must remain at the bottom

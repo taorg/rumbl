@@ -55,12 +55,12 @@ defmodule Rumbl.AjaxArc do
             cond do
                 VideoArc.is_valid?(file_extension) ->
                       Logger.error ("VIDEO UPLOADED")
-                      Verk.enqueue(%Verk.Job{queue: :default, class: "Rumbl.VideoWorker", args: [file_renamed,content_type,file_local_pk], max_retry_count: 5})
-                      #Rumbl.VideoWorker.perform(file_renamed,content_type,file_local_pk)
+                      #Verk.enqueue(%Verk.Job{queue: :default, class: "Rumbl.VideoWorker", args: [file_renamed,content_type,file_local_pk], max_retry_count: 5})
+                      Rumbl.VideoWorker.perform(file_renamed,content_type,file_local_pk)
                 ImageArc.is_valid?(file_extension) ->
                       Logger.error ("IMAGE UPLOADED")
-                      Verk.enqueue(%Verk.Job{queue: :default, class: "Rumbl.ImageWorker", args: [file_renamed,content_type,file_local_pk], max_retry_count: 5})
-                      #Rumbl.ImageWorker.perform(file_renamed,content_type,file_local_pk)
+                      #Verk.enqueue(%Verk.Job{queue: :default, class: "Rumbl.ImageWorker", args: [file_renamed,content_type,file_local_pk], max_retry_count: 5})
+                      Rumbl.ImageWorker.perform(file_renamed,content_type,file_local_pk)
                 true -> {:error, changeset}
             end
             conn
