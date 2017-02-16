@@ -40,6 +40,10 @@ config :ex_aws, :retries,
   base_backoff_in_ms: 10,
   max_backoff_in_ms: 10_000
 
+config :ex_aws, :httpoison_opts,
+  recv_timeout: 600_000,
+  hackney: [recv_timeout: 600_000, pool: false]
+
 #https://www.digitalocean.com/community/tutorials/how-to-secure-your-redis-installation-on-ubuntu-14-04
 config :verk, queues: [default: 25, priority: 10],
               workers_manager_timeout: 1200,
