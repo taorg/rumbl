@@ -10,6 +10,6 @@ defmodule Rumbl.Tag do
   def changeset(model, params \\ :empty) do
     model
       |> cast(params, [:tag])
-	    |> validate_required([:tag])
+	  |> validate_required([:tag])
   end
 end

@@ -3,10 +3,10 @@ exports.config = {
     files: {
         javascripts: {
             joinTo: {
-                "js/app.js": /^(web\/static\/js)|(node_modules)/
-
-
-                //"js/materialize.js": ["web/static/vendor/materialize/materialize.js"
+                "js/app.js": /^(web\/static\/js)|(node_modules)/,
+                "js/material-datetime-picker.js": ["web/static/vendor/material-datetime-picker/material-datetime-picker.js"]
+                    //<script src="<%= static_path(@conn, "/js/material-datetime-picker.js") %>"></script>
+                    //"js/materialize.js": ["web/static/vendor/materialize/materialize.js"]
             }
 
             // To use a separate vendor.js bundle, specify two files path
@@ -90,7 +90,6 @@ exports.config = {
             "timedropper-ex": ["src/timedropper.css"],
             "timepicker": ["jquery.timepicker.css"]
 
-
         },
         globals: {
             $: "jquery",
@@ -111,7 +110,8 @@ exports.config = {
             "node_modules/timedropper-ex/src/timedropper.js",
             "node_modules/timedropper-ex/src/timedropper.lang.js",
             "node_modules/fine-uploader/jquery.fine-uploader/jquery.fine-uploader.js",
-
+            "node_modules/rome/dist/rome.standalone.js",
+            //"node_modules/moment/src/moment.js"
         ]
     }
 };

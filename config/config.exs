@@ -31,7 +31,6 @@ config :arc,
 
 config :ex_aws,
   debug_requests: true,
-  debug_responses: true,
   access_key_id: [{:system, "AWS_ACCESS_KEY_ID"}, :instance_role],
   secret_access_key: [{:system, "AWS_SECRET_ACCESS_KEY"}, :instance_role],
   s3: [
@@ -56,4 +55,8 @@ config :verk, queues: [default: 25, priority: 10],
               redis_url: "redis://127.0.0.1:6379"
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
+
+config :ex_google, api_key: System.get_env("GOOGLE_API_KEY"),
+                   output: "json"
+
 import_config "#{Mix.env}.exs"

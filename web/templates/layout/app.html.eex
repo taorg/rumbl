@@ -7,11 +7,17 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+    <!--
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rome/2.1.22/rome.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.js"></script>
+    -->
+    <script src="<%= static_path(@conn, "/js/material-datetime-picker.js")%>" charset="utf-8"></script>
+    <%= Drab.Client.js(@conn) %>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>Hello Rumbl!</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
-    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
-  
+
   </head>
 
   <body>
@@ -32,9 +38,9 @@
     </ul>
   </div>
 </nav>
-     
+
       </header>
-       
+
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
 <div class="container">
@@ -43,38 +49,31 @@
       </main>
     </div>
     <script>
-$(document).ready(function(){    
+$(document).ready(function(){
     $('select').material_select();
     $("#time_dropper").timeDropper({});
-    $('#dateranger').dateRangePicker({		
+    $('#dateranger').dateRangePicker({
       shortcuts: {
         'next-days': [3, 5, 7],
         'next': ['week', 'month', 'year']
         }
       });
-    
+
     $("#datetimeranger").dateTimeRanger({});
-  
+
     $('#from_date').datepicker({
       //timepicker: true,
       language: 'en',
-      
+
       //minDate: new Date() // Now can select only dates, which goes after today
     })
-    $('#from_time').timepicker({ 'step': 5 });
+    $('#from_time').timepicker({ 'step': 1 });
     //
-    $('#date-end').bootstrapMaterialDatePicker({ format : 'dddd DD MMMM YYYY - HH:mm' }); 
-    $('#date-start').bootstrapMaterialDatePicker({ format : 'dddd DD MMMM YYYY - HH:mm' }); 
+    $('#date-end').bootstrapMaterialDatePicker({ format : 'dddd DD MMMM YYYY',time: false });
+    $('#date-start').bootstrapMaterialDatePicker({ format : 'dddd DD MMMM YYYY',time: false });
     flatpickr("#to_date");
     $("#to_date").prop('readonly', false);
-    $('#autocomplete-input').autocomplete({
-      data: {
-        "Apple": null,
-        "Microsoft": null,
-        "Google": 'http://placehold.it/250x250'
-      },
-      limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
-    });
+
 
     $('#tag_chips_id').material_chip({
         data: [{
@@ -96,12 +95,19 @@ $(document).ready(function(){
         'García': null
       }
     });
-  $('.slider').slider();  
+  $('.slider').slider();
   $('.carousel').carousel();
- 
+
   $('.dropify').dropify();
 
-//END DOCUMENT READY    
+const input = document.querySelector('.c-datepicker-input');
+const picker = new MaterialDatetimePicker({})
+    .on('submit', (val) => {
+      input.value = val.format("DD/MM/YYYY");
+    });
+
+input.addEventListener('focus', () => picker.open());   
+//END DOCUMENT READY
 });
     </script>
   </body>

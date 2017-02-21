@@ -14,11 +14,16 @@
 import "phoenix_html"
 import socket from "./socket"
 import "moment"
+import "rome"
+
+
+//import MaterialDatePicker from "./material-datetime-picker.js"
 import "dropify"
 import "jquery.filer"
 import "fine-uploader"
 import "dropzone"
-import bootstrapMaterialDatePicker from "./bootstrap-material-datetimepicker_2.7.1.js"
+import bootstrapMaterialDatePicker from "./bootstrap-material-datetimepicker.js"
+//import MaterialDatetimePicker from "./material-datetime-picker.js"
 // Import local files
 //
 // Local files can be imported directly using relative

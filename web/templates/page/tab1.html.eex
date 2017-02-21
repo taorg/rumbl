@@ -22,8 +22,8 @@
                     <label for="to_date"></label>
                 </div>
                 <div class="input-field col s6">
-                    <input type="text" id="autocomplete-input" class="autocomplete">
-                    <label for="autocomplete-input">Autocomplete</label>
+                    <input type="text" id="material-datetime-picker" class="c-datepicker-input">
+                    <label for="material-datetime-picker">material-datetime-picker</label>
                 </div>
             </div>
         </div>
@@ -64,13 +64,21 @@
         </div>
         <div id="test3" class="col s12">
             <div class="row">
-                <div class="input-field col s6">
+                <div class="input-field col m6 s6">
                     <input id="date-start" type="text">
                     <label for="date-start">From date</label>
                 </div>
-                <div class="input-field col s6">
+                <div class="input-field col m6 s6">
+                    <input id="time-start" class="timepicker" type="text">
+                    <label for="time-start">From time</label>
+                </div>
+                <div class="input-field col m6 s6">
                     <input id="date-end" type="text">
-                    <label for="date-end">From time Range</label>
+                    <label for="date-end">To date</label>
+                </div>
+                <div class="input-field col m6 s6">
+                    <input id="time-end" class="timepicker" type="text">
+                    <label for="time-end">To time Range</label>
                 </div>
             </div>
         </div>

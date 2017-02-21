@@ -23,17 +23,19 @@
         "jquery.filer": "1.3.0",
         "jquery": "^3.1.1",
         "materialize-css": "0.98",
+        "material-datetime-picker": "2.2.0",
         "moment": "^2.17.1",
         "moment-timezone": "0.5.11",
         "phoenix": "file:deps/phoenix",
         "phoenix_html": "file:deps/phoenix_html",
+        "rome": "2.1.22",
         "timepicker": "^1.11.9",
         "timedropper-ex": "^1.4.4"
 
     },
     "devDependencies": {
         "babel-brunch": "~6.0.6",
-        "brunch": "2.10.7",
+        "brunch": "2.10.8",
         "clean-css-brunch": "~2.10.0",
         "css-brunch": "~2.10.0",
         "sass-brunch": "^2.10.3",

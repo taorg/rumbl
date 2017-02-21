@@ -1,7 +1,40 @@
+
+
 <form action="#">
+    <!-- Dropdown Structure -->
+    <ul id='gmaps-dropdown' class='dropdown-content'>
+      <li><a href="#!">one</a></li>
+      <li><a href="#!">two</a></li>
+      <li class="divider"></li>
+      <li><a href="#!">three</a></li>
+    </ul>
 
 
+      <div class="divider"></div>
+      <div class="row">
+        <div class="col s12">
+    <!--    <div class="row">
+          <div class="input-field col s12">
+            <i class="material-icons prefix">textsms</i>
+            <input drab-keyup="gaddress_autocomplete_input_changed"  type="text" id="gaddress-autocomplete-input" class="autocomplete">
+            <label id=gaddress-autocomplete-label for="gaddress-autocomplete-input">Autocomplete</label>
+          </div>
+        </div>
+     END ROW-->
+        <div class="row">
+         <div class="input-field col s12">
+           <i class="material-icons prefix">textsms</i>
+           <input drab-keyup="gaddress_changed_input" type="text" id="google-address-input" class="autocomplete">
+           <label id=google-address-label for="google-address-input">Label Info</label>
+         </div>
+        </div>
+        <!-- END ROW-->
+
+        </div>
+      </div>
     <div class="divider"></div>
+
+
     <div id="tag_chips_id" class="chips chips-autocomplete"></div>
 
     <%= render "tab1.html", conn: @conn %>
@@ -10,3 +43,17 @@
 
 
 </form>
+<script>
+$('#gaddress-dropdown-label').dropdown({
+    inDuration: 300,
+    outDuration: 225,
+    constrainWidth: true, // Does not change width of dropdown to that of the activator
+    hover: true, // Activate on hover
+    gutter: 0, // Spacing from edge
+    belowOrigin: true, // Displays dropdown below the button
+    alignment: 'left', // Displays dropdown with edge aligned to the left of button
+    stopPropagation: false // Stops event propagation
+  }
+);
+
+</script>
