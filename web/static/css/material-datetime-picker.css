@@ -15,7 +15,7 @@
 }
 
 .c-datepicker {
-    min-height: 610px;
+    min-height: 580px;
     position: fixed;
     left: 50%;
     top: 45%;
@@ -61,7 +61,7 @@
 
 .c-datepicker__header-date {
     background: #00bcd4;
-    height: 150px;
+    height: 140px;
     padding: 16px 0;
 }
 
@@ -335,6 +335,7 @@ c-datepicker__day-body {
     height: 50px;
     margin: -25px;
     z-index: 98;
+    padding: 2px 0px;
 }
 
 .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(1) {
@@ -618,7 +619,7 @@ c-datepicker__day-body {
 .c-datepicker__clock__am-pm-toggle label {
     position: relative;
     cursor: pointer;
-    padding: 4px 10px;
+    padding: 0px 12px;
 }
 
 .u-hover-ball-effect:before,

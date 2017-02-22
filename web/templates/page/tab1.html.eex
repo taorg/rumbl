@@ -82,5 +82,26 @@
                 </div>
             </div>
         </div>
-        <div id="test4" class="col s12">Test 4</div>
+        <div id="test4" class="col s12">
+            <div class="row">
+                <div class="flatpickr input-field col m6 s6">
+                    <input id="date-start4" type="text" data-input>
+                    <label for="date-start4">From date</label>
+                    <a class="btn" data-toggle><i class="icon-calendar"></i></a>
+	                <a class="btn" data-clear><i class="icon-close"></i></a>
+                </div>
+                <div class="input-field col m6 s6">
+                    <input id="time-start4" class="timepicker" type="text">
+                    <label for="time-start4">From time</label>
+                </div>
+                <div class="input-field col m6 s6">
+                    <input id="date-end4" type="text">
+                    <label for="date-end4">To date</label>
+                </div>
+                <div class="input-field col m6 s6">
+                    <input id="time-end4" class="timepicker" type="text">
+                    <label for="time-end4">To time Range</label>
+                </div>
+            </div>
+        </div>
     </div>

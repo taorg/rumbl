@@ -85,7 +85,7 @@ exports.config = {
             "dropify": ["dist/css/dropify.css"],
             "dropzone": ["dist/dropzone.css"],
             "fine-uploader": ["jquery.fine-uploader/fine-uploader-gallery.css", "jquery.fine-uploader/fine-uploader-new.css"],
-            "flatpickr": ["dist/flatpickr.css"],
+            "flatpickr": [, "dist/themes/material_green.css"],
             "jquery.filer": ["css/themes/jquery.filer-dragdropbox-theme.css", "css/jquery.filer.css", "assets/fonts/jquery.filer-icons/jquery-filer.css"],
             "timedropper-ex": ["src/timedropper.css"],
             "timepicker": ["jquery.timepicker.css"]

@@ -6,15 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
-    <!--
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/rome/2.1.22/rome.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.js"></script>
-    -->
-    <script src="<%= static_path(@conn, "/js/material-datetime-picker.js")%>" charset="utf-8"></script>
     <%= Drab.Client.js(@conn) %>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="<%= static_path(@conn, "/js/material-datetime-picker.js")%>" charset="utf-8"></script>
+  
     <title>Hello Rumbl!</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
 
@@ -64,14 +60,21 @@ $(document).ready(function(){
     $('#from_date').datepicker({
       //timepicker: true,
       language: 'en',
-
       //minDate: new Date() // Now can select only dates, which goes after today
     })
     $('#from_time').timepicker({ 'step': 1 });
     //
-    $('#date-end').bootstrapMaterialDatePicker({ format : 'dddd DD MMMM YYYY',time: false });
-    $('#date-start').bootstrapMaterialDatePicker({ format : 'dddd DD MMMM YYYY',time: false });
-    flatpickr("#to_date");
+    $('#date-end').bootstrapMaterialDatePicker({ format : 'dddd DD MMMM YYYY - HH:mm',time: true });
+    $('#date-start').bootstrapMaterialDatePicker({ format : 'dddd DD MMMM YYYY - HH:mm',time: true });
+    flatpickr("#to_date", {
+      enableTime: true,
+      altInput: true,
+      altFormat: "F j, Y h:i K"
+    });
+    flatpickr(".flatpickr", {
+	    wrap: true,
+	    clickOpens: false // disable opening calendar by clicking on input
+    });
     $("#to_date").prop('readonly', false);
 
 
@@ -102,11 +105,21 @@ $(document).ready(function(){
 
 const input = document.querySelector('.c-datepicker-input');
 const picker = new MaterialDatetimePicker({})
+    .on('submit', function (val) {
+      input.value = val.format("dddd DD MMMM YYYY - HH:mm");
+    });
+
+input.addEventListener('focus', function onFocus (){picker.open()});   
+
+/*
+const input = document.querySelector('.c-datepicker-input');
+const picker = new MaterialDatetimePicker({})
     .on('submit', (val) => {
       input.value = val.format("DD/MM/YYYY");
     });
 
 input.addEventListener('focus', () => picker.open());   
+*/
 //END DOCUMENT READY
 });
     </script>
