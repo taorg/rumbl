@@ -38,7 +38,7 @@ defmodule Rumbl.Mixfile do
      {:poison, "~> 3.1", override: true},
      {:sweet_xml, "~> 0.6"},
      {:verk, "~> 0.13.5"},
-     {:drab, "~> 0.2.5"},
+     {:drab, "~> 0.2.6"},
      {:ex_google, "~> 0.1.4"},
      {:verk_web, "~> 0.13.6"},
      {:porcelain, "~> 2.0.3"},

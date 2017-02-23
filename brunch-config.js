@@ -4,7 +4,8 @@ exports.config = {
         javascripts: {
             joinTo: {
                 "js/app.js": /^(web\/static\/js)|(node_modules)/,
-                "js/material-datetime-picker.js": ["web/static/vendor/material-datetime-picker/material-datetime-picker.js"]
+                "js/material-datetime-picker.js": ["web/static/vendor/material-datetime-picker/material-datetime-picker.js",
+                                                    "web/static/vendor/material-datetime-picker/confirmClearDateFlatpickr.js"]
                     //<script src="<%= static_path(@conn, "/js/material-datetime-picker.js") %>"></script>
                     //"js/materialize.js": ["web/static/vendor/materialize/materialize.js"]
             }
@@ -85,7 +86,7 @@ exports.config = {
             "dropify": ["dist/css/dropify.css"],
             "dropzone": ["dist/dropzone.css"],
             "fine-uploader": ["jquery.fine-uploader/fine-uploader-gallery.css", "jquery.fine-uploader/fine-uploader-new.css"],
-            "flatpickr": [, "dist/themes/material_green.css"],
+            "flatpickr": ["dist/themes/material_green.css"],
             "jquery.filer": ["css/themes/jquery.filer-dragdropbox-theme.css", "css/jquery.filer.css", "assets/fonts/jquery.filer-icons/jquery-filer.css"],
             "timedropper-ex": ["src/timedropper.css"],
             "timepicker": ["jquery.timepicker.css"]
@@ -101,6 +102,7 @@ exports.config = {
             "node_modules/air-datepicker/dist/js/datepicker.js",
             "node_modules/air-datepicker/dist/js/i18n/datepicker.en.js",
             "node_modules/flatpickr/dist/flatpickr.js",
+            //"node_modules/flatpickr/dist/plugins/confirmDate/confirmDate.js",
             "node_modules/timepicker/jquery.timepicker.js",
             "node_modules/daterange-picker-ex/src/jquery.daterangepicker.js",
             "node_modules/daterange-picker-ex/src/jquery.daterangepicker.lang.js",

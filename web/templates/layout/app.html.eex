@@ -10,7 +10,7 @@
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
     <%= Drab.Client.js(@conn) %>
     <script src="<%= static_path(@conn, "/js/material-datetime-picker.js")%>" charset="utf-8"></script>
-  
+
     <title>Hello Rumbl!</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
 
@@ -66,12 +66,15 @@ $(document).ready(function(){
     //
     $('#date-end').bootstrapMaterialDatePicker({ format : 'dddd DD MMMM YYYY - HH:mm',time: true });
     $('#date-start').bootstrapMaterialDatePicker({ format : 'dddd DD MMMM YYYY - HH:mm',time: true });
-    flatpickr("#to_date", {
+    flatpickr("#to_date1", {
+      plugins: [new confirmClearDatePlugin({})],
       enableTime: true,
       altInput: true,
       altFormat: "F j, Y h:i K"
     });
     flatpickr(".flatpickr", {
+      weekNumbers: true,
+      enableTime: true,
 	    wrap: true,
 	    clickOpens: false // disable opening calendar by clicking on input
     });
@@ -109,7 +112,7 @@ const picker = new MaterialDatetimePicker({})
       input.value = val.format("dddd DD MMMM YYYY - HH:mm");
     });
 
-input.addEventListener('focus', function onFocus (){picker.open()});   
+input.addEventListener('focus', function onFocus (){picker.open()});
 
 /*
 const input = document.querySelector('.c-datepicker-input');
@@ -118,7 +121,7 @@ const picker = new MaterialDatetimePicker({})
       input.value = val.format("DD/MM/YYYY");
     });
 
-input.addEventListener('focus', () => picker.open());   
+input.addEventListener('focus', () => picker.open());
 */
 //END DOCUMENT READY
 });
