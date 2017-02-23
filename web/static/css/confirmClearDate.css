@@ -1,3 +1,6 @@
+.flatpickr-input {
+    color: black!important;
+}
 .flatpickr-confirm {
     float:left;
     width:100px;

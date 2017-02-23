@@ -1,43 +1,4 @@
 @import "materialize";
-.qq-edit-filename-icon {
-    background: url("images/edit.gif")!important;
-}
-
-.qq-upload-spinner {
-    background: url("/images/loading.gif")!important;
-}
-
-.qq-drop-processing-spinner {
-    background: url("/images/processing.gif")!important;
-}
-
-.qq-gallery .qq-upload-spinner {
-    background: url("/images/loading.gif")!important;
-}
-
-.qq-gallery .qq-drop-processing-spinner {
-    background: url("/images/processing.gif")!important;
-}
-
-.qq-gallery .qq-edit-filename-icon {
-    background: url("/images/edit.gif")!important;
-}
-
-.qq-gallery .qq-delete-icon {
-    background: url("/images/trash.gif")!important;
-}
-
-.qq-gallery .qq-retry-icon {
-    background: url("/images/retry.gif")!important;
-}
-
-.qq-gallery .qq-continue-icon {
-    background: url("/images/continue.gif")!important;
-}
-
-.qq-gallery .qq-pause-icon {
-    background: url("/images/pause.gif")!important;
-}
 
 .datepicker--nav {
     padding: 0px!important;
@@ -84,8 +45,4 @@ li.ui-timepicker-selected,
 
 .autocomplete-content {
     position: absolute!important;
-}
-
-.flatpickr-input {
-    color: black!important;
 }

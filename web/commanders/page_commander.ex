@@ -13,8 +13,6 @@ alias ExGoogle.Maps.Api, as: Maps
     end
 
     def gaddress_changed_input(socket, dom_sender) do
-IO.inspect "-----dom_sender-------"
-IO.inspect dom_sender
         map_search =  Maps.search(%{address: dom_sender["val"]})
         label = gmaps_ws (map_search)
 
@@ -36,6 +34,46 @@ IO.inspect dom_sender
         end
 
     end
+####################################
+# GMAP SELECT
+####################################
+    def gaddress_select_input(socket, dom_sender) do
+        map_search =  Maps.search(%{address: dom_sender["val"]})
+        map_address_map = gmaps_select (map_search)
+         
 
+        socket
+        |> update!(:html, set: map_address_map,  on: "#gmap-address-select")
+
+        _= socket
+        |>execjs("$('select').material_select();")
+        socket
+    end
+
+
+    defp gmaps_select (map_search) do
+        case map_search do
+            {:ok, %{"results" => [], "status" => "ZERO_RESULTS"}}->
+                                "ZERO_RESULTS"
+                                map_address_map = []
+            {:error, error_map, error_code}->
+                                error_map["error_message"]
+                                map_address_map = []
+            {:ok, map_address_struct}->
+                                map_address_map = Enum.map(map_address_struct, fn(x)-> gmaps_flat(x)  end)
+        end
+
+        option_map = Enum.map(map_address_map, fn(x)-> "<option value='#{x}'>#{x}</option>"  end)
+
+        case Enum.count(option_map) do
+          0-> "<option value=''></option>"
+          _->Enum.reduce(option_map,fn(x, acc) -> x<>acc end)
+        end
+
+    end
+
+    defp gmaps_flat(x) do
+         x["formatted_address"]
+    end
 
 end

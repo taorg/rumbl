@@ -5,7 +5,8 @@ exports.config = {
             joinTo: {
                 "js/app.js": /^(web\/static\/js)|(node_modules)/,
                 "js/material-datetime-picker.js": ["web/static/vendor/material-datetime-picker/material-datetime-picker.js",
-                                                    "web/static/vendor/material-datetime-picker/confirmClearDateFlatpickr.js"]
+                        "web/static/vendor/material-datetime-picker/confirmClearDateFlatpickr.js"
+                    ]
                     //<script src="<%= static_path(@conn, "/js/material-datetime-picker.js") %>"></script>
                     //"js/materialize.js": ["web/static/vendor/materialize/materialize.js"]
             }

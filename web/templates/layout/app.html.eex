@@ -69,6 +69,7 @@ $(document).ready(function(){
     flatpickr("#to_date1", {
       plugins: [new confirmClearDatePlugin({})],
       enableTime: true,
+      //weekNumbers: true,
       altInput: true,
       altFormat: "F j, Y h:i K"
     });
