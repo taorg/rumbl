@@ -1,3 +1,4 @@
+<div id="tag_chips_id" class="chips chips-autocomplete"></div>
 <div class="row">
     <div class="col s12">
         <ul id="tabs-swipe-demo" class="tabs">

@@ -17,32 +17,42 @@
          </div>
         </div>
         END ROW-->
+<div class="row">
+    <div class="input-field col s12">
+      <i class="material-icons prefix">textsms</i>
+      <input   type="text" id="fuse-autocomplete-input" class="autocomplete">
+      <label id=fuse-autocomplete-label for="fuse-autocomplete-input">Fuse autocomplete</label>
+    </div>
+  </div>
+<!-- END ROW-->        
  <div class="row">
-   <div class="input-field col s12">
+   <div class="input-field col s6">
      <i class="material-icons prefix">textsms</i>
      <input drab-keyup="gaddress_select_input" type="text" id="gaddress-input" >
      <label id=gaddress-label for="google-address-input">Write address</label>
    </div>
+   <div class="input-field col s6">
+     <select id="gmap-address-select" drab-event='change' drab-handler='gmap_address_select_changed'>
+       <option value="1">1</option>
+       <option value="2">2</option>
+       <option value="3">3</option>
+       <option value="4">4</option>
+     </select>
+     <label>Possible addresses</label>
+   </div>
   </div>
+  <div class="divider"></div>
   <!-- END ROW-->
   <div class="row">
-    <div class="input-field col s12">
-      <select id="gmap-address-select" drab-event='change' drab-handler='gmap_address_select_changed'>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-      </select>
-      <label>Possible addresses</label>
-    </div>
+
   </div>
   <!-- END ROW-->
   </div>
 </div>
-<div class="divider"></div>
 
 
-<div id="tag_chips_id" class="chips chips-autocomplete"></div>
+
+
 <script>
 //$('#gmap-address-select').on('change', function() {
 //alert ("Hoola");

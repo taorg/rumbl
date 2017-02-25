@@ -24,27 +24,24 @@
             <li><a href="/images">Images</a></li>
             <li><a href="/images/new">Upload Images</a></li>
       </ul>
-<nav>
-  <div class="nav-wrapper">
-    <a href="/" class="right brand-logo">Test</a>
-    <ul >
-      <li><a href="/">Get Started</a></li>
-      <!-- Dropdown Trigger -->
-      <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
-    </ul>
-  </div>
-</nav>
+        <nav>
+          <div class="nav-wrapper">
+            <a href="/" class="right brand-logo">Test</a>
+            <ul >
+              <li><a href="/">Get Started</a></li>
+              <!-- Dropdown Trigger -->
+              <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
+            </ul>
+          </div>
+        </nav>
 
       </header>
 
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-<div class="container">
       <main role="main">
         <%= render @view_module, @view_template, assigns %>
       </main>
-    </div>
-    <script>
+
+<script>
 $(document).ready(function(){
     $('select').material_select();
     $("#time_dropper").timeDropper({});
@@ -99,7 +96,16 @@ $(document).ready(function(){
       autocompleteData: {
         'Alameda': null,
         'Marinela': null,
-        'García': null
+        'García': null,
+        'Alhama de Murcia': null,
+        'Villa conejos de arriba': null,
+        'Santa cecilia': null,
+        'Animales nocturnos': null,
+        'Rouge One a star wars': null,
+        'Mad max y la cúpula del trueno': null,
+        'Los infiernos': null,
+        'Caravaca de la cruz': null,
+        'Santiago de compostela': null
       }
     });
   $('.slider').slider();
@@ -115,15 +121,167 @@ const picker = new MaterialDatetimePicker({})
 
 input.addEventListener('focus', function onFocus (){picker.open()});
 
-/*
-const input = document.querySelector('.c-datepicker-input');
-const picker = new MaterialDatetimePicker({})
-    .on('submit', (val) => {
-      input.value = val.format("DD/MM/YYYY");
-    });
+  $('#fuse-autocomplete-input').fuseautocomplete({
+            data: [ {
+                title: "Old Man's War",
+                author: {
+                    firstName: "John",
+                    lastName: "Scalzi"
+                }
+            }, {
+                title: "The Lock Artist",
+                author: {
+                    firstName: "Steve",
+                    lastName: "Hamilton"
+                }
+            }, {
+                title: "HTML5",
+                author: {
+                    firstName: "Remy",
+                    lastName: "Sharp"
+                }
+            }, {
+                title: "Right Ho Jeeves",
+                author: {
+                    firstName: "P.D",
+                    lastName: "Woodhouse"
+                }
+            }, {
+                title: "The Code of the Wooster",
+                author: {
+                    firstName: "P.D",
+                    lastName: "Woodhouse"
+                }
+            }, {
+                title: "Thank You Jeeves",
+                author: {
+                    firstName: "P.D",
+                    lastName: "Woodhouse"
+                }
+            }, {
+                title: "The DaVinci Code",
+                author: {
+                    firstName: "Dan",
+                    lastName: "Brown"
+                }
+            }, {
+                title: "Angels & Demons",
+                author: {
+                    firstName: "Dan",
+                    lastName: "Brown"
+                }
+            }, {
+                title: "The Silmarillion",
+                author: {
+                    firstName: "J.R.R",
+                    lastName: "Tolkien"
+                }
+            }, {
+                title: "Syrup",
+                author: {
+                    firstName: "Max",
+                    lastName: "Barry"
+                }
+            }, {
+                title: "The Lost Symbol",
+                author: {
+                    firstName: "Dan",
+                    lastName: "Brown"
+                }
+            }, {
+                title: "The Book of Lies",
+                author: {
+                    firstName: "Brad",
+                    lastName: "Meltzer"
+                }
+            }, {
+                title: "Lamb",
+                author: {
+                    firstName: "Christopher",
+                    lastName: "Moore"
+                }
+            }, {
+                title: "Fool",
+                author: {
+                    firstName: "Christopher",
+                    lastName: "Moore"
+                }
+            }, {
+                title: "Incompetence",
+                author: {
+                    firstName: "Rob",
+                    lastName: "Grant"
+                }
+            }, {
+                title: "Fat",
+                author: {
+                    firstName: "Rob",
+                    lastName: "Grant"
+                }
+            }, {
+                title: "Colony",
+                author: {
+                    firstName: "Rob",
+                    lastName: "Grant"
+                }
+            }, {
+                title: "Backwards, Red Dwarf",
+                author: {
+                    firstName: "Rob",
+                    lastName: "Grant"
+                }
+            }, {
+                title: "The Grand Design",
+                author: {
+                    firstName: "Stephen",
+                    lastName: "Hawking"
+                }
+            }, {
+                title: "The Book of Samson",
+                author: {
+                    firstName: "David",
+                    lastName: "Maine"
+                }
+            }, {
+                title: "The Preservationist",
+                author: {
+                    firstName: "David",
+                    lastName: "Maine"
+                }
+            }, {
+                title: "Fallen",
+                author: {
+                    firstName: "David",
+                    lastName: "Maine"
+                }
+            }, {
+                title: "Monster 1959",
+                author: {
+                    firstName: "David",
+                    lastName: "Maine"
+                }
+            } ],
+            fuseOptions: {
+                id: "title",
+                shouldSort: !0,
+                threshold: .6,
+                location: 0,
+                distance: 100,
+                maxPatternLength: 32,
+                minMatchCharLength: 1,
+                keys: [ "title", "author.firstName" ]
+            }
+  });
 
-input.addEventListener('focus', () => picker.open());
-*/
+
+  var books = [{
+  title: "Old Man's War",
+  author: {
+    firstName: "John",
+    lastName: "Scalzi"
+  }
+}];
+var fuse = new Fuse(books, { keys: ["title", "author.firstName"] });
 //END DOCUMENT READY
 });
     </script>

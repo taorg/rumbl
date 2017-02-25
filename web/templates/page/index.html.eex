@@ -1,34 +1,17 @@
 
 
-<form action="#">
-    <!-- Dropdown Structure -->
-    <ul id='gmaps-dropdown' class='dropdown-content'>
-      <li><a href="#!">one</a></li>
-      <li><a href="#!">two</a></li>
-      <li class="divider"></li>
-      <li><a href="#!">three</a></li>
-    </ul>
 
-
-
-    <%= render "tab1.html", conn: @conn %>
-<%= render "tab2.html", conn: @conn %>
-
-
-
-</form>
-<script>
-
-$('#gaddress-dropdown-label').dropdown({
-    inDuration: 300,
-    outDuration: 225,
-    constrainWidth: true, // Does not change width of dropdown to that of the activator
-    hover: true, // Activate on hover
-    gutter: 0, // Spacing from edge
-    belowOrigin: true, // Displays dropdown below the button
-    alignment: 'left', // Displays dropdown with edge aligned to the left of button
-    stopPropagation: false // Stops event propagation
-  }
-);
-
-</script>
+<ul class="collapsible" data-collapsible="accordion">
+  <li>
+    <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
+    <div class="collapsible-body"><%= render "tab1.html", conn: @conn %></div>
+  </li>
+  <li>
+    <div class="collapsible-header active"><i class="material-icons">place</i>Second</div>
+    <div class="collapsible-body"><%= render "tab2.html", conn: @conn %></div>
+  </li>
+  <li>
+    <div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
+    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+  </li>
+</ul>
