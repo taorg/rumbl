@@ -16,6 +16,8 @@ $.fn.fuseautocomplete = function (options) {
     var $input = $(this);
     var data = options.data,
         fuseOptions = options.fuseOptions,
+        dataIdentifierFn = options.dataIdentifierFn,
+        renderItemFn = options.renderItemFn,
         fuse = new Fuse(data, fuseOptions),
         count = 0,
         activeIndex = 0,
@@ -86,17 +88,13 @@ $.fn.fuseautocomplete = function (options) {
           if (val !== '') {
             fdata = fuse.search(val);
             for(var key in fdata) {
-              /*if (data.hasOwnProperty(key) &&
-                  key.toLowerCase().indexOf(val) !== -1 &&
-                  key.toLowerCase() !== val) {*/
-                // Break if past limit
                 if (count >= options.limit) {
                   break;
                 }
-
                 var autocompleteOption = $('<li></li>');
-                if (false) {//(!!fdata[key])
-                  autocompleteOption.append('<img src="'+ fdata[key] +'" class="right circle"><span>'+ key +'</span>');
+                autocompleteOption.data("dataSelectionId",dataIdentifierFn(fdata[key]));
+                if (!!renderItemFn) {//!!fuseOptions.key
+                    autocompleteOption.append(renderItemFn(fdata[key]));
                 } else {
                   autocompleteOption.append('<span>'+ fdata[key] +'</span>');
                 }
@@ -104,7 +102,6 @@ $.fn.fuseautocomplete = function (options) {
                 $autocomplete.append(autocompleteOption);
                 highlight(val, autocompleteOption);
                 count++;
-              /*}    */
             }
           }
         }
@@ -155,6 +152,7 @@ $.fn.fuseautocomplete = function (options) {
         var text = $(this).text().trim();
         $input.val(text);
         $input.trigger('change');
+        $input.data("data-id", $(this).data("dataSelectionId"));
         $autocomplete.empty();
         resetCurrentElement();
 
