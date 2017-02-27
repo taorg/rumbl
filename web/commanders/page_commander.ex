@@ -41,7 +41,6 @@ alias ExGoogle.Maps.Api, as: Maps
         map_search =  Maps.search(%{address: dom_sender["val"]})
         map_address_map = gmaps_select (map_search)
 
-
         socket
         |> update!(:html, set: map_address_map,  on: "#gmap-address-select")
         # $('#gmap-address-select').prevAll('input.select-dropdown').val()
@@ -53,6 +52,7 @@ alias ExGoogle.Maps.Api, as: Maps
 
 
     defp gmaps_select (map_search) do
+        IO.inspect map_search
         case map_search do
             {:ok, %{"results" => [], "status" => "ZERO_RESULTS"}}->
                                 "ZERO_RESULTS"
@@ -78,7 +78,7 @@ alias ExGoogle.Maps.Api, as: Maps
     end
 
     def gmap_address_select_changed(socket, dom_sender) do
-        IO.inspect dom_sender
+        #IO.inspect dom_sender
         ""
         _= socket
     end

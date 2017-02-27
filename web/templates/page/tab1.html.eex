@@ -109,3 +109,64 @@
         </div>
     </div>
 </div>
+<script>
+$(document).ready(function(){
+ $("#datetimeranger").dateTimeRanger({});
+
+    $('#from_date').datepicker({
+      //timepicker: true,
+      language: 'en',
+      //minDate: new Date() // Now can select only dates, which goes after today
+    })
+    $('#from_time').timepicker({ 'step': 1 });
+    //
+    $('#date-end').bootstrapMaterialDatePicker({ format : 'dddd DD MMMM YYYY - HH:mm',time: true });
+    $('#date-start').bootstrapMaterialDatePicker({ format : 'dddd DD MMMM YYYY - HH:mm',time: true });
+    flatpickr("#to_date1", {
+      plugins: [new confirmClearDatePlugin({})],
+      enableTime: true,
+      //weekNumbers: true,
+      altInput: true,
+      altFormat: "F j, Y h:i K"
+    });
+    flatpickr(".flatpickr", {
+      weekNumbers: true,
+      enableTime: true,
+	    wrap: true,
+	    clickOpens: false // disable opening calendar by clicking on input
+    });
+    $("#to_date").prop('readonly', false);
+
+
+    $('#tag_chips_id').material_chip({
+        data: [{
+          tag: 'Apple',
+          id: 1,
+          image: 'https://storage.googleapis.com/material-icons/external-assets/v4/icons/svg/ic_vpn_key_black_24px.svg'
+          }, {
+          tag: 'Microsoft',
+          id: 2,
+          image: 'https://storage.googleapis.com/material-icons/external-assets/v4/icons/svg/ic_chat_black_24px.svg'
+          }, {
+          tag: 'Google',
+          id: 3,
+          image: 'https://storage.googleapis.com/material-icons/external-assets/v4/icons/svg/ic_replay_black_24px.svg'
+        }],
+      autocompleteData: {
+        'Alameda': null,
+        'Marinela': null,
+        'García': null,
+        'Alhama de Murcia': null,
+        'Villa conejos de arriba': null,
+        'Santa cecilia': null,
+        'Animales nocturnos': null,
+        'Rouge One a star wars': null,
+        'Mad max y la cúpula del trueno': null,
+        'Los infiernos': null,
+        'Caravaca de la cruz': null,
+        'Santiago de compostela': null
+      }
+    });
+    //END DOCUMENT READY
+});
+</script>

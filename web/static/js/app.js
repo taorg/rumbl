@@ -15,7 +15,7 @@ import "phoenix_html"
 import socket from "./socket"
 import "moment"
 import "rome"
-
+import "fuse.js"
 
 //import MaterialDatePicker from "./material-datetime-picker.js"
 import "dropify"

@@ -106,6 +106,7 @@ exports.config = {
             "node_modules/air-datepicker/dist/js/datepicker.js",
             "node_modules/air-datepicker/dist/js/i18n/datepicker.en.js",
             "node_modules/flatpickr/dist/flatpickr.js",
+            //"node_modules/fuse.js/src/fuse.js",
             //"node_modules/flatpickr/dist/plugins/confirmDate/confirmDate.js",
             "node_modules/timepicker/jquery.timepicker.js",
             "node_modules/daterange-picker-ex/src/jquery.daterangepicker.js",
