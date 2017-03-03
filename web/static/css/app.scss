@@ -1,5 +1,4 @@
 @import "materialize";
-
 .datepicker--nav {
     padding: 0px!important;
 }
@@ -45,4 +44,27 @@ li.ui-timepicker-selected,
 
 .autocomplete-content {
     position: absolute!important;
+}
+
+.typeahead__list,
+.typeahead__dropdown {
+    margin: -18px 0 0;
+    background-color: #fff;
+    border: 0px solid #ccc;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+}
+
+.typeahead__list>li {
+    position: relative;
+    border-top: solid 0px #ccc;
+}
+
+.typeahead__list>li>a,
+.typeahead__dropdown>li>a {
+    color: #26a69a;
+}
+
+.typeahead__container {
+    position: relative;
+    font: 16px "Roboto", sans-serif;
 }

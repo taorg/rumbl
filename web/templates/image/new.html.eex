@@ -18,12 +18,8 @@
         <div id="test3" class="col s12">
             <%= render "filer.html", conn: @conn %>
         </div>
-        <div id="test4" class="col s12">Test 4</div>
-    </div>
-
-
-
-<%= form_for @changeset, image_path(@conn, :create), 
+        <div id="test4" class="col s12">
+        <%= form_for @changeset, image_path(@conn, :create), 
              [multipart: true], fn f -> %>
     <!-- The element where Fine Uploader will exist. -->
 
@@ -50,5 +46,13 @@
     </div>
     <%= submit "Submit", class: "btn " %>
 <% end %>
+
+        
+        
+        </div>
+    </div>
+
+
+
 
 

@@ -64,8 +64,6 @@ const picker = new MaterialDatetimePicker({})
       input.value = val.format("dddd DD MMMM YYYY - HH:mm");
     });
 
-input.addEventListener('focus', function onFocus (){picker.open()});
-
 
 //END DOCUMENT READY
 });

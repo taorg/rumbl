@@ -92,6 +92,7 @@ exports.config = {
             "fine-uploader": ["jquery.fine-uploader/fine-uploader-gallery.css", "jquery.fine-uploader/fine-uploader-new.css"],
             "flatpickr": ["dist/themes/material_green.css"],
             "jquery.filer": ["css/themes/jquery.filer-dragdropbox-theme.css", "css/jquery.filer.css", "assets/fonts/jquery.filer-icons/jquery-filer.css"],
+            "jquery-typeahead": ["src/jquery.typeahead.css"],
             "timedropper-ex": ["src/timedropper.css"],
             "timepicker": ["jquery.timepicker.css"]
 
@@ -114,6 +115,7 @@ exports.config = {
             "node_modules/datetimeranger/src/datetimeranger.js",
             "node_modules/datetimeranger/src/datetimeranger.lang.js",
             "node_modules/materialize-css/bin/materialize.js",
+            "node_modules/jquery-typeahead/src/jquery.typeahead.js",
             "node_modules/timedropper-ex/src/timedropper.js",
             "node_modules/timedropper-ex/src/timedropper.lang.js",
             "node_modules/fine-uploader/jquery.fine-uploader/jquery.fine-uploader.js",
