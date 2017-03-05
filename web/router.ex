@@ -17,7 +17,7 @@ defmodule Rumbl.Router do
     pipe_through :pharc
     resources "/media", AjaxArc, only: [:create, :delete]
     resources "/gmap",  GmapsControler, only: [:create]
-    resources "/acomplete",  AutocompleteControler, only: [:index]
+    resources "/acomplete.json",  AutocompleteControler, only: [:index]
   end
   
   scope "/", Rumbl do

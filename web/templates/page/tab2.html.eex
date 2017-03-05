@@ -1,7 +1,7 @@
 <div class="divider"></div>
 <div class="row">
-  <div class="col s12">
-  <!--    <div class="row">
+    <div class="col s12">
+        <!--    <div class="row">
         <div class="input-field col s12">
           <i class="material-icons prefix">textsms</i>
           <input drab-keyup="gaddress_autocomplete_input_changed"  type="text" id="gaddress-autocomplete-input" class="autocomplete">
@@ -9,7 +9,7 @@
         </div>
       </div>
   END ROW-->
-      <!--   <div class="row">
+        <!--   <div class="row">
          <div class="input-field col s12">
            <i class="material-icons prefix">textsms</i>
            <input drab-keyup="gaddress_changed_input" type="text" id="google-address-input" >
@@ -17,228 +17,228 @@
          </div>
         </div>
         END ROW-->
-
-<div class="row">
-    <div class="input-field col s12">
-      <i class="material-icons prefix">textsms</i>
-      <input   type="text" id="fuse-autocomplete-input" class="autocomplete" drab-keyup="fuse_input_on_keyup" drab-options="debounce(500)" >
-      <label id=fuse-autocomplete-label for="fuse-autocomplete-input">Fuse autocomplete</label>
-    </div>
-  </div>
-<!-- END ROW-->        
- <div class="row">
-   <div class="input-field col s6">
-     <i class="material-icons prefix">textsms</i>
-     <input drab-keyup="gaddress_select_input" type="text" id="gaddress-input" >
-     <label id=gaddress-label for="google-address-input">Write address</label>
-   </div>
-   <div class="input-field col s6">
-     <select id="gmap-address-select" drab-event='change' drab-handler='gmap_address_select_changed'>
+        <div class="row">
+            <div class="input-field col s12">          
+            <div class="typeahead__container">
+                <div class="typeahead__field">
+                    <span class="typeahead__query">
+                        <input class="js-typeahead-user_v1" name="user_v1[query]" placeholder="Search" autocomplete="off" type="search">
+                    </span>             
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">textsms</i>
+                <input type="text" id="fuse-autocomplete-input" class="autocomplete" drab-keyup="fuse_input_on_keyup" drab-options="debounce(500)">
+                <label id=fuse-autocomplete-label for="fuse-autocomplete-input">Fuse autocomplete</label>
+            </div>
+        </div>
+        <!-- END ROW-->
+        <div class="row">
+            <div class="input-field col s6">
+                <i class="material-icons prefix">textsms</i>
+                <input drab-keyup="gaddress_select_input" type="text" id="gaddress-input">
+                <label id=gaddress-label for="google-address-input">Write address</label>
+            </div>
+            <div class="input-field col s6">
+                <select id="gmap-address-select" drab-event='change' drab-handler='gmap_address_select_changed'>
        <option value="1">1</option>
        <option value="2">2</option>
        <option value="3">3</option>
        <option value="4">4</option>
      </select>
-     <label>Possible addresses</label>
-   </div>
-  </div>
-  <div class="divider"></div>
-  <!-- END ROW-->
-  <div class="row">
+                <label>Possible addresses</label>
+            </div>
+        </div>
+        <div class="divider"></div>
+        <!-- END ROW-->
+        <div class="row">
 
-  </div>
-  <!-- END ROW-->
-  </div>
+        </div>
+        <!-- END ROW-->
+    </div>
 </div>
-    <div class="typeahead__container">
-        <div class="typeahead__field">
-            <span class="typeahead__query">
+<div class="typeahead__container">
+    <div class="typeahead__field">
+        <span class="typeahead__query">
                 <input class="js-typeahead-country_v1" name="country_v1[query]" placeholder="Search" autocomplete="off" type="search">
             </span>
-        </div>
     </div>
-    <div class="typeahead__container">
-        <div class="typeahead__field">
-            <span class="typeahead__query">
-                <input class="js-typeahead-user_v1" name="user_v1[query]" placeholder="Search" autocomplete="off" type="search">
-            </span>
-        </div>
-    </div>
+</div>
+
 
 <!-- -->
 <script>
-$(document).ready(function(){
-$.typeahead({
-    input: '.js-typeahead-user_v1',
-    minLength: 1,
-    order: "asc",
-    dynamic: true,
-    delay: 500,
-    backdrop: {
-        "background-color": "#fff"
-    },
-    template: function (query, item) {
- 
-        var color = "#777";
-        if (item.status === "owner") {
-            color = "#ff1493";
-        }
- 
-        return '<span class="row">' +
-            '<span class="avatar">' +
-                '<img src="{{avatar}}">' +
-            "</span>" +
-            '<span class="username">{{username}} <small style="color: ' + color + ';">({{status}})</small></span>' +
-            '<span class="id">({{id}})</span>' +
-        "</span>"
-    },
-    emptyTemplate: "no result for {{query}}",
-    source: {
-        user: {
-            display: "username",
-            href: "https://www.github.com/{{username|slugify}}",
-            data: [{
-                "id": 415849,
-                "username": "an inserted user that is not inside the database",
-                "avatar": "https://avatars3.githubusercontent.com/u/415849",
-                "status":  "contributor"
-            }],
-            ajax: function (query) {
-                return {
-                    type: "GET",
-                    url: "/pharc/acomplete",
-                    path: "data.user",
-                    data: {
-                        q: "{{query}}"
-                    },
-                    callback: {
-                        done: function (data) {
-                            for (var i = 0; i < data.data.user.length; i++) {
-                                if (data.data.user[i].username === 'running-coder') {
-                                    data.data.user[i].status = 'owner';
-                                } else {
-                                    data.data.user[i].status = 'contributor';
+    $(document).ready(function() {
+        $.typeahead({
+            input: '.js-typeahead-user_v1',
+            minLength: 1,
+            order: "asc",
+            dynamic: true,
+            delay: 500,
+            template: function(query, item) {
+
+                var color = "#777";
+                if (item.status === "owner") {
+                    color = "#ff1493";
+                }
+
+                return '<span class="row">' +
+                    '<span class="avatar">' +
+                    '<img src="{{avatar}}">' +
+                    "</span>" +
+                    '<span class="username">{{username}} <small style="color: ' + color + ';">({{status}})</small></span>' +
+                    '<span class="id">({{id}})</span>' +
+                    "</span>"
+            },
+            emptyTemplate: "no result for {{query}}",
+            source: {
+                user: {
+                    display: "username",
+                    href: "https://www.github.com/{{username|slugify}}",
+                    data: [{
+                        "id": 415849,
+                        "username": "an inserted user that is not inside the database",
+                        "avatar": "https://avatars3.githubusercontent.com/u/415849",
+                        "status": "contributor"
+                    }],
+                    ajax: function(query) {
+                        return {
+                            type: "GET",
+                            url: "/pharc/acomplete.json",
+                            //path: "data.user",
+                            data: {
+                                q: "{{query}}"
+                            },
+                            callback: {
+                                done: function(data) {
+                                    for (var i = 0; i < data.data.user.length; i++) {
+                                        if (data.data.user[i].username === 'running-coder') {
+                                            data.data.user[i].status = 'owner';
+                                        } else {
+                                            data.data.user[i].status = 'contributor';
+                                        }
+                                    }
+                                    return data.data.user;
                                 }
                             }
-                            return data;
                         }
                     }
-                }
-            }
- 
-        },
-        project: {
-            display: "project",
-            href: function (item) {
-                return '/' + item.project.replace(/\s+/g, '').toLowerCase() + '/documentation/'
-            },
-            ajax: [{
-                type: "GET",
-                url: "/pharc/acomplete",
-                data: {
-                    q: "{{query}}"
-                }
-            }, "data.project"],
-            template: '<span>' +
-                '<span class="project-logo">' +
-                    '<img src="{{image}}">' +
-                '</span>' +
-                '<span class="project-information">' +
-                    '<span class="project">{{project}} <small>{{version}}</small></span>' +
-                    '<ul>' +
+
+                },
+                project: {
+                    display: "project",
+                    href: function(item) {
+                        return '/' + item.project.replace(/\s+/g, '').toLowerCase() + '/documentation/'
+                    },
+                    ajax: [{
+                        type: "GET",
+                        url: "/pharc/acomplete.json",
+                        data: {
+                            q: "{{query}}"
+                        }
+                    }, "data.project"],
+                    template: '<span>' +
+                        '<span class="project-logo">' +
+                        '<img src="{{image}}">' +
+                        '</span>' +
+                        '<span class="project-information">' +
+                        '<span class="project">{{project}} <small>{{version}}</small></span>' +
+                        '<ul>' +
                         '<li>{{demo}} Demos</li>' +
                         '<li>{{option}}+ Options</li>' +
                         '<li>{{callback}}+ Callbacks</li>' +
-                    '</ul>' +
-                '</span>' +
-            '</span>'
-        }
-    },
-    callback: {
-        onClick: function (node, a, item, event) {
- 
-            // You can do a simple window.location of the item.href
-            alert(JSON.stringify(item));
- 
-        },
-        onSendRequest: function (node, query) {
-            console.log('request is sent')
-        },
-        onReceiveRequest: function (node, query) {
-            console.log('request is received')
-        }
-    },
-    debug: true
-});
+                        '</ul>' +
+                        '</span>' +
+                        '</span>'
+                }
+            },
+            callback: {
+                onClick: function(node, a, item, event) {
+
+                    // You can do a simple window.location of the item.href
+                    alert(JSON.stringify(item));
+
+                },
+                onSendRequest: function(node, query) {
+                    console.log('request is sent')
+                },
+                onReceiveRequest: function(node, query) {
+                    console.log('request is received')
+                }
+            },
+            debug: true
+        });
 
 
+        $.typeahead({
+            input: '.js-typeahead-country_v1',
+            order: "desc",
+            source: {
+                data: [
+                    "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda",
+                    "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh",
+                    "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia",
+                    "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burma",
+                    "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Central African Republic", "Chad",
+                    "Chile", "China", "Colombia", "Comoros", "Congo, Democratic Republic", "Congo, Republic of the",
+                    "Costa Rica", "Cote d'Ivoire", "Croatia", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti",
+                    "Dominica", "Dominican Republic", "East Timor", "Ecuador", "Egypt", "El Salvador",
+                    "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Fiji", "Finland", "France", "Gabon",
+                    "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Greenland", "Grenada", "Guatemala", "Guinea",
+                    "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hong Kong", "Hungary", "Iceland", "India",
+                    "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan",
+                    "Kazakhstan", "Kenya", "Kiribati", "Korea, North", "Korea, South", "Kuwait", "Kyrgyzstan", "Laos",
+                    "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg",
+                    "Macedonia", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands",
+                    "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Mongolia", "Morocco", "Monaco",
+                    "Mozambique", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger",
+                    "Nigeria", "Norway", "Oman", "Pakistan", "Panama", "Papua New Guinea", "Paraguay", "Peru",
+                    "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russia", "Rwanda", "Samoa", "San Marino",
+                    "Sao Tome", "Saudi Arabia", "Senegal", "Serbia and Montenegro", "Seychelles", "Sierra Leone",
+                    "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "Spain",
+                    "Sri Lanka", "Sudan", "Suriname", "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan",
+                    "Tajikistan", "Tanzania", "Thailand", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey",
+                    "Turkmenistan", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States",
+                    "Uruguay", "Uzbekistan", "Vanuatu", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"
+                ]
+            },
+            callback: {
+                onInit: function(node) {
+                    console.log('Typeahead Initiated on ' + node.selector);
+                }
+            }
+        });
 
-$.typeahead({
-    input: '.js-typeahead-country_v1',
-    order: "desc",
-    source: {
-        data: [
-            "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda",
-            "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh",
-            "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia",
-            "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burma",
-            "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Central African Republic", "Chad",
-            "Chile", "China", "Colombia", "Comoros", "Congo, Democratic Republic", "Congo, Republic of the",
-            "Costa Rica", "Cote d'Ivoire", "Croatia", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti",
-            "Dominica", "Dominican Republic", "East Timor", "Ecuador", "Egypt", "El Salvador",
-            "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Fiji", "Finland", "France", "Gabon",
-            "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Greenland", "Grenada", "Guatemala", "Guinea",
-            "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hong Kong", "Hungary", "Iceland", "India",
-            "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan",
-            "Kazakhstan", "Kenya", "Kiribati", "Korea, North", "Korea, South", "Kuwait", "Kyrgyzstan", "Laos",
-            "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg",
-            "Macedonia", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands",
-            "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Mongolia", "Morocco", "Monaco",
-            "Mozambique", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger",
-            "Nigeria", "Norway", "Oman", "Pakistan", "Panama", "Papua New Guinea", "Paraguay", "Peru",
-            "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russia", "Rwanda", "Samoa", "San Marino",
-            "Sao Tome", "Saudi Arabia", "Senegal", "Serbia and Montenegro", "Seychelles", "Sierra Leone",
-            "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "Spain",
-            "Sri Lanka", "Sudan", "Suriname", "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan",
-            "Tajikistan", "Tanzania", "Thailand", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey",
-            "Turkmenistan", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States",
-            "Uruguay", "Uzbekistan", "Vanuatu", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"
-        ]
-    },
-    callback: {
-        onInit: function (node) {
-            console.log('Typeahead Initiated on ' + node.selector);
-        }
-    }
-});
+        /* END DOCUMENT READY*/
+    });
+    /*
 
-//END DOCUMENT READY
-});
-/*
-
-$("#myCheckbox2").prop('checked','true')
-  $('#fuse-autocomplete-input').fuseautocomplete({          
-          data:[{title:"Old Man's War",author:{img:"/images/processing.gif",firstName:"John",lastName:"Scalzi"}},{title:"The Lock Artist",author:{img:"/images/processing.gif",firstName:"Steve",lastName:"Hamilton"}},{title:"HTML5",author:{img:"/images/processing.gif",firstName:"Remy",lastName:"Sharp"}},{title:"Right Ho Jeeves",author:{img:"/images/processing.gif",firstName:"P.D",lastName:"Woodhouse"}},{title:"The Code of the Wooster",author:{img:"/images/processing.gif",firstName:"P.D",lastName:"Woodhouse"}},{title:"Thank You Jeeves",author:{img:"/images/processing.gif",firstName:"P.D",lastName:"Woodhouse"}},{title:"The DaVinci Code",author:{img:"/images/processing.gif",firstName:"Dan",lastName:"Brown"}},{title:"Angels & Demons",author:{img:"/images/processing.gif",firstName:"Dan",lastName:"Brown"}},{title:"The Silmarillion",author:{img:"/images/processing.gif",firstName:"J.R.R",lastName:"Tolkien"}},{title:"Syrup",author:{img:"/images/processing.gif",firstName:"Max",lastName:"Barry"}},{title:"The Lost Symbol",author:{img:"/images/processing.gif",firstName:"Dan",lastName:"Brown"}},{title:"The Book of Lies",author:{img:"/images/processing.gif",firstName:"Brad",lastName:"Meltzer"}},{title:"Lamb",author:{img:"/images/processing.gif",firstName:"Christopher",lastName:"Moore"}},{title:"Fool",author:{img:"/images/processing.gif",firstName:"Christopher",lastName:"Moore"}},{title:"Incompetence",author:{img:"/images/processing.gif",firstName:"Rob",lastName:"Grant"}},{title:"Fat",author:{img:"/images/processing.gif",firstName:"Rob",lastName:"Grant"}},{title:"Colony",author:{img:"/images/processing.gif",firstName:"Rob",lastName:"Grant"}},{title:"Backwards, Red Dwarf",author:{img:"/images/processing.gif",firstName:"Rob",lastName:"Grant"}},{title:"The Grand Design",author:{img:"/images/processing.gif",firstName:"Stephen",lastName:"Hawking"}},{title:"The Book of Samson",author:{img:"/images/processing.gif",firstName:"David",lastName:"Maine"}},{title:"The Preservationist",author:{img:"/images/processing.gif",firstName:"David",lastName:"Maine"}},{title:"Fallen",author:{img:"/images/processing.gif",firstName:"David",lastName:"Maine"}},{title:"Monster 1959",author:{img:"/images/processing.gif",firstName:"David",lastName:"Maine"}}],
-          fuseOptions: {
-              //id: "title",
-              shouldSort: !0,
-              threshold: .6,
-              location: 0,
-              distance: 100,
-              maxPatternLength: 32,
-              minMatchCharLength: 1,
-              keys: [ "title", "firstName" ]
-            },   
-          //$("#fuse-autocomplete-input").data("data-id")  
-          dataIdentifierFn: function (fdata_key) {
-          var id =  fdata_key.author.lastName; 
-          return id;         
-          },         
-          renderItemFn: function (fdata_key) {
-          var image = '<img src="'+ fdata_key.author.img +'" class="right circle"><span>'+ fdata_key.title +'</span>'            
-          return image;         
-          },
-          onAutocomplete:function(){ console.log('********AUTOCOMPLETE');}
-  });
-*/
+    $("#myCheckbox2").prop('checked','true')
+      $('#fuse-autocomplete-input').fuseautocomplete({          
+              data:[{title:"Old Man's War",author:{img:"/images/processing.gif",firstName:"John",lastName:"Scalzi"}},{title:"The Lock Artist",author:{img:"/images/processing.gif",firstName:"Steve",lastName:"Hamilton"}},{title:"HTML5",author:{img:"/images/processing.gif",firstName:"Remy",lastName:"Sharp"}},{title:"Right Ho Jeeves",author:{img:"/images/processing.gif",firstName:"P.D",lastName:"Woodhouse"}},{title:"The Code of the Wooster",author:{img:"/images/processing.gif",firstName:"P.D",lastName:"Woodhouse"}},{title:"Thank You Jeeves",author:{img:"/images/processing.gif",firstName:"P.D",lastName:"Woodhouse"}},{title:"The DaVinci Code",author:{img:"/images/processing.gif",firstName:"Dan",lastName:"Brown"}},{title:"Angels & Demons",author:{img:"/images/processing.gif",firstName:"Dan",lastName:"Brown"}},{title:"The Silmarillion",author:{img:"/images/processing.gif",firstName:"J.R.R",lastName:"Tolkien"}},{title:"Syrup",author:{img:"/images/processing.gif",firstName:"Max",lastName:"Barry"}},{title:"The Lost Symbol",author:{img:"/images/processing.gif",firstName:"Dan",lastName:"Brown"}},{title:"The Book of Lies",author:{img:"/images/processing.gif",firstName:"Brad",lastName:"Meltzer"}},{title:"Lamb",author:{img:"/images/processing.gif",firstName:"Christopher",lastName:"Moore"}},{title:"Fool",author:{img:"/images/processing.gif",firstName:"Christopher",lastName:"Moore"}},{title:"Incompetence",author:{img:"/images/processing.gif",firstName:"Rob",lastName:"Grant"}},{title:"Fat",author:{img:"/images/processing.gif",firstName:"Rob",lastName:"Grant"}},{title:"Colony",author:{img:"/images/processing.gif",firstName:"Rob",lastName:"Grant"}},{title:"Backwards, Red Dwarf",author:{img:"/images/processing.gif",firstName:"Rob",lastName:"Grant"}},{title:"The Grand Design",author:{img:"/images/processing.gif",firstName:"Stephen",lastName:"Hawking"}},{title:"The Book of Samson",author:{img:"/images/processing.gif",firstName:"David",lastName:"Maine"}},{title:"The Preservationist",author:{img:"/images/processing.gif",firstName:"David",lastName:"Maine"}},{title:"Fallen",author:{img:"/images/processing.gif",firstName:"David",lastName:"Maine"}},{title:"Monster 1959",author:{img:"/images/processing.gif",firstName:"David",lastName:"Maine"}}],
+              fuseOptions: {
+                  id: "title",
+                  shouldSort: !0,
+                  threshold: .6,
+                  location: 0,
+                  distance: 100,
+                  maxPatternLength: 32,
+                  minMatchCharLength: 1,
+                  keys: [ "title", "firstName" ]
+                },   
+              $("#fuse-autocomplete-input").data("data-id")  
+              dataIdentifierFn: function (fdata_key) {
+              var id =  fdata_key.author.lastName; 
+              return id;         
+              },         
+              renderItemFn: function (fdata_key) {
+              var image = '<img src="'+ fdata_key.author.img +'" class="right circle"><span>'+ fdata_key.title +'</span>'            
+              return image;         
+              },
+              onAutocomplete:function(){ console.log('********AUTOCOMPLETE');}
+      });
+    */
 </script>
