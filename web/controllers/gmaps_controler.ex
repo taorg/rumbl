@@ -3,25 +3,54 @@ defmodule Rumbl.GmapsControler do
   alias ExGoogle.Maps.Api, as: Maps
   @moduledoc false
 
-# google maps reverse geocoding
-#IO.inspect "Maps.search(%{latlng: 40.714224,-73.961452})------------------------------------"
-#IO.inspect Maps.search(%{latlng: "40.714224,-73.961452"})
-# Advanced parameters
-#IO.inspect "Maps.search(%{latlng: 40.714224,-73.961452, location_type: ROOFTOP|RANGE_INTERPOLATED|GEOMETRIC_CENTER, result_type: street_address})------------------------------------"
-#IO.inspect Maps.search(%{latlng: "40.714224,-73.961452", location_type: "ROOFTOP|RANGE_INTERPOLATED|GEOMETRIC_CENTER", result_type: "street_address"})
-
 # google maps geocoding
-def create(conn, _params) do
-    IO.inspect "Maps.search(%{address: 1600 Amphitheatre Parkway, Mountain View, CA})------------------------------------"
+    def index(conn, _params) do        
+        
+        IO.inspect _params["address"]
 
-    map_address =  Maps.search(%{address: " Calle conde de elda alhama"})
-        |>IO.inspect 
-         #|>elem(1)
-         #|>List.first()
+        map_address =  Maps.search(%{address: _params["address"]})
+        map_address_data =  gmaps_select(map_address,_params["address"])
+        trailed_addresses = String.replace_trailing(map_address_data,",\n","")
+        |>IO.inspect
+            #|>elem(1)
+            #|>List.first()
 
-    IO.inspect map_address["formatted_address"]
-    IO.inspect map_address["geometry"]["location"]["lat"]
-    IO.inspect map_address["geometry"]["location"]["lng"]
+        send_resp(conn, 200, "{\"status\":true,\"error\":null,\"data\":{\"address\":[#{trailed_addresses}]}}")
+        
+    end
 
-end
+    defp gmaps_select(map_search,address_param) do
+        #IO.inspect map_search
+        case map_search do
+            {:ok, %{"results" => [], "status" => "ZERO_RESULTS"}}->
+                                "ZERO_RESULTS"
+                                map_address_map = []
+            {:error, error_map, error_code}->
+                                error_map["error_message"]
+                                map_address_map = []
+            {:ok, map_address_struct}->
+                                populate_json(map_address_struct,address_param)
+        end
+
+    end
+
+    defp gmaps_flat(x) do
+         x["formatted_address"]
+    end
+    defp populate_json(map_address_struct,address_param) do
+        #IO.inspect map_address_struct
+        #IO.inspect "-------------------------    {"status":true,"error":null,"data":{"address":[       ]}}"
+        EEx.eval_string( """
+            <%= for geolocation <- geolocations do %>                
+                 {  "param":"<%= param %>",
+                    "address":"<%= geolocation["formatted_address"] %>",
+                    "lat":"<%= geolocation["geometry"]["location"]["lat"] %>",
+                    "lng":"<%= geolocation["geometry"]["location"]["lng"] %>" } ,<% end %>
+                    """, [geolocations: map_address_struct,param: address_param]) 
+
+    end
+        # IO.inspect map_address["formatted_address"]
+        #IO.inspect map_address["geometry"]["location"]["lat"]
+        #IO.inspect map_address["geometry"]["location"]["lng"]
+
 end

@@ -23,6 +23,8 @@ import "jquery.filer"
 import "fine-uploader"
 import "dropzone"
 import bootstrapMaterialDatePicker from "./bootstrap-material-datetimepicker.js"
+import "leaflet"
+
 //import MaterialDatetimePicker from "./material-datetime-picker.js"
 // Import local files
 //

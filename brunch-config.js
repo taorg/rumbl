@@ -8,7 +8,7 @@ exports.config = {
                         "web/static/vendor/material-datetime-picker/confirmClearDateFlatpickr.js",
                         "web/static/vendor/material-datetime-picker/fuse.js",
                         "web/static/vendor/material-datetime-picker/fuseAutocomplete.js",
-
+                        //"web/static/vendor/material-datetime-picker/bundle-leaflet-geosearch.js",
                     ]
                     //<script src="<%= static_path(@conn, "/js/material-datetime-picker.js") %>"></script>
                     //"js/materialize.js": ["web/static/vendor/materialize/materialize.js"]
@@ -91,10 +91,12 @@ exports.config = {
             "dropzone": ["dist/dropzone.css"],
             "fine-uploader": ["jquery.fine-uploader/fine-uploader-gallery.css", "jquery.fine-uploader/fine-uploader-new.css"],
             "flatpickr": ["dist/themes/material_green.css"],
+            "leaflet-geosearch": ["dist/style.css"],
             "jquery.filer": ["css/themes/jquery.filer-dragdropbox-theme.css", "css/jquery.filer.css", "assets/fonts/jquery.filer-icons/jquery-filer.css"],
             "jquery-typeahead": ["src/jquery.typeahead.css"],
             "timedropper-ex": ["src/timedropper.css"],
-            "timepicker": ["jquery.timepicker.css"]
+            "timepicker": ["jquery.timepicker.css"],
+            "leaflet": ["dist/leaflet.css"]
 
         },
         globals: {

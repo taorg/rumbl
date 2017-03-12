@@ -18,6 +18,7 @@ defmodule Rumbl.Router do
     resources "/media", AjaxArc, only: [:create, :delete]
     resources "/gmap",  GmapsControler, only: [:create]
     resources "/acomplete.json",  AutocompleteControler, only: [:index]
+    resources "/gmaps.json",  GmapsControler, only: [:index]
   end
   
   scope "/", Rumbl do

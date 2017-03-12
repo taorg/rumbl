@@ -7,11 +7,11 @@
     <div class="collapsible-body"><%= render "tab1.html", conn: @conn %></div>
   </li>
   <li>
-    <div class="collapsible-header active"><i class="material-icons">place</i>Second</div>
+    <div class="collapsible-header "><i class="material-icons">place</i>Second</div>
     <div class="collapsible-body"><%= render "tab2.html", conn: @conn %></div>
   </li>
   <li>
-    <div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
-    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+    <div class="collapsible-header active"><i class="material-icons">whatshot</i>Third</div>
+     <div class="collapsible-body"><%= render "tab3.html", conn: @conn %></div>
   </li>
 </ul>

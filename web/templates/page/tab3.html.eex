@@ -1,0 +1,59 @@
+
+<div class="row">
+    <div class="input-field col s12">
+                   <div class="typeahead__container">
+                <div class="typeahead__field">
+                    <span class="typeahead__query">
+                        <input id="geoleaf-input" name="geoleaf-input[query]" placeholder="Type an address" autocomplete="on" type="search" autofocus>
+                        <label for="time_dropper">GeoLeaf</label>
+                    </span>
+                </div>
+            </div>        
+    </div>
+</div>
+ <div id="mapid"></div>
+
+<script>
+// setup
+$(document).ready(function() {
+
+    var mymap = L.map('mapid').setView([51.505, -0.09], 13);
+    var tiles = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: 'Sulia'
+    });
+    mymap.addLayer(tiles);
+
+    $('#geoleaf-input').typeahead({
+           debug: true,
+           delay: 50,
+           dynamic: true,
+           display: ['address','param'],                            
+           source: {              
+                ajax: function(query) {
+                    return {
+                        type: 'GET',
+                        path: 'data.address',
+                        url: '/pharc/gmaps.json',                           
+                        data: {address: '{{query}}'}
+                    }
+                }               
+           },
+           callback: {
+               onClickAfter: function(node, a, item, event) {
+                    document.getElementById('geoleaf-input').value = item.address;
+                    var marker = L.marker([ item.lat, item.lng]).addTo(mymap);
+                    mymap.setView([ item.lat, item.lng], 16);
+               },
+           }
+        });
+
+
+
+
+
+
+
+            /* END DOCUMENT READY*/
+    });
+</script>
