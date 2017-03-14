@@ -42,8 +42,9 @@ $(document).ready(function() {
            callback: {
                onClickAfter: function(node, a, item, event) {
                     document.getElementById('geoleaf-input').value = item.address;
-                    var marker = L.marker([ item.lat, item.lng]).addTo(mymap);
                     mymap.setView([ item.lat, item.lng], 16);
+                    var marker = L.marker([ item.lat, item.lng]).addTo(mymap);
+                    marker.bindPopup("<b>Address: </b><br>"+ item.address).openPopup();
                },
            }
         });

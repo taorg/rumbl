@@ -38,8 +38,6 @@ defmodule Rumbl.GmapsControler do
          x["formatted_address"]
     end
     defp populate_json(map_address_struct,address_param) do
-        #IO.inspect map_address_struct
-        #IO.inspect "-------------------------    {"status":true,"error":null,"data":{"address":[       ]}}"
         EEx.eval_string( """
             <%= for geolocation <- geolocations do %>                
                  {  "param":"<%= param %>",
@@ -49,8 +47,6 @@ defmodule Rumbl.GmapsControler do
                     """, [geolocations: map_address_struct,param: address_param]) 
 
     end
-        # IO.inspect map_address["formatted_address"]
-        #IO.inspect map_address["geometry"]["location"]["lat"]
-        #IO.inspect map_address["geometry"]["location"]["lng"]
+
 
 end
