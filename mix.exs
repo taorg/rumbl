@@ -32,7 +32,7 @@ defmodule Rumbl.Mixfile do
   defp deps do
     [{:arc, "~> 0.7.0", override: true},
      {:arc_ecto, "~> 0.5.0", override: true},
-     {:ex_aws, "~> 1.1"},
+     {:ex_aws, "~> 1.1.2"},
      {:hackney, "~>1.6"},
      {:httpoison, "~> 0.11.0", override: true},
      {:poison, "~> 3.1", override: true},
