@@ -30,6 +30,10 @@ defmodule Rumbl.ImageArc do
     "uploads/#{scope.content_type}"
   end
 
+  def s3_object_headers(version, {file, scope}) do
+    [timeout: 3_000_000, content_type: Plug.MIME.path(file.file_name)] # for "image.png", would produce: "image/png"
+  end
+
   #http://stackoverflow.com/questions/9812589/how-to-determine-the-length-of-a-gif-animation-in-milliseconds#9813921
   # To add a thumbnail version:
   # @versions [:original, :thumb]

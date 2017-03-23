@@ -18,8 +18,24 @@ defmodule Rumbl.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {Rumbl, []},
-     applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :arc_ecto, :ex_aws, :hackney, :httpoison, :poison, :verk, :verk_web,:porcelain,:ex_google]]
+     applications: [:phoenix, 
+                    :phoenix_pubsub,
+                    :phoenix_html, 
+                    :cowboy, 
+                    :logger, 
+                    :gettext,
+                    :phoenix_ecto, 
+                    :postgrex, 
+                    :arc_ecto, 
+                    :ex_aws, 
+                    :hackney,
+                    :jsx, 
+                    :httpoison, 
+                    :poison, 
+                    :verk, 
+                    :verk_web,
+                    :porcelain,
+                    :ex_google]]
   end
 
   # Specifies which paths to compile per environment.
@@ -33,16 +49,17 @@ defmodule Rumbl.Mixfile do
     [{:arc, "~> 0.7.0", override: true},
      {:arc_ecto, "~> 0.5.0", override: true},
      {:ex_aws, "~> 1.1.2"},
-     {:hackney, "~>1.6"},
+     {:hackney, "~> 1.7.1", override: true},
      {:httpoison, "~> 0.11.0", override: true},
      {:poison, "~> 3.1", override: true},
+     {:jsx, "~> 2.8.2"},
      {:sweet_xml, "~> 0.6"},
      {:verk, "~> 0.13"},
-     {:drab, "~> 0.3"},
+     {:drab, "~> 0.3.1"},
      {:ex_google, "~> 0.1.4"},
      {:verk_web, "~> 0.13.6"},
      {:porcelain, "~> 2.0.3"},
-     {:phoenix, "~> 1.2.1"},
+     {:phoenix, "~> 1.2.3"},
      {:phoenix_pubsub, "~> 1.0"},
      {:phoenix_ecto, "~> 3.2.1"},
      {:postgrex, ">= 0.0.0"},

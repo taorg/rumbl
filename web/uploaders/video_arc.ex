@@ -19,16 +19,20 @@ defmodule Rumbl.VideoArc do
   end
   
   def transform(:thumb, _) do
-    {:ffmpeg, fn(input, output) -> "-itsoffset -1 -i #{input} -vcodec png -vframes 1 -f rawvideo  -y -filter:v scale='300:-1' #{output}" end, :png}
+    {:ffmpeg, fn(input, output) -> "-itsoffset -1 -i #{input} -vcodec mjpeg -vframes 1 -f rawvideo  -y -filter:v scale='300:-1' #{output}" end, :png}
     #http://stackoverflow.com/questions/14551102/with-ffmpeg-create-thumbnails-proportional-to-the-videos-ratio
   end
 
   def transform(:screen, _) do
-    {:ffmpeg, fn(input, output) -> "-itsoffset -1 -i #{input} -vcodec png -vframes 1 -f rawvideo  -y #{output}" end, :jpg}
+    {:ffmpeg, fn(input, output) -> "-itsoffset -1 -i #{input} -vcodec mjpeg -vframes 1 -f rawvideo  -y #{output}" end, :jpg}
   end
 
   def storage_dir(version, {file, scope}) do
     "uploads/#{scope.content_type}"
+  end
+
+  def s3_object_headers(version, {file, scope}) do
+    [timeout: 3_000_000, content_type: Plug.MIME.path(file.file_name)] # for "image.png", would produce: "image/png"
   end
 
   # To add a thumbnail version:
