@@ -1,4 +1,9 @@
 ​<h5>Listing Users</h5>
+
+
+
+<div id="embed-elm-here"></div>
+
 <table class="table">​ 
 <table class="centered highlight">
   <thead>
@@ -22,3 +27,23 @@
 <% end %>​
 </tbody>
 ​</table>
+<!--
+<script>
+$(document).ready(function(){
+    const elmDiv = document.querySelector('#embed-elm-here');
+    if (elmDiv) {
+        Elm.Main.embed(elmDiv);
+    }
+//END DOCUMENT READY
+});    
+</script>
+
+
+<script type="text/javascript"> 
+$(document).ready(function(){ 
+  const elmDiv = document.querySelector('#embed-elm-here');
+  require("web/static/js/rumblelm.js").Main.embed(elmDiv);
+  //END DOCUMENT READY
+});    
+</script>  
+-->

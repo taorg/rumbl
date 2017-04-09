@@ -3,13 +3,14 @@ exports.config = {
     files: {
         javascripts: {
             joinTo: {
-                "js/app.js": /^(web\/static\/js)|(node_modules)/,
+                "js/app.js": /(web\/static\/js)|(node_modules)/,
                 "js/material-datetime-picker.js": ["web/static/vendor/material-datetime-picker/material-datetime-picker.js",
-                        "web/static/vendor/material-datetime-picker/confirmClearDateFlatpickr.js",
-                        "web/static/vendor/material-datetime-picker/fuse.js",
-                        "web/static/vendor/material-datetime-picker/fuseAutocomplete.js",
-                        //"web/static/vendor/material-datetime-picker/bundle-leaflet-geosearch.js",
-                    ]
+                    "web/static/vendor/material-datetime-picker/confirmClearDateFlatpickr.js",
+                    "web/static/vendor/material-datetime-picker/fuse.js",
+                    "web/static/vendor/material-datetime-picker/fuseAutocomplete.js",
+                    //"web/static/vendor/material-datetime-picker/bundle-leaflet-geosearch.js",
+                ],
+                "js/elm.js": /^(web\/static\/elm)/
                     //<script src="<%= static_path(@conn, "/js/material-datetime-picker.js") %>"></script>
                     //"js/materialize.js": ["web/static/vendor/materialize/materialize.js"]
             }
@@ -46,7 +47,7 @@ exports.config = {
         // This option sets where we should place non-css and non-js assets in.
         // By default, we set this to "/web/static/assets". Files in this directory
         // will be copied to `paths.public`, which is "priv/static" by default.
-        assets: /^(web\/static\/assets)/
+        assets: /^(web\/static\/assets)|(web\/elm\/elm-stuff)/
     },
 
     // Phoenix paths configuration
@@ -60,9 +61,23 @@ exports.config = {
         // Where to compile files to
         public: "priv/static"
     },
-
     // Configure your plugins
     plugins: {
+
+        elmBrunch: {
+            // Set to path where `elm-make` is located, relative to `elmFolder` (optional)
+            //executablePath: '../../../node_modules/elm/binwrappers',
+            // Set to path where elm-package.json is located, defaults to project root (optional)
+            // if your elm files are not in /app then make sure to configure paths.watched in main brunch config
+            elmFolder: 'web/elm',
+            // Set to the elm file(s) containing your "main" function
+            // `elm make` handles all elm dependencies (required)
+            // relative to `elmFolder`s
+            mainModules: ['Main.elm'],
+            //outputFolder: '../../../priv/static/js/elm',
+            outputFolder: "../../static/js",
+            outputFile: "rumblelm.js"
+        },
         babel: {
             // Do not use ES6 compiler in vendor code
             ignore: [/web\/static\/vendor/]
@@ -83,6 +98,7 @@ exports.config = {
 
     npm: {
         enabled: true,
+        whitelist: ["phoenix", "phoenix_html"],
         styles: {
             "air-datepicker": ["dist/css/datepicker.css"],
             "daterange-picker-ex": ["src/daterangepicker.css"],

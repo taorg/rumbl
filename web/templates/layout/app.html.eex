@@ -7,9 +7,11 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
     <%= Drab.Client.js(@conn) %>
     <script src="<%= static_path(@conn, "/js/material-datetime-picker.js")%>" charset="utf-8"></script>
+    
 
     <title>Hello Rumbl!</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
@@ -64,7 +66,8 @@ const picker = new MaterialDatetimePicker({})
       input.value = val.format("dddd DD MMMM YYYY - HH:mm");
     });
 
-
+  const elmDiv = document.querySelector('#embed-elm-here');
+  require("web/static/js/rumblelm.js").Main.embed(elmDiv);
 //END DOCUMENT READY
 });
     </script>
