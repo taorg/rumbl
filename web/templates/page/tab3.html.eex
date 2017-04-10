@@ -16,13 +16,19 @@
 <script>
 // setup
 $(document).ready(function() {
-
-    var mymap = L.map('mapid').setView([51.505, -0.09], 13);
+$('.collapsible').collapsible({
+    accordion: false, // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+    onOpen: function(el) { mymap.invalidateSize() }, // Callback for Collapsible open
+    //onClose: function(el) { alert('Closed'); } // Callback for Collapsible close
+  });
+    var mymap = L.map('mapid')
     var tiles = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: 'Sulia'
     });
+    mymap.setView([51.505, -0.09], 13);
     mymap.addLayer(tiles);
+    
 
     $('#geoleaf-input').typeahead({
            debug: true,
@@ -47,9 +53,7 @@ $(document).ready(function() {
                     marker.bindPopup("<b>Address: </b><br>"+ item.address).openPopup();
                },
            }
-        });
-
-
+        });   
             /* END DOCUMENT READY*/
     });
 </script>

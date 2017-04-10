@@ -1,9 +1,4 @@
 ​<h5>Listing Users</h5>
-
-
-
-<div id="embed-elm-here"></div>
-
 <table class="table">​ 
 <table class="centered highlight">
   <thead>
@@ -28,6 +23,7 @@
 </tbody>
 ​</table>
 <!--
+<div id="embed-elm-here"></div>
 <script>
 $(document).ready(function(){
     const elmDiv = document.querySelector('#embed-elm-here');

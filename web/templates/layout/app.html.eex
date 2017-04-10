@@ -66,8 +66,11 @@ const picker = new MaterialDatetimePicker({})
       input.value = val.format("dddd DD MMMM YYYY - HH:mm");
     });
 
+//ELM INITIALITATION
   const elmDiv = document.querySelector('#embed-elm-here');
-  require("web/static/js/rumblelm.js").Main.embed(elmDiv);
+  if (elmDiv) {
+    require("web/static/js/rumblelm.js").Main.embed(elmDiv);
+  }
 //END DOCUMENT READY
 });
     </script>

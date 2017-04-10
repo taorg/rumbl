@@ -7796,7 +7796,7 @@ var _elm_lang$html$Html$menuitem = _elm_lang$html$Html$node('menuitem');
 var _elm_lang$html$Html$menu = _elm_lang$html$Html$node('menu');
 
 var _user$project$Main$main = _elm_lang$virtual_dom$Native_VirtualDom.staticProgram(
-	_elm_lang$html$Html$text('Hello Foo'));
+	_elm_lang$html$Html$text('Hello ELM dynamic'));
 
 var Elm = {};
 Elm['Main'] = Elm['Main'] || {};

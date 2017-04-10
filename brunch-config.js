@@ -69,12 +69,11 @@ exports.config = {
             //executablePath: '../../../node_modules/elm/binwrappers',
             // Set to path where elm-package.json is located, defaults to project root (optional)
             // if your elm files are not in /app then make sure to configure paths.watched in main brunch config
-            elmFolder: 'web/elm',
+            elmFolder: 'web/static/elm',
             // Set to the elm file(s) containing your "main" function
             // `elm make` handles all elm dependencies (required)
             // relative to `elmFolder`s
             mainModules: ['Main.elm'],
-            //outputFolder: '../../../priv/static/js/elm',
             outputFolder: "../../static/js",
             outputFile: "rumblelm.js"
         },
