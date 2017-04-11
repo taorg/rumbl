@@ -1,0 +1,50 @@
+var _user$project$Components_ArticleList$renderArticle = function (article) {
+	return A2(
+		_elm_lang$html$Html$li,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: _user$project$Article$view(article),
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$Components_ArticleList$articles = {
+	ctor: '::',
+	_0: {title: 'Article 1', url: 'http://google.com', postedBy: 'Author', postedOn: '06/20/16'},
+	_1: {
+		ctor: '::',
+		_0: {title: 'Article 2', url: 'http://google.com', postedBy: 'Author 2', postedOn: '06/20/16'},
+		_1: {
+			ctor: '::',
+			_0: {title: 'Article 3', url: 'http://google.com', postedBy: 'Author 3', postedOn: '06/20/16'},
+			_1: {ctor: '[]'}
+		}
+	}
+};
+var _user$project$Components_ArticleList$renderArticles = A2(_elm_lang$core$List$map, _user$project$Components_ArticleList$renderArticle, _user$project$Components_ArticleList$articles);
+var _user$project$Components_ArticleList$view = A2(
+	_elm_lang$html$Html$div,
+	{
+		ctor: '::',
+		_0: _elm_lang$html$Html_Attributes$class('article-list'),
+		_1: {ctor: '[]'}
+	},
+	{
+		ctor: '::',
+		_0: A2(
+			_elm_lang$html$Html$h2,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text('Article List'),
+				_1: {ctor: '[]'}
+			}),
+		_1: {
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$ul,
+				{ctor: '[]'},
+				_user$project$Components_ArticleList$renderArticles),
+			_1: {ctor: '[]'}
+		}
+	});
