@@ -4,9 +4,9 @@
         <div class="col s12">
             <ul class="tabs">
                 <li class="tab col s3"><a href="#test1">DropZone</a></li>
-                <li class="tab col s3"><a class="active" href="#test2">FineUploader</a></li>
+                <li class="tab col s3"><a href="#test2">FineUploader</a></li>
                 <li class="tab col s3"><a href="#test3">JQuery Filer</a></li>
-                <li class="tab col s3"><a href="#test4">Test 4</a></li>
+                <li class="tab col s3"><a class="active" href="#test4">Uppy</a></li>
             </ul>
         </div>
         <div id="test1" class="col s12">
@@ -19,40 +19,9 @@
             <%= render "filer.html", conn: @conn %>
         </div>
         <div id="test4" class="col s12">
-        <%= form_for @changeset, image_path(@conn, :create), 
-             [multipart: true], fn f -> %>
-    <!-- The element where Fine Uploader will exist. -->
-
-    <!--
-<div class="file-field input-field">
-      <div class="btn">
-        <span>Image File</span>
-          <%= file_input f, :image,[multiple: "multiple"] %>
-      </div>
-      <div class="file-path-wrapper">
-        <input class="file-path validate" type="text" placeholder="Upload one or more files">
-      </div>
-  </div>
- <div class="row">
- <div class="col s4">
-</div>
-</div> 
--->
-
-    <div class="row">
-        <div class="col s4">
-            <%= file_input f, :image,[multiple: "multiple", class: "dropify"] %>
+            <%= render "uppy.html", conn: @conn %>
         </div>
-    </div>
-    <%= submit "Submit", class: "btn " %>
-<% end %>
-
-        
-        
         </div>
-    </div>
-
-
 
 
 

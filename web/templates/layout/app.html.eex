@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+    
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
     <%= Drab.Client.js(@conn) %>
     <script src="<%= static_path(@conn, "/js/material-datetime-picker.js")%>" charset="utf-8"></script>
@@ -58,9 +58,10 @@ $(document).ready(function(){
   $('.slider').slider();
   $('.carousel').carousel();
 
-  $('.dropify').dropify();
 
+  $('.dropify').dropify();
 const input = document.querySelector('.c-datepicker-input');
+/*
 const picker = new MaterialDatetimePicker({})
     .on('submit', function (val) {
       input.value = val.format("dddd DD MMMM YYYY - HH:mm");
@@ -71,8 +72,10 @@ const picker = new MaterialDatetimePicker({})
   if (elmDiv) {
     require("web/static/js/rumblelm.js").Main.embed(elmDiv);
   }
+  */
 //END DOCUMENT READY
 });
+
     </script>
   </body>
 </html>

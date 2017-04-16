@@ -1,50 +1,48 @@
 {
-  "name": "rumbl",
-  "version": "1.0.0",
-  "main": "brunch-config.js",
-  "directories": {
-    "test": "test"
-  },
-  "repository": {},
-  "license": "MIT",
-  "scripts": {
-    "deploy": "brunch build --production",
-    "watch": "brunch watch --stdin",
-    "postinstall": "rm -f node_modules/flatpickr/.babelrc"
-  },
-  "dependencies": {
-    "air-datepicker": "2.2.3",
-    "datepair.js": "^0.4.15",
-    "daterange-picker-ex": "^1.1.5",
-    "datetimeranger": "^1.0.7",
-    "dpicker": "4.2.0",
-    "dropify": "^0.2.2",
-    "dropzone": "4.3.0",
-    "fine-uploader": "5.14.1",
-    "flatpickr": "2.4.7",
-    "fuse.js": "2.6.2",
-    "jquery": "^3.2.1",
-    "jquery-typeahead": "2.8.0",
-    "jquery.filer": "1.3.0",
-    "leaflet": "^1.0.3",
-    "materialize-css": "0.98.1",
-    "moment": "^2.18.1",
-    "moment-timezone": "0.5.11",
-    "nodent-runtime": "^3.0.4",
-    "phoenix": "file:deps/phoenix",
-    "phoenix_html": "file:deps/phoenix_html",
-    "rome": "2.1.22",
-    "timedropper-ex": "^1.4.4",
-    "timepicker": "^1.11.9"
-  },
-  "devDependencies": {
-    "babel-brunch": "~6.1.1",
-    "brunch": "2.10.9",
-    "clean-css-brunch": "~2.10.0",
-    "css-brunch": "~2.10.0",
-    "elm": "^0.18.0",
-    "elm-brunch": "^0.8.0",
-    "sass-brunch": "^2.10.4",
-    "uglify-js-brunch": "~2.10.0"
-  }
+    "name": "rumbl",
+    "version": "1.0.0",
+    "main": "brunch-config.js",
+    "directories": {
+        "test": "test"
+    },
+    "repository": {},
+    "license": "MIT",
+    "scripts": {
+        "deploy": "brunch build --production",
+        "watch": "brunch watch --stdin",
+        "postinstall": "rm -f node_modules/flatpickr/.babelrc"
+    },
+    "dependencies": {
+        "air-datepicker": "2.2.3",
+        "datepair.js": "^0.4.15",
+        "daterange-picker-ex": "^1.1.5",
+        "datetimeranger": "^1.0.7",
+        "dpicker": "5.0.2",
+        "dropify": "^0.2.2",
+        "dropzone": "4.3.0",
+        "fine-uploader": "5.14.2",
+        "flatpickr": "2.5.3",
+        "fuse.js": "2.6.2",
+        "jquery": "^3.2.1",
+        "jquery-typeahead": "2.8.0",
+        "jquery.filer": "1.3.0",
+        "leaflet": "^1.0.3",
+        "materialize-css": "0.98.2",
+        "moment": "^2.18.1",
+        "moment-timezone": "0.5.11",
+        "nodent-runtime": "^3.0.4",
+        "phoenix": "file:deps/phoenix",
+        "phoenix_html": "file:deps/phoenix_html",
+        "timedropper-ex": "^1.4.4",
+        "timepicker": "^1.11.9",
+        "uppy": "^0.15.0"
+    },
+    "devDependencies": {
+        "babel-brunch": "~6.1.1",
+        "brunch": "2.10.9",
+        "clean-css-brunch": "~2.10.0",
+        "css-brunch": "~2.10.0",
+        "sass-brunch": "^2.10.4",
+        "uglify-js-brunch": "~2.10.0"
+    }
 }

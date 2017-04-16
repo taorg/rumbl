@@ -4,12 +4,14 @@ exports.config = {
         javascripts: {
             joinTo: {
                 "js/app.js": /(web\/static\/js)|(node_modules)/,
-                "js/material-datetime-picker.js": ["web/static/vendor/material-datetime-picker/material-datetime-picker.js",
+                "js/material-datetime-picker.js": [
                     "web/static/vendor/material-datetime-picker/confirmClearDateFlatpickr.js",
                     "web/static/vendor/material-datetime-picker/fuse.js",
                     "web/static/vendor/material-datetime-picker/fuseAutocomplete.js",
                     //"web/static/vendor/material-datetime-picker/bundle-leaflet-geosearch.js",
+                    //"web/static/vendor/material-datetime-picker/material-datetime-picker.js",
                 ],
+                //"js/uppy.js": /^(web\/static\/uppy)/,
                 "js/elm.js": /^(web\/static\/elm)/
                     //<script src="<%= static_path(@conn, "/js/material-datetime-picker.js") %>"></script>
                     //"js/materialize.js": ["web/static/vendor/materialize/materialize.js"]
@@ -63,20 +65,21 @@ exports.config = {
     },
     // Configure your plugins
     plugins: {
-
-        elmBrunch: {
-            // Set to path where `elm-make` is located, relative to `elmFolder` (optional)
-            //executablePath: '../../../node_modules/elm/binwrappers',
-            // Set to path where elm-package.json is located, defaults to project root (optional)
-            // if your elm files are not in /app then make sure to configure paths.watched in main brunch config
-            elmFolder: 'web/static/elm',
-            // Set to the elm file(s) containing your "main" function
-            // `elm make` handles all elm dependencies (required)
-            // relative to `elmFolder`s
-            mainModules: ['Main.elm'],
-            outputFolder: "../../static/js",
-            outputFile: "rumblelm.js"
-        },
+        /**
+                elmBrunch: {
+                    // Set to path where `elm-make` is located, relative to `elmFolder` (optional)
+                    //executablePath: '../../../node_modules/elm/binwrappers',
+                    // Set to path where elm-package.json is located, defaults to project root (optional)
+                    // if your elm files are not in /app then make sure to configure paths.watched in main brunch config
+                    elmFolder: 'web/static/elm',
+                    // Set to the elm file(s) containing your "main" function
+                    // `elm make` handles all elm dependencies (required)
+                    // relative to `elmFolder`s
+                    mainModules: ['Main.elm'],
+                    outputFolder: "../../static/js",
+                    outputFile: "rumblelm.js"
+                },
+                 */
         babel: {
             // Do not use ES6 compiler in vendor code
             ignore: [/web\/static\/vendor/]
@@ -111,14 +114,15 @@ exports.config = {
             "jquery-typeahead": ["src/jquery.typeahead.css"],
             "timedropper-ex": ["src/timedropper.css"],
             "timepicker": ["jquery.timepicker.css"],
-            "leaflet": ["dist/leaflet.css"]
-
+            "leaflet": ["dist/leaflet.css"],
+            "uppy": ["dist/uppy.css"]
         },
         globals: {
             $: "jquery",
             jQuery: "jquery",
             moment: "moment",
-            Dropzone: "dropzone"
+            Dropzone: "dropzone",
+
         },
         static: [
             "node_modules/air-datepicker/dist/js/datepicker.js",
@@ -136,8 +140,16 @@ exports.config = {
             "node_modules/timedropper-ex/src/timedropper.js",
             "node_modules/timedropper-ex/src/timedropper.lang.js",
             "node_modules/fine-uploader/jquery.fine-uploader/jquery.fine-uploader.js",
-            "node_modules/rome/dist/rome.standalone.js",
-            //"node_modules/moment/src/moment.js"
+
+            /*"node_modules/uppy/dist/uppy.min.js"
+            "node_modules/uppy/src/core/Core.js",
+            "node_modules/uppy/src/core/Utils.js",
+            "node_modules/uppy/src/core/Utils.js",
+            "node_modules/uppy/src/plugins/Dashboard/index.js",
+            "node_modules/uppy/src/plugins/GoogleDrive/index.js",
+            "node_modules/uppy/src/plugins/Dropbox/index.js",
+            "node_modules/uppy/src/plugins/Webcam/index.js"
+*/
         ]
     }
 };

@@ -4,18 +4,20 @@ defmodule Rumbl.AjaxArc do
     require Logger
   @video_extension_whitelist ~w(.mp4 .mkv)
   def create(conn, _params) do
+    IO.inspect _params
     case Map.has_key?(_params, "qqfile") do
         true ->
           do_insert_fine_upload(conn, _params)
         false ->
-          do_insert_dropzone(conn, _params)
+          do_insert_uppy(conn, _params)
+          
     end
 
   end
 
 
 ################################################################
-#DROP ZONE
+#FineUpload
 ################################################################
   defp do_delete_fine_upload(conn, _params) do
     send_resp(conn, 200, "{\"success\":false}")
@@ -80,11 +82,15 @@ defmodule Rumbl.AjaxArc do
 
 
 ################################################################
-#DROP ZONE
+#Uppy
 ################################################################
-  defp do_insert_dropzone(conn, _params) do
-      %{"file" => media_params} = _params
-      changeset = MediasLocal.changeset(%MediasLocal{}, %{"image" => media_params})
+  defp do_insert_uppy(conn, _params) do
+    #IO.inspect conn
+    IO.inspect "-----------------------"
+    IO.inspect _params
+      %{"files" => media_params} = _params
+    IO.inspect media_params |>List.first  
+      changeset = MediasLocal.changeset(%MediasLocal{}, %{"image" => media_params|>List.first})
       result = Repo.insert(changeset)
       case result do
           {:ok, uploaded} ->
