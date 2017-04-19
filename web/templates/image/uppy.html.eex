@@ -18,15 +18,14 @@
 
 
 const PROTOCOL = location.protocol === 'https:' ? 'https' : 'http'
-const TUS_ENDPOINT = PROTOCOL + '://localhost:3000/pharc/media'
+const TUS_ENDPOINT = PROTOCOL + '://localhost:3000/pharc/umedia'
+//const PROTOCOL = 'https'
+//const TUS_ENDPOINT = PROTOCOL + '://master.tus.io/files/'
 
-// import ru_RU from '../src/locales/ru_RU.js'
-// import MagicLog from '../src/plugins/MagicLog'
-// import PersistentState from '../src/plugins/PersistentState'
-
+function uppyInit () {
 const uppy = Uppy.Core({debug: true, autoProceed: true})
   .use(Uppy.Dashboard, {
-     trigger: '#uppyModalOpener',
+     //trigger: '#uppyModalOpener',
      //maxWidth: 600,
      //maxHeight: 800,
      inline: true,
@@ -42,10 +41,9 @@ const uppy = Uppy.Core({debug: true, autoProceed: true})
   //.use(Uppy.DragDrop, {target: 'body', locale: {
   //   strings: {chooseFile: 'hmm'}
   // }})
-  .use(Uppy.ProgressBar, {target: 'body'})
-   //.use(dummy)
+  .use(Uppy.ProgressBar, {target: '#idUppyParent'})
   .use(Uppy.Webcam, {target: Uppy.Dashboard})
-  .use(Uppy.Multipart, {endpoint: '//localhost:3000/pharc/media'})
+  //.use(Uppy.Multipart, {endpoint: '//localhost:3000/pharc/media/'})
   .use(Uppy.Tus10, {endpoint: TUS_ENDPOINT, resume: true})
   .use(Uppy.Informer, {target: Uppy.Dashboard})
   .use(Uppy.MetaData, {
@@ -64,5 +62,8 @@ uppy.on('core:success', (fileCount) => {
 })
 
  uppy.emit('informer', 'Smile!', 'info', 2000)
+ }
+uppyInit()
+window.uppyInit = uppyInit
 
 </script>

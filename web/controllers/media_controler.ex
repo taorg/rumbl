@@ -16,6 +16,7 @@ defmodule Rumbl.AjaxArc do
   end
 
 
+
 ################################################################
 #FineUpload
 ################################################################
@@ -76,17 +77,14 @@ defmodule Rumbl.AjaxArc do
   end
 
 
-
-
-
-
-
 ################################################################
 #Uppy
+# %Plug.Upload{content_type: "image/jpeg", filename: "led1.jpeg",
+# path: "/var/folders/r8/zd35qmfd7675_lkv64zn3ftr0000gn/T//plug-1492/multipart-342625-442633-4"}
 ################################################################
-  defp do_insert_uppy(conn, _params) do
+  defp do_insert_uppy1(conn, _params) do
     #IO.inspect conn
-    IO.inspect "-----------------------"
+    IO.inspect "do_insert_uppy1-----------------"
     IO.inspect _params
       %{"files" => media_params} = _params
     IO.inspect media_params |>List.first  
@@ -102,6 +100,20 @@ defmodule Rumbl.AjaxArc do
             |> put_resp_content_type("text/plain")
             |>send_resp(415, "415 ERROR : Media not suported")
       end
+  end
+  defp do_insert_uppy(conn, _params) do
+    IO.inspect conn
+    IO.inspect "do_insert_uppy1----------------->"  
+
+    conn
+    |> put_resp_header("Content-Type","text/plain; charset=utf-8")
+    |> put_resp_header("Content-Length", "0")
+    |> put_resp_header("tus-extension", "creation,creation-with-upload,termination")
+    |> put_resp_header("tus-max-size", "1000000000")
+    |> put_resp_header("Tus-Resumable", "1.0.0")
+    |> put_resp_header("tus-version", "1.0.0")
+    |> put_resp_header("Access-Control-Allow-Methods", "POST, GET, HEAD, PATCH, DELETE, OPTIONS")
+    |> send_resp(200, "")
   end
 
 end
