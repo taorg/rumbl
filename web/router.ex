@@ -17,6 +17,7 @@ defmodule Rumbl.Router do
     pipe_through :pharc
     options "/umedia/:id", UppyArc, :options
     head "/umedia", UppyArc, :head
+    #patch "/umedia/:id", UppyArc, :patch
     patch "/umedia", UppyArc, :patch
     post "/umedia", UppyArc, :post
     resources "/media", AjaxArc, only: [:create, :delete]
