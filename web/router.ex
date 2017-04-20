@@ -16,7 +16,7 @@ defmodule Rumbl.Router do
   scope "/pharc", Rumbl do
     pipe_through :pharc
     options "/umedia/:uuiid", UppyArc, :options
-    head "/umedia", UppyArc, :head
+    head "/umedia/:uuid", UppyArc, :head
     patch "/umedia/:uuid", UppyArc, :patch
     #patch "/umedia", UppyArc, :patch
     post "/umedia", UppyArc, :post
