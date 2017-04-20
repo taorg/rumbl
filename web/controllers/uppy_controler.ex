@@ -13,13 +13,13 @@ defmodule Rumbl.UppyArc do
                           uuid_path_size = 0
     end
     uuid_media_size=uuid_media|>String.split("_")|>List.first|>String.to_integer
-    upload_length = uuid_media_size - uuid_path_size
+    #upload_length = uuid_media_size - uuid_path_size
     conn
     |> put_resp_header("Content-Type","text/plain; charset=utf-8")
     |> put_resp_header("Content-Length", "0")    
     |> put_resp_header("Tus-Resumable", "1.0.0")
     |> put_resp_header("tus-version", "1.0.0")
-    |> put_resp_header("Upload-Length", "#{upload_length}") 
+    |> put_resp_header("Upload-Length", "0") 
     |> put_resp_header("Upload-Offset", "#{uuid_path_size}")    
     |> send_resp(200,"OK")
   end
