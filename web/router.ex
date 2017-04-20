@@ -15,10 +15,10 @@ defmodule Rumbl.Router do
 
   scope "/pharc", Rumbl do
     pipe_through :pharc
-    options "/umedia/:id", UppyArc, :options
+    options "/umedia/:uuiid", UppyArc, :options
     head "/umedia", UppyArc, :head
-    #patch "/umedia/:id", UppyArc, :patch
-    patch "/umedia", UppyArc, :patch
+    patch "/umedia/:uuid", UppyArc, :patch
+    #patch "/umedia", UppyArc, :patch
     post "/umedia", UppyArc, :post
     resources "/media", AjaxArc, only: [:create, :delete]
     resources "/gmap",  GmapsControler, only: [:create]
