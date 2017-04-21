@@ -30,10 +30,13 @@ defmodule Rumbl.UppyArc do
 
 
   def post(conn, _params) do
+    IO.inspect "POST----------------------"
     %Plug.Conn{req_headers: request_headers} = conn
-    upload_length =Enum.find_value(request_headers, 0, fn {h, v} -> if "upload-length" == h, do: v end)     
-    IO.inspect upload_length
-    srv_location = "http://localhost:3000/pharc/umedia/#{create_u_file(upload_length)}"
+    upload_length =Enum.find_value(request_headers, 0, fn {h, v} -> if "upload-length" == h, do: v end)
+    upload_metadata = Enum.find_value(request_headers, 0, fn {h, v} -> if "upload-metadata" == h, do: v end)     
+    metadata = decode_metadata(upload_metadata)    
+            
+    srv_location = "http://localhost:3000/pharc/umedia/#{create_u_file(upload_length, metadata)}"
  
     conn
     |> put_resp_header("Content-Type","text/plain; charset=utf-8")
@@ -51,7 +54,6 @@ defmodule Rumbl.UppyArc do
     IO.inspect "HEAD----------------------"
     %{"uuid" => uuid_media} = _params
     srv_upload_offset = get_uuid_file_size(uuid_media)
-    #uuid_media_size=uuid_media|>String.split("_")|>List.first|>String.to_integer
     uuid_media_size = Stash.get(:uppy_cache, uuid_media)|>String.to_integer
     srv_upload_length = uuid_media_size - srv_upload_offset
 
@@ -70,8 +72,7 @@ defmodule Rumbl.UppyArc do
 
   def patch(conn, _params) do
     IO.inspect "PATCH----------------------"
-    %{"uuid" => uuid_media} = _params
-    #media_size = uuid_media|>String.split("_")|>List.first|>String.to_integer    
+    %{"uuid" => uuid_media} = _params   
     media_size = Stash.get(:uppy_cache, uuid_media)|>String.to_integer
     %Plug.Conn{req_headers: request_headers} = conn
     cli_content_length =Enum.find_value(request_headers, 0, fn {h, v} -> if "content-length" == h, do: v end)
@@ -107,14 +108,13 @@ defmodule Rumbl.UppyArc do
   end
 
 
-
-  #Rumbl.UppyArc.create_u_file()  :delayed_write
-  def create_u_file(upload_length) do 
-    uuid_file = upload_length<>"_"<>Ecto.UUID.generate()    
+  def create_u_file(upload_length, remote_metadata) do 
+    uuid_file = upload_length<>"_"<>Ecto.UUID.generate()<>Path.extname(remote_metadata["name"])    
     file_out_path = Path.expand('./uploads')|>Path.join(uuid_file)
     File.touch!(file_out_path)
     Stash.load(:uppy_cache, Path.expand('./uploads')|>Path.join("uppy.db"))
     Stash.set(:uppy_cache, uuid_file, upload_length)
+    Stash.set(:uppy_cache, uuid_file<>"_name", remote_metadata["name"])
     Stash.persist(:uppy_cache, Path.expand('./uploads')|>Path.join("uppy.db"))
     uuid_file
   end
@@ -141,8 +141,7 @@ defmodule Rumbl.UppyArc do
     {initial_file_size,final_file_size}              
   end
 
-  #Rumbl.UppyArc.copy_file "/opt/tmp/rumbl/uploads/led1.jpeg"
-  #Rumbl.UppyArc.copy_file "/Users/taorg/Desktop/media/SampleVideo_1280x720_30mb.mp4"
+
   def append_chunck in_file  do
     out_file = Path.expand('./uploads')|>Path.join(Ecto.UUID.generate())
     with {:ok, wdev} <- File.open(out_file, [:write]),
@@ -179,4 +178,17 @@ defmodule Rumbl.UppyArc do
     end
   end
 
+  def decode_metadata(metadata) do
+    split_md = metadata|>String.split([" ", ","])
+    list_md = Enum.concat(["dummy"],split_md)    
+      |>Enum.map_every(2,fn(x) ->
+            case Base.decode64(x) do
+              {:ok, token}-> token
+              :error -> x
+            end
+        end)
+      |>List.delete_at(0) 
+    Enum.zip(Enum.take_every(list_md, 2), Enum.drop_every(list_md, 2)) |> Enum.into(%{})
+  end
+  
 end

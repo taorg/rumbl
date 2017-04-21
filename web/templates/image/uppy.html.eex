@@ -23,12 +23,11 @@ const TUS_ENDPOINT = PROTOCOL + '://localhost:3000/pharc/umedia'
 //const TUS_ENDPOINT = PROTOCOL + '://master.tus.io/files/'
 
 function uppyInit () {
-const uppy = Uppy.Core({debug: true, autoProceed: true})
-  .use(Uppy.Dashboard, {
-     //trigger: '#uppyModalOpener',
-     //maxWidth: 600,
-     //maxHeight: 800,
-     inline: true,
+const uppy = Uppy.Core({debug: true, autoProceed: true, allowPause: true})
+  .use(Uppy.Dashboard, {     
+    //maxWidth: 600,
+    //maxHeight: 800,
+    inline: true,
     target: '#idUppyParent',
     locale: {
       strings: {browse: 'wow'}
@@ -48,7 +47,7 @@ const uppy = Uppy.Core({debug: true, autoProceed: true})
   .use(Uppy.Informer, {target: Uppy.Dashboard})
   .use(Uppy.MetaData, {
     fields: [
-      { id: 'resizeTo', name: 'Resize to', value: 1200, placeholder: 'specify future image size' },
+      { id: 'tags', name: 'Tags', value: '', placeholder: 'add tags separated by ,' },
       { id: 'description', name: 'Description', value: 'none', placeholder: 'describe what the file is for' }
     ]
   })
