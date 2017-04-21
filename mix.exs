@@ -56,6 +56,7 @@ defmodule Rumbl.Mixfile do
      {:sweet_xml, "~> 0.6"},
      {:verk, "~> 0.13"},
      {:drab, "~> 0.3.2"},
+     {:stash, "~> 1.0.0"},
      {:ex_google, "~> 0.1.4"},
      {:verk_web, "~> 0.13.6"},
      {:porcelain, "~> 2.0.3"},

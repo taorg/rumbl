@@ -42,6 +42,7 @@
   "redix": {:hex, :redix, "0.6.0", "b0ee9b66cd15b5fe72deeaba285e90b65dbf069b7be67f610d32d4304226b1b2", [:mix], [{:connection, "~> 1.0", [hex: :connection, optional: false]}]},
   "shards": {:hex, :shards, "0.4.3", "3d23a9c1d37bbea79bb3cb10ebe52dead461334eb65c7d751c5de9c9440b6bf3", [:make, :rebar3], []},
   "ssl_verify_fun": {:hex, :ssl_verify_fun, "1.1.1", "28a4d65b7f59893bc2c7de786dec1e1555bd742d336043fe644ae956c3497fbe", [:make, :rebar], []},
+  "stash": {:hex, :stash, "1.0.0", "e2d9e61f67009a0d2c59796169316754a06314f11572fce2a967b583bd947976", [:mix], []},
   "sweet_xml": {:hex, :sweet_xml, "0.6.5", "dd9cde443212b505d1b5f9758feb2000e66a14d3c449f04c572f3048c66e6697", [:mix], []},
   "timex": {:hex, :timex, "3.1.13", "48b33162e3ec33e9a08fb5f98e3f3c19c3e328dded3156096c1969b77d33eef0", [:mix], [{:combine, "~> 0.7", [hex: :combine, optional: false]}, {:gettext, "~> 0.10", [hex: :gettext, optional: false]}, {:tzdata, "~> 0.1.8 or ~> 0.5", [hex: :tzdata, optional: false]}]},
   "tzdata": {:hex, :tzdata, "0.5.12", "1c17b68692c6ba5b6ab15db3d64cc8baa0f182043d5ae9d4b6d35d70af76f67b", [:mix], [{:hackney, "~> 1.0", [hex: :hackney, optional: false]}]},
