@@ -17,31 +17,12 @@ import "moment"
 import "fuse.js"
 
 //import MaterialDatePicker from "./material-datetime-picker.js"
-import "dropify"
-import "jquery.filer"
+
 import "fine-uploader"
-import "dropzone"
 import bootstrapMaterialDatePicker from "./bootstrap-material-datetimepicker.js"
 import "leaflet"
 
 
-/*
-import { Core, Dashboard, GoogleDrive, Webcam, Tus10, MetaData, Informer } from 'uppy'
-
-window.Core = Core;
-
-import "uppy"
-import { Core, Dashboard, GoogleDrive, Webcam, Tus10, MetaData, Informer } from "uppy"
-
-const Uppy = require('./uppy/lib/core')
-const Dashboard = require('./uppy/lib/plugins/Dashboard')
-const GoogleDrive = require('./uppy/lib/plugins/GoogleDrive')
-const Dropbox = require('./uppy/lib/plugins/Dropbox')
-const Webcam = require('./uppy/lib/plugins/Webcam')
-const Tus10 = require('./uppy/lib/plugins/Tus10')
-const MetaData = require('./uppy/lib/plugins/MetaData')
-const Informer = require('./uppy/lib/plugins/Informer')
-*/
 //import MaterialDatetimePicker from "./material-datetime-picker.js"
 // Import local files
 //

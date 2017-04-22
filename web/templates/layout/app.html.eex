@@ -59,7 +59,7 @@ $(document).ready(function(){
   $('.carousel').carousel();
 
 
-  $('.dropify').dropify();
+  //$('.dropify').dropify();
 const input = document.querySelector('.c-datepicker-input');
 /*
 const picker = new MaterialDatetimePicker({})

@@ -11,14 +11,17 @@ exports.config = {
                     //"web/static/vendor/material-datetime-picker/bundle-leaflet-geosearch.js",
                     //"web/static/vendor/material-datetime-picker/material-datetime-picker.js",
                 ],
-                "js/uppy.js": ["web/static/vendor/uppy/dist_0.15/uppy.min.js"]
+                //"js/uppy.js": ["web/static/vendor/uppy/dist_0.15/uppy.min.js"]
+                "js/uppy.js": ["node_modules/uppy/dist/uppy.min.js"]
                     //"js/uppy.js": /^(web\/static\/uppy)/,
                     //"js/elm.js": /^(web\/static\/elm)/
                     //<script src="<%= static_path(@conn, "/js/material-datetime-picker.js") %>"></script>
                     //"js/materialize.js": ["web/static/vendor/materialize/materialize.js"]
 
+            },
+            order: {
+                after: ["node_modules/uppy/dist/uppy.min.js"] // concat app.css last
             }
-
             // To use a separate vendor.js bundle, specify two files path
             // http://brunch.io/docs/config#-files-
             // joinTo: {
@@ -67,24 +70,10 @@ exports.config = {
     },
     // Configure your plugins
     plugins: {
-        /**
-                elmBrunch: {
-                    // Set to path where `elm-make` is located, relative to `elmFolder` (optional)
-                    //executablePath: '../../../node_modules/elm/binwrappers',
-                    // Set to path where elm-package.json is located, defaults to project root (optional)
-                    // if your elm files are not in /app then make sure to configure paths.watched in main brunch config
-                    elmFolder: 'web/static/elm',
-                    // Set to the elm file(s) containing your "main" function
-                    // `elm make` handles all elm dependencies (required)
-                    // relative to `elmFolder`s
-                    mainModules: ['Main.elm'],
-                    outputFolder: "../../static/js",
-                    outputFile: "rumblelm.js"
-                },
-                 */
+
         babel: {
             // Do not use ES6 compiler in vendor code
-            ignore: [/web\/static\/vendor/]
+            ignore: [/web\/static\/vendor/, "node_modules/uppy/dist/uppy.min.js"]
         },
         sass: {
             mode: "native",
@@ -107,12 +96,9 @@ exports.config = {
             "air-datepicker": ["dist/css/datepicker.css"],
             "daterange-picker-ex": ["src/daterangepicker.css"],
             "datetimeranger": ["src/datetimeranger.css"],
-            "dropify": ["dist/css/dropify.css"],
-            "dropzone": ["dist/dropzone.css"],
             "fine-uploader": ["jquery.fine-uploader/fine-uploader-gallery.css", "jquery.fine-uploader/fine-uploader-new.css"],
             "flatpickr": ["dist/themes/material_green.css"],
             "leaflet-geosearch": ["dist/style.css"],
-            "jquery.filer": ["css/themes/jquery.filer-dragdropbox-theme.css", "css/jquery.filer.css", "assets/fonts/jquery.filer-icons/jquery-filer.css"],
             "jquery-typeahead": ["src/jquery.typeahead.css"],
             "timedropper-ex": ["src/timedropper.css"],
             "timepicker": ["jquery.timepicker.css"],
@@ -122,8 +108,7 @@ exports.config = {
         globals: {
             $: "jquery",
             jQuery: "jquery",
-            moment: "moment",
-            Dropzone: "dropzone",
+            moment: "moment"
 
         },
         static: [
@@ -142,15 +127,9 @@ exports.config = {
             "node_modules/timedropper-ex/src/timedropper.js",
             "node_modules/timedropper-ex/src/timedropper.lang.js",
             "node_modules/fine-uploader/jquery.fine-uploader/jquery.fine-uploader.js",
-
-            /*"node_modules/uppy/dist/uppy.min.js"
-            "node_modules/uppy/src/core/Core.js",
-            "node_modules/uppy/src/core/Utils.js",
-            "node_modules/uppy/src/core/Utils.js",
-            "node_modules/uppy/src/plugins/Dashboard/index.js",
-            "node_modules/uppy/src/plugins/GoogleDrive/index.js",
-            "node_modules/uppy/src/plugins/Dropbox/index.js",
-            "node_modules/uppy/src/plugins/Webcam/index.js"
+            "node_modules/uppy/dist/uppy.min.js"
+            /* "node_modules/uppy/dist/uppy.min.js"
+  
 */
         ]
     }
