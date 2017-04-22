@@ -43,7 +43,7 @@ const uppy = Uppy.Core({debug: true, autoProceed: true, allowPause: true})
   .use(Uppy.ProgressBar, {target: '#idUppyParent'})
   .use(Uppy.Webcam, {target: Uppy.Dashboard})
   //.use(Uppy.Multipart, {endpoint: '//localhost:3000/pharc/media/'})
-  .use(Uppy.Tus10, {endpoint: TUS_ENDPOINT, resume: true})
+  .use(Uppy.Tus10, {endpoint: TUS_ENDPOINT, resume: true, allowPause: true})
   .use(Uppy.Informer, {target: Uppy.Dashboard})
   .use(Uppy.MetaData, {
     fields: [

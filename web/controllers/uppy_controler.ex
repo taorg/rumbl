@@ -5,7 +5,7 @@ defmodule Rumbl.UppyArc do
   @video_extension_whitelist ~w(.mp4 .mkv)
 
   def get(conn, _params) do
-    IO.inspect "GET----------------------"
+    IO.puts "GET----------------------"
     IO.inspect conn
     %{"uuid" => uuid_media} = _params
         
@@ -14,13 +14,13 @@ defmodule Rumbl.UppyArc do
   end
 
   def options(conn, _params) do
-    IO.inspect "OPTIONS----------------------"
+    IO.puts "OPTIONS----------------------"
     conn
     |> put_resp_header("Content-Type","text/plain; charset=utf-8")
     |> put_resp_header("Content-Length", "0")
     |> put_resp_header("access-control-allow-headers","Origin, X-Requested-With, Content-Type, Upload-Length, Upload-Offset, Tus-Resumable, Upload-Metadata")
     |> put_resp_header("Access-Control-Allow-Methods", "POST, GET, HEAD, PATCH, DELETE, OPTIONS")
-    |> put_resp_header("tus-extension", "creation,creation-with-upload,termination")
+    |> put_resp_header("tus-extension", "creation,creation-with-upload,termination,creation-defer-length")
     |> put_resp_header("tus-max-size", "1000000000")
     |> put_resp_header("tus-version", "1.0.0")   
     |> put_resp_header("Upload-Offset", "0")     
@@ -30,14 +30,25 @@ defmodule Rumbl.UppyArc do
 
 
   def post(conn, _params) do
-    IO.inspect "POST----------------------"
+    IO.puts "POST----------------------"
     %Plug.Conn{req_headers: request_headers} = conn
-    upload_length =Enum.find_value(request_headers, 0, fn {h, v} -> if "upload-length" == h, do: v end)
-    upload_metadata = Enum.find_value(request_headers, 0, fn {h, v} -> if "upload-metadata" == h, do: v end)     
-    metadata = decode_metadata(upload_metadata)    
-            
-    srv_location = "http://localhost:3000/pharc/umedia/#{create_u_file(upload_length, metadata)}"
+    upload_length =Enum.find_value(request_headers, 0, fn {h, v} -> if "upload-length" == h, do: v end)    
+    upload_deferer_length = Enum.find_value(request_headers, 0, fn {h, v} -> if "upload-defer-length" == h, do: v end)
+    upload_metadata = Enum.find_value(request_headers, 0, fn {h, v} -> if "upload-metadata" == h, do: v end)
+    metadata = decode_metadata(upload_metadata)         
+    
+    case upload_deferer_length do
+      "1" -> length = 1
+       _  -> length = upload_length      
+    end
+
+    srv_location = "http://localhost:3000/pharc/umedia/#{create_u_file( length, metadata )}"
  
+    IO.puts "UPLOAD_LENGTH #{upload_length}"
+    IO.puts "UPLOAD_DEFERER_LENGTH #{upload_deferer_length}"
+    IO.write "UPLOAD_METADATA "; IO.inspect metadata
+    IO.puts "LOCATION #{srv_location}"
+
     conn
     |> put_resp_header("Content-Type","text/plain; charset=utf-8")
     |> put_resp_header("Content-Length", "0")
@@ -51,14 +62,14 @@ defmodule Rumbl.UppyArc do
 
 
   def head(conn, _params) do
-    IO.inspect "HEAD----------------------"
+    IO.puts "HEAD----------------------"
     %{"uuid" => uuid_media} = _params
     srv_upload_offset = get_uuid_file_size(uuid_media)
     uuid_media_size = Stash.get(:uppy_cache, uuid_media)|>String.to_integer
     srv_upload_length = uuid_media_size - srv_upload_offset
 
-    IO.inspect  "SRV_UPLOAD_LENGTH: #{srv_upload_length}"  
-    IO.inspect  "SRV_UPLOAD_OFFSET: #{srv_upload_offset}"
+    IO.puts  "SRV_UPLOAD_LENGTH: #{srv_upload_length}"  
+    IO.puts  "SRV_UPLOAD_OFFSET: #{srv_upload_offset}"
 
     conn
     |> put_resp_header("Content-Type","text/plain; charset=utf-8")
@@ -71,12 +82,21 @@ defmodule Rumbl.UppyArc do
   end
 
   def patch(conn, _params) do
-    IO.inspect "PATCH----------------------"
+    IO.puts "PATCH----------------------"
     %{"uuid" => uuid_media} = _params   
     media_size = Stash.get(:uppy_cache, uuid_media)|>String.to_integer
     %Plug.Conn{req_headers: request_headers} = conn
     cli_content_length =Enum.find_value(request_headers, 0, fn {h, v} -> if "content-length" == h, do: v end)
     cli_upload_offset =Enum.find_value(request_headers, 0, fn {h, v} -> if "upload-offset" == h, do: v end)    
+    upload_deferer_length = Enum.find_value(request_headers, 0, fn {h, v} -> if "upload-defer-length" == h, do: v end)
+
+    
+    upload_length =Enum.find_value(request_headers, 0, fn {h, v} -> if "upload-length" == h, do: v end)
+    cond  do
+      (upload_length != 0  && Stash.set(:uppy_cache, uuid_media) == "1") ->Stash.set(:uppy_cache, uuid_media, upload_length)
+      true -> Logger.info("Upload-Length already set to: #{Stash.get(:uppy_cache, uuid_media)}")
+    end
+
     media_size_tuple = write_patch(conn, uuid_media)
     srv_prepatch_size = elem(media_size_tuple, 0)
     srv_upload_offset = elem(media_size_tuple, 1)
@@ -90,14 +110,14 @@ defmodule Rumbl.UppyArc do
     #  http_msg="Conflict" 
     #end
 
-    IO.inspect  "UUIDFILE: #{uuid_media}"  
-    IO.inspect  "SRV TOTAL MEDIA SIZE: #{media_size}"
-    IO.inspect  "CLI CONTENTLENGTH: #{cli_content_length}" 
-    IO.inspect  "CLI UPLOADOFFSET: #{cli_content_length}" 
-    IO.inspect  "SRV UPLOADOFFSET #{srv_upload_offset}"
-    IO.inspect  "SRV PRE PATCH SIZE #{srv_prepatch_size}"
-    IO.inspect  "SRV UPLOADOFFSET SEND #{srv_upload_offset}"
-    IO.inspect  "HTTP CODE #{http_code}"
+    IO.puts  "UUIDFILE: #{uuid_media}"  
+    IO.puts  "SRV TOTAL MEDIA SIZE: #{media_size}"
+    IO.puts  "CLI CONTENTLENGTH: #{cli_content_length}" 
+    IO.puts  "CLI UPLOADOFFSET: #{cli_content_length}" 
+    IO.puts  "SRV UPLOADOFFSET #{srv_upload_offset}"
+    IO.puts  "SRV PRE PATCH SIZE #{srv_prepatch_size}"
+    IO.puts  "SRV UPLOADOFFSET SEND #{srv_upload_offset}"
+    IO.puts  "HTTP CODE #{http_code}"
     
     conn
     |> put_resp_header("Tus-Resumable", "1.0.0")
@@ -109,13 +129,14 @@ defmodule Rumbl.UppyArc do
 
 
   def create_u_file(upload_length, remote_metadata) do 
-    uuid_file = upload_length<>"_"<>Ecto.UUID.generate()<>Path.extname(remote_metadata["name"])    
+    uuid_file = Ecto.UUID.generate()<>Path.extname(remote_metadata["name"])    
     file_out_path = Path.expand('./uploads')|>Path.join(uuid_file)
     File.touch!(file_out_path)
     Stash.load(:uppy_cache, Path.expand('./uploads')|>Path.join("uppy.db"))
     Stash.set(:uppy_cache, uuid_file, upload_length)
-    Stash.set(:uppy_cache, uuid_file<>"_name", remote_metadata["name"])
+    Stash.set(:uppy_cache, "name_"<>uuid_file, remote_metadata["name"])
     Stash.persist(:uppy_cache, Path.expand('./uploads')|>Path.join("uppy.db"))
+    Logger.info("uppy_cache: #{inspect Stash.keys(:uppy_cache) }")
     uuid_file
   end
 
@@ -152,10 +173,10 @@ defmodule Rumbl.UppyArc do
           File.close wdev
           File.close rdev
         rescue
-          error -> IO.inspect "Failed to write #{in_file} "
+          error -> Logger.error "Failed to write #{in_file} "
         end
     else
-      whatever -> IO.inspect "Failed to write #{in_file}: "
+      whatever -> Logger.error "Failed to write #{in_file}: "
     end
   end
 
