@@ -11,10 +11,12 @@ exports.config = {
                     //"web/static/vendor/material-datetime-picker/bundle-leaflet-geosearch.js",
                     //"web/static/vendor/material-datetime-picker/material-datetime-picker.js",
                 ],
-                //"js/uppy.js": /^(web\/static\/uppy)/,
-                "js/elm.js": /^(web\/static\/elm)/
+                "js/uppy.js": ["web/static/vendor/uppy/dist_0.15/uppy.min.js"]
+                    //"js/uppy.js": /^(web\/static\/uppy)/,
+                    //"js/elm.js": /^(web\/static\/elm)/
                     //<script src="<%= static_path(@conn, "/js/material-datetime-picker.js") %>"></script>
                     //"js/materialize.js": ["web/static/vendor/materialize/materialize.js"]
+
             }
 
             // To use a separate vendor.js bundle, specify two files path
