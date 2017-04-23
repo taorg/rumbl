@@ -22,7 +22,7 @@
 
 
 const PROTOCOL = location.protocol === 'https:' ? 'https' : 'http'
-const TUS_ENDPOINT = PROTOCOL + '://localhost:3000/pharc/umedia'
+const TUS_ENDPOINT = PROTOCOL + '://localhost:3000/umedia'
 //const PROTOCOL = 'https'
 //const TUS_ENDPOINT = PROTOCOL + '://master.tus.io/files/'
 
@@ -37,7 +37,8 @@ const uppy = Uppy.Core({debug: true, autoProceed: true, allowPause: true})
       strings: {browse: 'wow'}
     }
   })
-
+  //.use(Uppy.GoogleDrive, {target: Uppy.Dashboard, host: 'http://localhost:3000'})
+  .use(Uppy.Dropbox, {target: Uppy.Dashboard, host: 'http://localhost:3000'})
   // .use(FileInput, {target: '.Uppy', locale: {
   //   strings: {selectToUpload: 'хуй'}
   // }})
@@ -46,7 +47,7 @@ const uppy = Uppy.Core({debug: true, autoProceed: true, allowPause: true})
   // }})
   .use(Uppy.ProgressBar, {target: '#idUppyParent'})
   .use(Uppy.Webcam, {target: Uppy.Dashboard})
-  //.use(Uppy.Multipart, {endpoint: '//localhost:3000/pharc/media/'})
+  //.use(Uppy.Multipart, {endpoint: '//localhost:3000/media/'})
   .use(Uppy.Tus10, {endpoint: TUS_ENDPOINT, resume: true, allowPause: true})
   .use(Uppy.Informer, {target: Uppy.Dashboard})
   .use(Uppy.MetaData, {
@@ -55,8 +56,6 @@ const uppy = Uppy.Core({debug: true, autoProceed: true, allowPause: true})
       { id: 'description', name: 'Description', value: 'none', placeholder: 'describe what the file is for' }
     ]
   })
-  //.use(Uppy.GoogleDrive, {target: Uppy.Dashboard, host: 'http://localhost:3000/pharc/media'})
-  //.use(Uppy.Dropbox, {target: Uppy.Dashboard, host: 'http://localhost:3000/pharc/media'})
 uppy.run()
 
 uppy.on('core:success', (fileCount) => {

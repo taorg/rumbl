@@ -1,2 +1,2 @@
 
-<form action="/pharc/media" id="my-dropzone" class="dropzone"></form>
+<form action="/media" id="my-dropzone" class="dropzone"></form>

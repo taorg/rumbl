@@ -42,7 +42,7 @@ defmodule Rumbl.UppyArc do
        _  -> length = upload_length      
     end
 
-    srv_location = "http://localhost:3000/pharc/umedia/#{create_u_file( length, metadata )}"
+    srv_location = "http://localhost:3000/umedia/#{create_u_file( length, metadata )}"
  
     IO.puts "UPLOAD_LENGTH #{upload_length}"
     IO.puts "UPLOAD_DEFERER_LENGTH #{upload_deferer_length}"

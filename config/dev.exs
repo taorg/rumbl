@@ -41,3 +41,9 @@ config :rumbl, Rumbl.Repo,
   database: "rumbl_dev",
   hostname: "localhost",
   pool_size: 10
+
+
+config :rumbl, Dropbox,
+  client_id: System.get_env("DROPBOX_CLIENT_ID"),
+  client_secret: System.get_env("DROPBOX_CLIENT_SECRET"),
+  redirect_uri: System.get_env("DROPBOX_REDIRECT_URI")

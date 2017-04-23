@@ -66,11 +66,11 @@
                                 debug: true,
                                 element: document.getElementById('fine-uploader'),
                                 request: {
-                                    endpoint: '/pharc/media'
+                                    endpoint: '/media'
                                 },
                                 deleteFile: {
                                     enabled: true,
-                                    endpoint: '/pharc/media'
+                                    endpoint: '/media'
                                 },
                                 retry: {
                                     maxAutoAttempts: 3

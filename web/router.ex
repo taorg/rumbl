@@ -9,17 +9,25 @@ defmodule Rumbl.Router do
     plug :put_secure_browser_headers
   end
 
-  pipeline :pharc do
+  pipeline :api do
     plug :accepts, ["json"]    
   end
 
-  scope "/pharc", Rumbl do
-    pipe_through :pharc
+  scope "/", Rumbl do
+    pipe_through :api
+
     options "/umedia/:uuiid", UppyArc, :options
     head "/umedia/:uuid", UppyArc, :head
     get "/umedia/:uuid", UppyArc, :get
     patch "/umedia/:uuid", UppyArc, :patch
     post "/umedia", UppyArc, :post
+
+    options "/dropbox/:uuiid", DropboxAuth, :options
+    head "/dropbox/:uuid", DropboxAuth, :head
+    get "/dropbox/:uuid", DropboxAuth, :get
+    patch "/dropbox/:uuid", DropboxAuth, :patch
+    post "/dropbox", DropboxAuth, :post
+
     resources "/media", AjaxArc, only: [:create, :delete]
     resources "/gmap",  GmapsControler, only: [:create]
     resources "/acomplete.json",  AutocompleteControler, only: [:index]
@@ -28,6 +36,11 @@ defmodule Rumbl.Router do
   
   scope "/", Rumbl do
     pipe_through :browser
+
+    get "/connect/:provider", UppyOauth, :get
+    get "/connect/:provider/callback", UppyOauth, :callback
+    delete "/logout", UppyOauth, :delete
+
     get "/", PageController, :index
     resources "/users", UserController, only: [:index, :show, :new, :edit, :create]
     resources "/images", ImageController  

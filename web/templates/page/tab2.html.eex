@@ -107,7 +107,7 @@
                     ajax: function(query) {
                         return {
                             type: "GET",
-                            url: "/pharc/acomplete.json",
+                            url: "/acomplete.json",
                             //path: "data.user",
                             data: {
                                 q: "{{query}}"
@@ -135,7 +135,7 @@
                     //},
                     ajax: [{
                         type: "GET",
-                        url: "/pharc/acomplete.json",
+                        url: "/acomplete.json",
                         data: {
                             q: "{{query}}"
                         }

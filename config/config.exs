@@ -7,6 +7,7 @@ use Mix.Config
 
 # General application configuration
 config :rumbl,
+  app_namespace: Rumbl,
   ecto_repos: [Rumbl.Repo]
 
 # Configures the endpoint
@@ -60,5 +61,6 @@ config :verk, queues: [default: 25, priority: 10],
 
 config :ex_google, api_key: System.get_env("GOOGLE_API_KEY"),
                    output: "json"
+
 
 import_config "#{Mix.env}.exs"

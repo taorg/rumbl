@@ -40,7 +40,7 @@ $('.collapsible').collapsible({
                     return {
                         type: 'GET',
                         path: 'data.address',
-                        url: '/pharc/gmaps.json',                           
+                        url: '/gmaps.json',                           
                         data: {address: '{{query}}'}
                     }
                 }               
