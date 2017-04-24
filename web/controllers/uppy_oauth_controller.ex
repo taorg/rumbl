@@ -4,11 +4,13 @@ defmodule Rumbl.UppyOauth do
   
 
   def get(conn, %{"provider" => provider}) do
-    IO.puts "GET----------------------"
+    IO.puts "GET--------UppyOauth--------------"
     redirect conn, external: authorize_url!(provider)
   end
 
    def callback(conn, %{"provider" => provider, "code" => code}) do
+    IO.puts "CALLBACK--------UppyOauth--------------"
+    IO.inspect conn       
     # Exchange an auth code for an access token
     client = get_token!(provider, code)
 
@@ -21,8 +23,9 @@ defmodule Rumbl.UppyOauth do
     # database, I'm just storing the user map.
     #
     # If you need to make additional resource requests, you may want to store
-    # the access token as well.
+    # the access token as well.    
     conn
+    |>IO.inspect
     |> put_session(:current_user, user)
     |> put_session(:access_token, client.token.access_token)
     |> redirect(to: "/")
@@ -33,8 +36,8 @@ defmodule Rumbl.UppyOauth do
   defp authorize_url!("dropbox"),   do: Dropbox.authorize_url!
   defp get_token!("dropbox", code),   do: Dropbox.get_token!(code: code) 
   defp get_user!("dropbox", client) do
-    {:ok, %{body: user}} = OAuth2.Client.get!(client, "https://www.dropboxapis.com/plus/v1/people/me/openIdConnect")
-    %{name: user["name"], avatar: user["picture"]}
+    %OAuth2.Response{body: body}  = OAuth2.Client.get!(client, "https://api.dropboxapi.com/1/account/info")
+    %{name: body["email"], avatar: body["display_name"]}
   end
 ########
 #GOOGLE
@@ -43,7 +46,7 @@ defmodule Rumbl.UppyOauth do
   defp get_token!("google", code),   do: Google.get_token!(code: code) 
   defp get_user!("google", client) do
     {:ok, %{body: user}} = OAuth2.Client.get!(client, "https://www.googleapis.com/plus/v1/people/me/openIdConnect")
-    %{name: user["name"], avatar: user["picture"]}
+    %{name: user["email"], avatar: user["display_name"]}
   end
 ########
 #DEFAULT

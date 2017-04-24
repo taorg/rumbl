@@ -22,11 +22,9 @@ defmodule Rumbl.Router do
     patch "/umedia/:uuid", UppyArc, :patch
     post "/umedia", UppyArc, :post
 
-    options "/dropbox/:uuiid", DropboxAuth, :options
-    head "/dropbox/:uuid", DropboxAuth, :head
-    get "/dropbox/:uuid", DropboxAuth, :get
-    patch "/dropbox/:uuid", DropboxAuth, :patch
-    post "/dropbox", DropboxAuth, :post
+    options "/dropbox/:uuiid", UppyDropbox, :options
+    head "/dropbox/:uuid", UppyDropbox, :head
+    get "/dropbox/:uuid", UppyDropbox, :get
 
     resources "/media", AjaxArc, only: [:create, :delete]
     resources "/gmap",  GmapsControler, only: [:create]

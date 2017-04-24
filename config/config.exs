@@ -62,5 +62,8 @@ config :verk, queues: [default: 25, priority: 10],
 config :ex_google, api_key: System.get_env("GOOGLE_API_KEY"),
                    output: "json"
 
-
+config :oauth2, debug: true,
+  serializers: %{
+    "application/json" => Poison    
+  }
 import_config "#{Mix.env}.exs"
