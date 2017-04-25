@@ -32,7 +32,7 @@ defmodule Rumbl.UppyArc do
   def post(conn, _params) do
     IO.puts "POST----------------------"
     %Plug.Conn{req_headers: request_headers} = conn
-    upload_length =Enum.find_value(request_headers, 0, fn {h, v} -> if "upload-length" == h, do: v end)    
+    upload_length =Enum.find_value(request_headers, 0, fn {h, v} -> if "upload-length" == h, do: v end)
     upload_deferer_length = Enum.find_value(request_headers, 0, fn {h, v} -> if "upload-defer-length" == h, do: v end)
     upload_metadata = Enum.find_value(request_headers, 0, fn {h, v} -> if "upload-metadata" == h, do: v end)
     metadata = decode_metadata(upload_metadata)         

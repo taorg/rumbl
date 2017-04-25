@@ -9,8 +9,8 @@ defmodule Dropbox do
   defp config do
     [strategy: Dropbox,
      site: "https://www.dropbox.com",
-     authorize_url: "https://www.dropbox.com/1/oauth2/authorize",
-     token_url: "https://api.dropbox.com/1/oauth2/token"]
+     authorize_url: "https://www.dropbox.com/oauth2/authorize",
+     token_url: "https://api.dropbox.com/oauth2/token"]
   end
 
   # Public API

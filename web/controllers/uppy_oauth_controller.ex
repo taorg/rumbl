@@ -3,14 +3,15 @@ defmodule Rumbl.UppyOauth do
     require Logger
   
 
-  def get(conn, %{"provider" => provider}) do
+  def get(conn, %{"provider" => provider, "state" =>state}) do
     IO.puts "GET--------UppyOauth--------------"
-    redirect conn, external: authorize_url!(provider)
+    
+    redirect conn, external: authorize_url!([provider, state: state])
   end
 
    def callback(conn, %{"provider" => provider, "code" => code}) do
     IO.puts "CALLBACK--------UppyOauth--------------"
-    IO.inspect conn       
+        
     # Exchange an auth code for an access token
     client = get_token!(provider, code)
 
@@ -24,16 +25,21 @@ defmodule Rumbl.UppyOauth do
     #
     # If you need to make additional resource requests, you may want to store
     # the access token as well.    
+    IO.puts "CALLBACK--------UppyOauth--------------"
+    IO.puts "PROVIDER #{provider}"
+    IO.puts "TOKEN #{client.token.access_token}"
     conn
     |>IO.inspect
     |> put_session(:current_user, user)
-    |> put_session(:access_token, client.token.access_token)
+    |> put_session(provider, client.token.access_token)
     |> redirect(to: "/")
   end
 ########
 #DROPBOX
 ########
-  defp authorize_url!("dropbox"),   do: Dropbox.authorize_url!
+  defp authorize_url!(["dropbox" | params]) do
+      Dropbox.authorize_url!(params)
+  end
   defp get_token!("dropbox", code),   do: Dropbox.get_token!(code: code) 
   defp get_user!("dropbox", client) do
     %OAuth2.Response{body: body}  = OAuth2.Client.get!(client, "https://api.dropboxapi.com/1/account/info")
@@ -42,7 +48,7 @@ defmodule Rumbl.UppyOauth do
 ########
 #GOOGLE
 ########
-  defp authorize_url!("google"),   do: Google.authorize_url!(scope: "https://www.googleapis.com/auth/userinfo.email")
+  defp authorize_url!(["google" | params]),   do: Google.authorize_url!(scope: "https://www.googleapis.com/auth/userinfo.email")
   defp get_token!("google", code),   do: Google.get_token!(code: code) 
   defp get_user!("google", client) do
     {:ok, %{body: user}} = OAuth2.Client.get!(client, "https://www.googleapis.com/plus/v1/people/me/openIdConnect")

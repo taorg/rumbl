@@ -14,10 +14,10 @@
   </div>
 </div>
 <!--
-<script src="https://unpkg.com/uppy/dist/uppy.min.js"></script>
 
--->
 <script src="<%= static_path(@conn, "/js/uppy.js") %>"></script>
+-->
+<script src="https://unpkg.com/uppy/dist/uppy.js"></script>
 <script>
 
 

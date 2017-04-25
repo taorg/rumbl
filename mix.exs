@@ -21,7 +21,7 @@ defmodule Rumbl.Mixfile do
      applications: [:phoenix, 
                     :phoenix_pubsub,
                     :phoenix_html, 
-                    :oauth2,
+                    :oauth2,                
                     :cowboy, 
                     :logger, 
                     :gettext,
@@ -49,7 +49,7 @@ defmodule Rumbl.Mixfile do
   defp deps do
     [{:arc, "~> 0.8.0", override: true},
      {:arc_ecto, "~> 0.7.0", override: true},
-     {:oauth2, "~> 0.9.1"},
+     {:oauth2, "~> 0.9.1"},    
      {:ex_aws, "~> 1.1.2"},
      {:hackney, "~> 1.7.1", override: true},
      {:httpoison, "~> 0.11.0", override: true},
