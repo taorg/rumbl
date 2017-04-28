@@ -71,6 +71,13 @@ defmodule Rumbl.UppyDropbox do
     |> send_resp(200,Poison.encode! %{token: uuid_file})
   end
 
+  def static_url(conn, _params) do
+    IO.puts "static_url----------------------"
+    %{"uuid" => uuid_media} = _params
+        
+    conn 
+    |> redirect(to: "/uploads/#{uuid_media}")
+  end
 
 
   defp count_seconds_to_expire_date(date) do

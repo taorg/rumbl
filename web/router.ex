@@ -16,7 +16,7 @@ defmodule Rumbl.Router do
   scope "/", Rumbl do
     pipe_through :api
 
-    get "/uuid", UppyArc, :static_url
+    get "/api/:uuid", UppyArc, :static_url
     options "/umedia/:uuid", UppyArc, :options
     head "/umedia/:uuid", UppyArc, :head
     get "/umedia/:uuid", UppyArc, :get

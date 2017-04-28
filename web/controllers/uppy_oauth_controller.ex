@@ -29,7 +29,6 @@ defmodule Rumbl.UppyOauth do
     IO.puts "PROVIDER #{provider}"
     IO.puts "TOKEN #{client.token.access_token}"
     conn
-    |>IO.inspect
     |> put_session(:current_user, user)
     |> put_session(provider, client.token.access_token)
     |> redirect(to: "/")

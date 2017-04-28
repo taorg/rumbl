@@ -12,11 +12,10 @@ defmodule Rumbl.UppyArc do
 
   def get(conn, _params) do
     IO.puts "GET----------------------"
-    IO.inspect conn
     %{"uuid" => uuid_media} = _params
         
     conn 
-    |> send_resp(200,"")
+    |> redirect(to: "/uploads/#{uuid_media}")
   end
 
   def options(conn, _params) do
@@ -71,8 +70,13 @@ defmodule Rumbl.UppyArc do
     IO.puts "HEAD----------------------"
     %{"uuid" => uuid_media} = _params
     srv_upload_offset = get_uuid_file_size(uuid_media)
-    uuid_media_size = Stash.get(:uppy_cache, uuid_media)|>String.to_integer
-    srv_upload_length = uuid_media_size - srv_upload_offset
+    stash_size = Stash.get(:uppy_cache, uuid_media)
+    case stash_size do
+       nill->srv_upload_length = 0
+       _ -> srv_upload_length = String.to_integer(stash_size) - srv_upload_offset
+    end   
+
+    
 
     IO.puts  "SRV_UPLOAD_LENGTH: #{srv_upload_length}"  
     IO.puts  "SRV_UPLOAD_OFFSET: #{srv_upload_offset}"
