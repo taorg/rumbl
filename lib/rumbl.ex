@@ -21,6 +21,7 @@ defmodule Rumbl do
     opts = [strategy: :one_for_one, name: Rumbl.Supervisor]
     Supervisor.start_link(children, opts)
     start_verk()
+    
   end
   def start_verk() do
     import Supervisor.Spec

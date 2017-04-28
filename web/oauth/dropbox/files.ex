@@ -136,7 +136,7 @@ defmodule ElixirDropbox.Files do
       :path => path
     }
     headers = %{ "Dropbox-API-Arg" => Poison.encode!(dropbox_headers) }
-    download_request(client, "files/download", [], headers)
+    download_request(client, "/files/download", [], headers)
   end
 
   def get_thumbnail(client, path, format \\ "jpeg", size \\ "w64h64") do

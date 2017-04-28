@@ -19,29 +19,56 @@ defmodule Rumbl.UppyDropbox do
   def glist(conn, _params) do
     IO.puts "LIST-------UppyDropbox---------------"    
     IO.inspect _params
-    if Map.has_key?(_params,"dir_file") do
-     dir_file =  "/"<>Map.fetch!(_params,"dir_file")
-    else
-      dir_file=""
-    end  
-    client = ElixirDropbox.Client.new(get_session(conn,"dropbox"))
-    
+    case Map.has_key?(_params,"path") do
+      true -> path =  URI.encode(Map.fetch!(_params,"path"))
+      _    -> paht = ""
+    end
+      
+    metadata = ElixirDropbox.Client.new(get_session(conn,"dropbox"))
+              |>ElixirDropbox.Files.get_v1_metadata(path) 
+
+      case metadata do 
+      {{:status_code, status_code}, {:error, {:invalid, body, _}}} ->Logger.error( "Status code #{status_code} body #{body}")
+                                http_code=status_code
+                                send_metadata= ElixirDropbox.Client.new(get_session(conn,"dropbox"))
+                                                |>ElixirDropbox.Files.get_v1_metadata("")                                     
+      _ -> Logger.info("Dropbox metadata successfully retrived"); 
+                                http_code=200
+                                send_metadata = metadata 
+            
+    end
+
     conn 
-    |> send_resp(200,Poison.encode! ElixirDropbox.Files.get_v1_metadata(client,dir_file))
+    |> send_resp(http_code,Poison.encode! send_metadata)
   end
 
-  def get_file(conn, _params) do
-    IO.puts "POST_FILE-------UppyDropbox---------------"    
-    IO.inspect _params
-    conn 
-    |> send_resp(200,Poison.encode! %{})
-  end
+
 
   def post_file(conn, _params) do
-    IO.puts "LIST-------UppyDropbox---------------"    
+    IO.puts "POST__FILE-------UppyDropbox---------------"    
     IO.inspect _params
+    IO.inspect "----------------------------------------"
+    case Map.has_key?(_params,"path") do
+      true -> path =  Path.join("/", Map.fetch!(_params,"path"))
+      _    -> paht = ""
+    end
+      
+    response = ElixirDropbox.Client.new(get_session(conn,"dropbox"))
+              |>ElixirDropbox.Files.download(path) 
+    case response do
+        {:ok, %{file: body, headers: headers}} -> 
+                {:ok, %{"name"=> name}} = headers
+                uuid_file =  Ecto.UUID.generate()<>Path.extname(name)
+                uuid_path = Path.expand('./uploads')|>Path.join(uuid_file)
+                File.write!(uuid_path, body)
+                Stash.load(:uppy_cache, Path.expand('./uploads')|>Path.join("uppy.db"))
+                Stash.set(:uppy_cache, "name_"<>uuid_file, name)
+                Stash.persist(:uppy_cache, Path.expand('./uploads')|>Path.join("uppy.db"))
+        _->     Logger.error( " Failed to download #{inspect response}")
+      end
+    
     conn 
-    |> send_resp(200,Poison.encode! %{})
+    |> send_resp(200,Poison.encode! %{token: uuid_file})
   end
 
 
@@ -50,5 +77,7 @@ defmodule Rumbl.UppyDropbox do
     expire_secs = Date.now |> Date.diff(date, :secs)
     expire_secs
   end
+
+
 
 end

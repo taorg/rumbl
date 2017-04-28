@@ -8,12 +8,10 @@ defmodule ElixirDropbox do
 
   @base_url_v1 "https://api.dropboxapi.com/1"
   @base_url "https://content.dropboxapi.com/2"
-  @upload_url "https://api.dropboxapi.com/2"
+  @upload_url "https://content.dropboxapi.com/2"
   
   def post_v1(client, url, body \\ "") do
     headers = json_headers()
-    IO.puts "---------post_v1"
-    IO.puts "#{@base_url_v1}#{url}"
     post_request(client, "#{@base_url_v1}#{url}", body, headers)
   end
   
@@ -34,9 +32,9 @@ defmodule ElixirDropbox do
    @spec download_response(HTTPoison.Response.t) :: response
    def download_response(response) do
     case response do
-      {:ok, %{body: body, headers: headers, status_code: 200}} ->
-        {:ok, %{file: body, headers: get_header(headers, "dropbox_api_result") |> Poison.decode}}
-      _-> response
+      %HTTPoison.Response{body: body, headers: headers, status_code: 200} ->
+        {:ok, %{file: body, headers: get_header(headers, "dropbox-api-result") |> Poison.decode}}
+      _-> response   
     end
   end
 

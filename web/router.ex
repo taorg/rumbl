@@ -16,7 +16,8 @@ defmodule Rumbl.Router do
   scope "/", Rumbl do
     pipe_through :api
 
-    options "/umedia/:uuiid", UppyArc, :options
+    get "/uuid", UppyArc, :static_url
+    options "/umedia/:uuid", UppyArc, :options
     head "/umedia/:uuid", UppyArc, :head
     get "/umedia/:uuid", UppyArc, :get
     patch "/umedia/:uuid", UppyArc, :patch
@@ -25,9 +26,8 @@ defmodule Rumbl.Router do
     options "/dropbox/:uuiid", UppyDropbox, :oauth
     get "/dropbox/auth", UppyDropbox, :gauth
     get "/dropbox/list", UppyDropbox, :glist
-    get "/dropbox/list/:dir_file", UppyDropbox, :glist
-    get "/dropbox/get/:file", UppyDropbox, :get_file
-    post "/dropbox/get/:file", UppyDropbox, :post_file  
+    get "/dropbox/list/:path", UppyDropbox, :glist
+    post "/dropbox/get/:path", UppyDropbox, :post_file  
 
     resources "/media", AjaxArc, only: [:create, :delete]
     resources "/gmap",  GmapsControler, only: [:create]

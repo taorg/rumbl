@@ -4,6 +4,12 @@ defmodule Rumbl.UppyArc do
     require Logger
   @video_extension_whitelist ~w(.mp4 .mkv)
 
+  def static_url(conn, _params) do
+    %{"uuid" => uuid_media} = _params
+    conn 
+    |> send_resp(200,Poison.encode! "http://localhost:3000/uploads/"<>uuid_media )
+  end
+
   def get(conn, _params) do
     IO.puts "GET----------------------"
     IO.inspect conn
@@ -132,6 +138,8 @@ defmodule Rumbl.UppyArc do
     uuid_file = Ecto.UUID.generate()<>Path.extname(remote_metadata["name"])    
     file_out_path = Path.expand('./uploads')|>Path.join(uuid_file)
     File.touch!(file_out_path)
+    # Salvamos la el tamaño y el nombre para luego subirlo a S3
+    # Esto puede ir a ECTO, pero ahora como demo se utiliza una ETS con persistencia por facilidad
     Stash.load(:uppy_cache, Path.expand('./uploads')|>Path.join("uppy.db"))
     Stash.set(:uppy_cache, uuid_file, upload_length)
     Stash.set(:uppy_cache, "name_"<>uuid_file, remote_metadata["name"])
@@ -161,25 +169,6 @@ defmodule Rumbl.UppyArc do
                   |>Map.get(:size)
     {initial_file_size,final_file_size}              
   end
-
-
-  def append_chunck in_file  do
-    out_file = Path.expand('./uploads')|>Path.join(Ecto.UUID.generate())
-    with {:ok, wdev} <- File.open(out_file, [:write]),
-         {:ok, rdev} <- File.open(in_file, [:read]) do
-        try do
-          rdev |> IO.binstream(4096) |> Enum.each(fn x -> IO.binwrite wdev, x end)          
-        after
-          File.close wdev
-          File.close rdev
-        rescue
-          error -> Logger.error "Failed to write #{in_file} "
-        end
-    else
-      whatever -> Logger.error "Failed to write #{in_file}: "
-    end
-  end
-
 
   def transfer(conn, wdev) do
     case Plug.Conn.read_body(conn) do
@@ -211,5 +200,23 @@ defmodule Rumbl.UppyArc do
       |>List.delete_at(0) 
     Enum.zip(Enum.take_every(list_md, 2), Enum.drop_every(list_md, 2)) |> Enum.into(%{})
   end
-  
+
+  def append_chunck in_file  do
+    out_file = Path.expand('./uploads')|>Path.join(Ecto.UUID.generate())
+    with {:ok, wdev} <- File.open(out_file, [:write]),
+         {:ok, rdev} <- File.open(in_file, [:read]) do
+        try do
+          rdev |> IO.binstream(4096) |> Enum.each(fn x -> IO.binwrite wdev, x end)          
+        after
+          File.close wdev
+          File.close rdev
+        rescue
+          error -> Logger.error "Failed to write #{in_file} "
+        end
+    else
+      whatever -> Logger.error "Failed to write #{in_file}: "
+    end
+  end
+
+
 end
