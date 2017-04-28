@@ -74,28 +74,61 @@ defmodule ElixirDropbox do
         receive do
               %HTTPoison.AsyncStatus{ id: ^id, code: status } ->
                 case status do
-                  200 -> {:ok, async_loop(id, resp, %{file: <<>>})}
+                  200 -> async_loop(id, resp, %{})
                   non_200 -> {:error, non_200}
                 end
               whatever -> {:error, whatever}
             end
-      whatever -> Logger.debug "#{inspect whatever}"
+      whatever -> {:error, whatever}
     end
- 
   end
   
   def async_loop id, resp, acc do
-    {:ok, ^resp} = HTTPoison.stream_next(resp)
-    receive do
-      %HTTPoison.AsyncHeaders{ id: ^id, headers: headers } ->
-        async_loop(id, resp, Map.put(acc, :headers, (get_header(headers, "dropbox-api-result") |> Poison.decode)))
- 
-      %HTTPoison.AsyncChunk{ id: ^id, chunk: chunk } ->
-        async_loop(id, resp, Map.update(acc, :file, <<>>, &(&1 <> chunk)))
- 
-      %HTTPoison.AsyncEnd{ id: ^id } -> acc
- 
-      whatever -> Logger.debug "#{inspect whatever}"
+    case HTTPoison.stream_next(resp) do
+      {:ok, ^resp} ->
+        receive do
+          %HTTPoison.AsyncHeaders{ id: ^id, headers: headers } ->
+            headers = case get_header(headers, "dropbox-api-result") |> Poison.decode() do
+              {:ok, decoded_headers} -> decoded_headers
+
+              {:error, whatever} ->
+                Logger.error "Failed to decode #{inspect headers}: #{inspect whatever}"
+                %{"name" => "name.unknown"}
+            end
+
+            uuid_file = Ecto.UUID.generate() <> Path.extname(headers["name"])
+            upload_folder = Path.expand('./uploads')
+            File.mkdir_p upload_folder
+            uuid_path = upload_folder |> Path.join(uuid_file)
+
+            acc = acc
+              |> Map.put(:headers, headers)
+              |> Map.put(:uuid_file, uuid_file)
+              |> Map.put(:uuid_path, uuid_path)
+
+            async_loop(id, resp, acc)
+
+          %HTTPoison.AsyncChunk{ id: ^id, chunk: chunk } ->
+            case File.write(acc[:uuid_path], chunk, [:append]) do
+              :ok ->
+                async_loop(id, resp, acc)
+
+              {:error, posix} = error ->
+                Logger.error "Failed to write chunk: #{inspect posix}"
+                error
+            end
+
+          %HTTPoison.AsyncEnd{ id: ^id } ->
+            Stash.load(:uppy_cache, Path.expand('./uploads') |> Path.join("uppy.db"))
+            Stash.set(:uppy_cache, "name_" <> acc[:uuid_file], get_in(acc, [:headers, "name"]))
+            Stash.persist(:uppy_cache, Path.expand('./uploads') |> Path.join("uppy.db"))
+            {:ok, acc}
+
+          whatever ->
+            {:error, whatever}
+        end
+
+      {:error, _} = error -> error
     end
   end
 end

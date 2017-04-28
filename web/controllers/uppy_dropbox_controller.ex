@@ -48,27 +48,24 @@ defmodule Rumbl.UppyDropbox do
     IO.puts "POST__FILE-------UppyDropbox---------------"    
     IO.inspect _params
     IO.inspect "----------------------------------------"
-    case Map.has_key?(_params,"path") do
-      true -> path =  Path.join("/", Map.fetch!(_params,"path"))
-      _    -> paht = ""
+    path = case Map.has_key?(_params,"path") do
+      true -> Path.join("/", Map.fetch!(_params,"path"))
+      _    -> "" # ¿Realmente vale la pena seguir en este caso?
     end
       
-    response = ElixirDropbox.Client.new(get_session(conn,"dropbox"))
-              |>ElixirDropbox.Files.download(path) 
-    case response do
-        {:ok, %{file: body, headers: headers}} -> 
-                {:ok, %{"name"=> name}} = headers
-                uuid_file =  Ecto.UUID.generate()<>Path.extname(name)
-                uuid_path = Path.expand('./uploads')|>Path.join(uuid_file)
-                File.write!(uuid_path, body)
-                Stash.load(:uppy_cache, Path.expand('./uploads')|>Path.join("uppy.db"))
-                Stash.set(:uppy_cache, "name_"<>uuid_file, name)
-                Stash.persist(:uppy_cache, Path.expand('./uploads')|>Path.join("uppy.db"))
-        _->     Logger.error( " Failed to download #{inspect response}")
+    response = conn
+      |> get_session("dropbox")
+      |> ElixirDropbox.Client.new
+      |> ElixirDropbox.Files.download(path)
+
+    {status, result} = case response do
+        {:ok, %{uuid_file: uuid_file}} -> {200, Poison.encode!(%{token: uuid_file})}
+        {:error, error} ->
+           Logger.error "Failed to download #{path}: #{inspect error}"
+          {500, Poison.encode!(%{})}
       end
     
-    conn 
-    |> send_resp(200,Poison.encode! %{token: uuid_file})
+    conn |> send_resp(status, result)
   end
 
   def static_url(conn, _params) do
@@ -84,7 +81,4 @@ defmodule Rumbl.UppyDropbox do
     expire_secs = Date.now |> Date.diff(date, :secs)
     expire_secs
   end
-
-
-
 end
