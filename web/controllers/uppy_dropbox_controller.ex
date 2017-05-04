@@ -34,8 +34,7 @@ defmodule Rumbl.UppyDropbox do
                                                 |>ElixirDropbox.Files.get_v1_metadata("")                                     
       _ -> Logger.info("Dropbox metadata successfully retrived"); 
                                 http_code=200
-                                send_metadata = metadata 
-            
+                                send_metadata = metadata             
     end
 
     conn 
@@ -59,7 +58,12 @@ defmodule Rumbl.UppyDropbox do
       |> ElixirDropbox.Files.download(path)
 
     {status, result} = case response do
-        {:ok, %{uuid_file: uuid_file}} -> {200, Poison.encode!(%{token: uuid_file})}
+        {:ok, %{uuid_file: uuid_file}} ->
+                stash_path = Path.expand('./uploads')|>Path.join("uppy.db") 
+                Stash.load(:uppy_cache, stash_path)
+                Stash.set(:uppy_cache, "name_"<>uuid_file, Path.basename(path,""))
+                Stash.persist(:uppy_cache, stash_path)
+                {200, Poison.encode!(%{token: uuid_file})}
         {:error, error} ->
            Logger.error "Failed to download #{path}: #{inspect error}"
           {500, Poison.encode!(%{})}
