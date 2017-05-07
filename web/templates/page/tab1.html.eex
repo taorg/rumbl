@@ -120,8 +120,8 @@ $(document).ready(function(){
     })
     $('#from_time').timepicker({ 'step': 1 });
     //
-    $('#date-end').bootstrapMaterialDatePicker({ format : 'dddd DD MMMM YYYY - HH:mm',time: true });
-    $('#date-start').bootstrapMaterialDatePicker({ format : 'dddd DD MMMM YYYY - HH:mm',time: true });
+    //$('#date-end').bootstrapMaterialDatePicker({ format : 'dddd DD MMMM YYYY - HH:mm',time: true });
+    //$('#date-start').bootstrapMaterialDatePicker({ format : 'dddd DD MMMM YYYY - HH:mm',time: true });
     flatpickr("#to_date1", {      
       enableTime: true,
       //weekNumbers: true,

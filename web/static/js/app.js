@@ -13,14 +13,16 @@
 // to also remove its path from "config.paths.watched".
 import "phoenix_html"
 import socket from "./socket"
+import "leaflet"
+import "fine-uploader"
 import "moment"
 import "fuse.js"
 
 //import MaterialDatePicker from "./material-datetime-picker.js"
 
-import "fine-uploader"
-import bootstrapMaterialDatePicker from "./bootstrap-material-datetimepicker.js"
-import "leaflet"
+
+//import bootstrapMaterialDatePicker from "./bootstrap-material-datetimepicker.js"
+
 
 
 //import MaterialDatetimePicker from "./material-datetime-picker.js"

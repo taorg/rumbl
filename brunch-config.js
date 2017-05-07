@@ -4,24 +4,20 @@ exports.config = {
         javascripts: {
             joinTo: {
                 "js/app.js": /(web\/static\/js)|(node_modules)/,
+                //"js/uppy.js": ["web/static/vendor/uppy/dist_0.15/uppy.min.js"],
+                "js/uppy.js": ["node_modules/uppy/dist/uppy.min.js"],
                 "js/material-datetime-picker.js": [
-                    "web/static/vendor/material-datetime-picker/confirmClearDateFlatpickr.js",
+                    //"web/static/vendor/material-datetime-picker/confirmClearDateFlatpickr.js",
                     "web/static/vendor/material-datetime-picker/fuse.js",
                     "web/static/vendor/material-datetime-picker/fuseAutocomplete.js",
                     //"web/static/vendor/material-datetime-picker/bundle-leaflet-geosearch.js",
                     //"web/static/vendor/material-datetime-picker/material-datetime-picker.js",
                 ],
-                //"js/uppy.js": ["web/static/vendor/uppy/dist_0.15/uppy.min.js"]
-                "js/uppy.js": ["node_modules/uppy/dist/uppy.min.js"]
-                    //"js/uppy.js": /^(web\/static\/uppy)/,
-                    //"js/elm.js": /^(web\/static\/elm)/
-                    //<script src="<%= static_path(@conn, "/js/material-datetime-picker.js") %>"></script>
-                    //"js/materialize.js": ["web/static/vendor/materialize/materialize.js"]
 
             },
-            order: {
-                after: ["node_modules/uppy/dist/uppy.min.js"] // concat app.css last
-            }
+            //order: {
+            //    after: ["node_modules/uppy/dist/uppy.min.js"] // concat app.css last
+            //}
             // To use a separate vendor.js bundle, specify two files path
             // http://brunch.io/docs/config#-files-
             // joinTo: {
@@ -74,6 +70,7 @@ exports.config = {
         babel: {
             // Do not use ES6 compiler in vendor code
             ignore: [/web\/static\/vendor/, "node_modules/uppy/dist/uppy.min.js"]
+                //ignore: [/web\/static\/vendor/]
         },
         sass: {
             mode: "native",
@@ -108,7 +105,9 @@ exports.config = {
         globals: {
             $: "jquery",
             jQuery: "jquery",
-            moment: "moment"
+            L: "leaflet",
+            moment: "moment",
+
 
         },
         static: [
@@ -128,9 +127,7 @@ exports.config = {
             "node_modules/timedropper-ex/src/timedropper.lang.js",
             "node_modules/fine-uploader/jquery.fine-uploader/jquery.fine-uploader.js",
             "node_modules/uppy/dist/uppy.min.js"
-            /* "node_modules/uppy/dist/uppy.min.js"
-  
-*/
+
         ]
     }
 };

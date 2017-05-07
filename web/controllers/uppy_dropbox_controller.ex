@@ -41,12 +41,24 @@ defmodule Rumbl.UppyDropbox do
     |> send_resp(http_code,Poison.encode! send_metadata)
   end
 
+  def gthumbnail(conn, _params) do
+    IO.puts "gthumbnail-------UppyDropbox---------------"    
+    IO.inspect _params
+    IO.inspect "----------------------------------------"    
+    path = case Map.has_key?(_params,"path") do
+      true -> Path.join("/", Map.fetch!(_params,"path"))
+      _    -> "" # ¿Realmente vale la pena seguir en este caso?
+    end
+      
+    response = conn
+      |> get_session("dropbox")
+      |> ElixirDropbox.Client.new
+      |> ElixirDropbox.Files.get_thumbnail(path)
 
+    conn |> send_resp(200, "")
+  end
 
   def post_file(conn, _params) do
-    IO.puts "POST__FILE-------UppyDropbox---------------"    
-    IO.inspect _params
-    IO.inspect "----------------------------------------"
     path = case Map.has_key?(_params,"path") do
       true -> Path.join("/", Map.fetch!(_params,"path"))
       _    -> "" # ¿Realmente vale la pena seguir en este caso?
@@ -59,10 +71,6 @@ defmodule Rumbl.UppyDropbox do
 
     {status, result} = case response do
         {:ok, %{uuid_file: uuid_file}} ->
-                stash_path = Path.expand('./uploads')|>Path.join("uppy.db") 
-                Stash.load(:uppy_cache, stash_path)
-                Stash.set(:uppy_cache, "name_"<>uuid_file, Path.basename(path,""))
-                Stash.persist(:uppy_cache, stash_path)
                 {200, Poison.encode!(%{token: uuid_file})}
         {:error, error} ->
            Logger.error "Failed to download #{path}: #{inspect error}"
@@ -71,15 +79,6 @@ defmodule Rumbl.UppyDropbox do
     
     conn |> send_resp(status, result)
   end
-
-  def static_url(conn, _params) do
-    IO.puts "static_url----------------------"
-    %{"uuid" => uuid_media} = _params
-        
-    conn 
-    |> redirect(to: "/uploads/#{uuid_media}")
-  end
-
 
   defp count_seconds_to_expire_date(date) do
     expire_secs = Date.now |> Date.diff(date, :secs)

@@ -40,7 +40,8 @@ defmodule ElixirDropbox do
 
   def post_request(client, url, body, headers) do
     headers = Map.merge(headers, headers(client))
-    HTTPoison.post!(url, body, headers) |> upload_response
+    options = [recv_timeout: 50000]
+    HTTPoison.post!(url, body, headers, options) |> upload_response
   end
 
   def headers(client) do
@@ -64,12 +65,14 @@ defmodule ElixirDropbox do
 
   def download_request1(client, url, data, headers) do
     headers = Map.merge(headers, headers(client))
-    HTTPoison.post!("#{@upload_url}#{url}", data, headers) |> download_response
+    options = [recv_timeout: 50000]
+    HTTPoison.post!("#{@upload_url}#{url}", data, headers, options) |> download_response
   end
 
   def download_request(client, url, data, headers) do
     headers = Map.merge(headers, headers(client))
-    case HTTPoison.post!("#{@upload_url}#{url}", data, headers, [stream_to: self(), async: :once]) do
+    options = [stream_to: self(), async: :once, recv_timeout: 50000]
+    case HTTPoison.post!("#{@upload_url}#{url}", data, headers, options) do
       resp = %HTTPoison.AsyncResponse{id: id} ->
         receive do
               %HTTPoison.AsyncStatus{ id: ^id, code: status } ->

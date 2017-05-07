@@ -1,9 +1,9 @@
 defmodule Rumbl.UserSocket do
   use Phoenix.Socket
-  use Drab.Socket
-  ## Channels
+  use Drab.Socket    
+  ## Channels  
   channel "room:*", Rumbl.RoomChannel
-
+  channel "uppy", Rumbl.UppyChannel
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
   # transport :longpoll, Phoenix.Transports.LongPoll

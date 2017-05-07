@@ -52,7 +52,7 @@ defmodule Rumbl.Mixfile do
      {:oauth2, "~> 0.9.1"},    
      {:ex_aws, "~> 1.1.2"},
      {:hackney, "~> 1.7.1", override: true},
-     {:httpoison, "~> 0.11.0", override: true},
+     {:httpoison, "~> 0.11.2", override: true},
      {:poison, "~> 3.1", override: true},
      {:jsx, "~> 2.8.2"},
      {:sweet_xml, "~> 0.6"},
