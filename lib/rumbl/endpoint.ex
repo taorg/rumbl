@@ -3,7 +3,7 @@ defmodule Rumbl.Endpoint do
   use VerkWeb.Mount, path: "/verk"
 
 
-  socket "/api", Rumbl.UserSocket
+  socket "/api", Rumbl.UppySocket
   socket "/socket", Rumbl.UserSocket
 
   # Serve at "/" the static files from "priv/static" directory.

@@ -1,6 +1,6 @@
         <script>
             function init() { 
-            websocket = new WebSocket("ws://localhost:3000/api/websocket?=uppy");
+            websocket = new WebSocket("ws://localhost:3000/api/websocket");
             
             websocket.onopen = function() { 
               document.getElementById("output").innerHTML += "<p>> CONNECTED</p>"; };
