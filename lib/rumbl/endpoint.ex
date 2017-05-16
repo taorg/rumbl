@@ -3,8 +3,8 @@ defmodule Rumbl.Endpoint do
   use VerkWeb.Mount, path: "/verk"
 
 
-  socket "/api", Rumbl.UppySocket
-  socket "/socket", Rumbl.UserSocket
+  #socket "/api/:uuid", Rumbl.UppySocket
+  #socket "/socket", Rumbl.UserSocket
 
   # Serve at "/" the static files from "priv/static" directory.
   #
@@ -20,7 +20,7 @@ defmodule Rumbl.Endpoint do
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
   if code_reloading? do
-    socket "/phoenix/live_reload/socket", Phoenix.LiveReloader.Socket
+    #socket "/phoenix/live_reload/socket", Phoenix.LiveReloader.Socket
     plug Phoenix.LiveReloader
     plug Phoenix.CodeReloader
   end

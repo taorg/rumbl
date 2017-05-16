@@ -16,7 +16,29 @@ config :rumbl, Rumbl.Endpoint,
   secret_key_base: "ahkgkxMx3nvlusx0og68Vshu0JZ4ZlHh2qY2mEQhA0AXFZg83wVCBRqu2HQCRzL0",
   render_errors: [view: Rumbl.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Rumbl.PubSub,
-           adapter: Phoenix.PubSub.PG2]
+           adapter: Phoenix.PubSub.PG2],
+  http: [dispatch: [{:_, [
+    {"/phoenix/live_reload/socket/longpoll",
+     Plug.Adapters.Cowboy.Handler,
+     {Phoenix.Transports.LongPoll, {Rumbl.Endpoint, Phoenix.LiveReloader.Socket, :longpoll}}},
+    {"/phoenix/live_reload/socket/websocket",
+     Phoenix.Endpoint.CowboyWebSocket,
+     {Phoenix.Transports.WebSocket, {Rumbl.Endpoint, Phoenix.LiveReloader.Socket, :websocket}}},
+    {"/socket/websocket",
+     Phoenix.Endpoint.CowboyWebSocket,
+     {Phoenix.Transports.WebSocket, {Rumbl.Endpoint, Rumbl.UserSocket, :websocket}}},
+    {"/api/:uuid",
+     Phoenix.Endpoint.CowboyWebSocket,
+     {Phoenix.Transports.WebSocket, {Rumbl.Endpoint, Rumbl.UppySocket, :websocket}}},
+    {"/verk/socket/longpoll",
+     Plug.Adapters.Cowboy.Handler,
+     {Phoenix.Transports.LongPoll, {Rumbl.Endpoint, VerkWeb.UserSocket, :longpoll}}},
+    {"/verk/socket/websocket",
+     Phoenix.Endpoint.CowboyWebSocket,
+     {Phoenix.Transports.WebSocket, {Rumbl.Endpoint, VerkWeb.UserSocket, :websocket}}},
+    {:_, Plug.Adapters.Cowboy.Handler, {Rumbl.Endpoint, []}}]
+    }]]
+
 
 # Configures Elixir's Logger
 config :logger, :console,
