@@ -46,31 +46,32 @@ defmodule Rumbl.Mixfile do
   # Specifies your project dependencies.
   #
   # Type `mix help deps` for examples and options.
-  defp deps do
-    [{:arc, "~> 0.8.0", override: true},
+  defp deps do    [
      {:arc_ecto, "~> 0.7.0", override: true},
-     {:oauth2, "~> 0.9.1"},    
+     {:arc, "~> 0.8.0", override: true},
+     {:comeonin, "~> 2.5"},
+     {:cowboy, "~> 1.0.4"},
+     {:drab, "~> 0.4.0"},
      {:ex_aws, "~> 1.1.2"},
+     {:ex_google, "~> 0.1.4"},
+     {:gettext, "~> 0.11"},
      {:hackney, "~> 1.7.1", override: true},
      {:httpoison, "~> 0.11.2", override: true},
-     {:poison, "~> 3.1", override: true},
      {:jsx, "~> 2.8.2"},
-     {:sweet_xml, "~> 0.6"},
-     {:verk, "~> 0.13"},
-     {:drab, "~> 0.3.2"},
-     {:stash, "~> 1.0.0"},
-     {:ex_google, "~> 0.1.4"},
-     {:verk_web, "~> 0.13.6"},
-     {:porcelain, "~> 2.0.3"},
-     {:phoenix, "~> 1.2.3"},
-     {:phoenix_pubsub, "~> 1.0"},
+     {:oauth2, "~> 0.9.1"},    
      {:phoenix_ecto, "~> 3.2.1"},
-     {:postgrex, ">= 0.0.0"},
      {:phoenix_html, "~> 2.9.2"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
-     {:gettext, "~> 0.11"},
-     {:comeonin, "~> 2.5"},
-     {:cowboy, "~> 1.0.4"}]
+     {:phoenix_pubsub, "~> 1.0"},
+     {:phoenix, "~> 1.2.3"},
+     {:poison, "~> 3.1", override: true},
+     {:porcelain, "~> 2.0.3"},
+     {:postgrex, ">= 0.0.0"},
+     {:sobelow, ">= 0.2.4"},
+     {:stash, "~> 1.0.0"},
+     {:sweet_xml, "~> 0.6"},
+     {:verk_web, "~> 0.14"},
+     {:verk, "~> 0.14"}   ]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.

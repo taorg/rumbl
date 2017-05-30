@@ -1,3 +1,4 @@
+   <!--
         <script>
             function init() { 
             websocket = new WebSocket("ws://localhost:3000/api/websocket");
@@ -20,7 +21,7 @@
             
             window.addEventListener("load", init, false);
         </script>
- 
+ -->
 <div class="row">
     <div class="col s12">
         <input onkeypress="if(this.value) {if (window.event.keyCode == 13) { sendMessage(this.value); this.value = null; }}"/>
@@ -51,13 +52,11 @@
 const PROTOCOL = location.protocol === 'https:' ? 'https' : 'http'
 const TUS_ENDPOINT = PROTOCOL + '://localhost:3000/umedia'
 //const PROTOCOL = 'https'
-//const TUS_ENDPOINT = PROTOCOL + '://master.tus.io/files/'
+//const TUS_ENDPOINT = PROTOCOL + '://localhost:3020/files'
 
 function uppyInit () {
 const uppy = Uppy.Core({debug: true, autoProceed: true, allowPause: true})
   .use(Uppy.Dashboard, {     
-    //maxWidth: 600,
-    //maxHeight: 800,
     inline: true,
     target: '#idUppyParent',
     locale: {
@@ -65,6 +64,7 @@ const uppy = Uppy.Core({debug: true, autoProceed: true, allowPause: true})
     }
   })
   //.use(Uppy.GoogleDrive, {target: Uppy.Dashboard, host: 'http://localhost:3000'})
+  //.use(Uppy.Dropbox, {target: Uppy.Dashboard, host: 'http://localhost:3020'})
   .use(Uppy.Dropbox, {target: Uppy.Dashboard, host: 'http://localhost:3000'})
   // .use(FileInput, {target: '.Uppy', locale: {
   //   strings: {selectToUpload: 'хуй'}

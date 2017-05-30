@@ -17,11 +17,11 @@ defmodule Rumbl.Router do
     pipe_through :api
 
     
-    options "/umedia/:uuid", UppyArc, :options
-    head "/umedia/:uuid", UppyArc, :head
-    get "/umedia/:uuid", UppyArc, :get
-    patch "/umedia/:uuid", UppyArc, :patch
-    post "/umedia", UppyArc, :post
+    options "/umedia/:uuid", UppuTus, :options
+    head "/umedia/:uuid", UppuTus, :head
+    get "/umedia/:uuid", UppuTus, :get
+    patch "/umedia/:uuid", UppuTus, :patch
+    post "/umedia", UppuTus, :post
 
     options "/dropbox/:uuiid", UppyDropbox, :oauth
     get "/dropbox/auth", UppyDropbox, :gauth

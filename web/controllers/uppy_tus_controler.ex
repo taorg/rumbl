@@ -1,6 +1,6 @@
-defmodule Rumbl.UppyArc do
+defmodule Rumbl.UppuTus do
   use Rumbl.Web, :controller
-  alias Rumbl.{Repo, MediasS3, MediasLocal, ImageArcLocal, ImageArc, VideoArcLocal, VideoArc,UppyArc}
+  alias Rumbl.{Repo, MediasS3, MediasLocal, ImageArcLocal, ImageArc, VideoArcLocal, VideoArc,UppuTus}
     require Logger
   @video_extension_whitelist ~w(.mp4 .mkv)
 

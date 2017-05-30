@@ -31,7 +31,7 @@ defmodule Rumbl.UppyOauth do
     conn
     |> put_session(:current_user, user)
     |> put_session(provider, client.token.access_token)
-    |> redirect(to: "/")
+    |> redirect(to: "/new")
   end
 ########
 #DROPBOX
